@@ -1,13 +1,15 @@
-import { useState } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
-import { SignaturePad } from "./signature-pad";
-import { Loader } from "./loading";
-import { useRef } from "react";
-import { cn } from "../utils";
-import { PDFDocument } from "pdf-lib";
+
 import { saveAs } from "file-saver";
+import { PDFDocument } from "pdf-lib";
+import { useState } from "react";
+import { useRef } from "react";
+import { Document, Page, pdfjs } from "react-pdf";
+
+import { cn } from "../utils";
+import { Loader } from "./loading";
+import { SignaturePad } from "./signature-pad";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
@@ -59,7 +61,7 @@ export const PdfViewer = ({ pdf }) => {
     const arrayBuffer = await pdf.arrayBuffer(); // dove `pdf` è un File/Blob
     const pdfDoc = await PDFDocument.load(arrayBuffer);
     const pngImageBytes = await fetch(signature).then((res) =>
-      res.arrayBuffer()
+      res.arrayBuffer(),
     );
     const embeddedImage = await pdfDoc.embedPng(pngImageBytes);
     const scaledImage = embeddedImage.scale(0.5); // puoi regolare lo scale qui

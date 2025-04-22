@@ -6,7 +6,4 @@ export function cn(...classes) {
   return twMerge(clsx(...classes));
 }
 
-
-
 export const trimCanvas = trimCanvasRaw.default || trimCanvasRaw;
-

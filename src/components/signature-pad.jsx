@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
+
 import { cn, trimCanvas } from "../utils";
 
 export const SignaturePad = ({ onSaveSignatureCallback }) => {
@@ -12,8 +13,6 @@ export const SignaturePad = ({ onSaveSignatureCallback }) => {
     onSaveSignatureCallback();
     if (!enableSave) setEnableSalve(true);
   };
-
-
 
   const handleSave = () => {
     const canvas = sigCanvasRef.current.getCanvas();
@@ -31,7 +30,7 @@ export const SignaturePad = ({ onSaveSignatureCallback }) => {
       </span>
       <div
         className={cn(
-          "flex items-center  justify-center flex-col w-full bg-gray-300 px-4 h-[220px]"
+          "flex items-center  justify-center flex-col w-full bg-gray-300 px-4 h-[220px]",
         )}
       >
         <SignatureCanvas
