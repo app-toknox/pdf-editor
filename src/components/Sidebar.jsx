@@ -1,13 +1,11 @@
-import React from 'react'
 import { DraggableItem } from "./DraggableItem";
 
 export const Sidebar = () => {
-  
   //esempio di items
   const items = [
-    { id: 'stamp', label: 'Timbro' },
-    { id: 'signature', label: 'Firma' },
-  ]
+    { id: "stamp", label: "Timbro" },
+    { id: "signature", label: "Firma" },
+  ];
   return (
     <aside className="w-64 bg-gray-100 p-4 border-r">
       <h2 className="text-lg font-bold mb-4">Strumenti</h2>
@@ -17,5 +15,5 @@ export const Sidebar = () => {
         ))}
       </div>
     </aside>
-  )
-}
+  );
+};
