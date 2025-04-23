@@ -17,7 +17,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 const options = {
   standardFontDataUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/standard_fonts`,
 };
-export const PdfViewer = ({ pdf, dropped }) => {
+export const PdfViewer = ({ pdf, dropped, droppedItem }) => {
   const [numPages, setNumPages] = useState();
   const [pageNumber, setPageNumber] = useState(1);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -82,7 +82,7 @@ export const PdfViewer = ({ pdf, dropped }) => {
     saveAs(blob, "signed.pdf");
   };
 
-  //Logica per PDF
+  //Logica per aggiungere su PDF con drag & drop
   const { setNodeRef } = useDroppable({
     id: "droppable",
   });
@@ -108,7 +108,7 @@ export const PdfViewer = ({ pdf, dropped }) => {
             ref={pdfWrapperRef}
           >
             {/* logica per droppable element */}
-            <div ref={setNodeRef}>
+            <div id="pdf" ref={setNodeRef}>
               <div className="absolute top-4 left-4 text-xl bg-white p-2 rounded shadow z-20">
                 {!dropped && "Drop here"}
               </div>
@@ -125,6 +125,20 @@ export const PdfViewer = ({ pdf, dropped }) => {
                 <Page pageNumber={pageNumber} x />
               </Document>
             </div>
+
+            {droppedItem && droppedItem.position ? (
+              <div
+                className="absolute bg-yellow-200 px-4 py-2 rounded font-bold shadow"
+                style={{
+                  top: `${droppedItem.position.y}px`,
+                  left: `${droppedItem.position.x}px`,
+                  pointerEvents: "none",
+                }}
+              >
+                {droppedItem.label}
+              </div>
+            ) : null}
+
             {signature && signaturePos ? (
               <img
                 src={signature}

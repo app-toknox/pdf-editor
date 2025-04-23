@@ -7,7 +7,7 @@ export const DraggableItem = ({ id, label }) => {
   const style = {
     // sposta l'elemento secondo i valori X e Y del drag
     transform: transform
-      ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
+      ? `translate(${transform.x}px, ${transform.y}px)`
       : undefined,
     // abbassa l'opacità mentre trascini
     opacity: isDragging ? 0.5 : 1,
@@ -20,7 +20,7 @@ export const DraggableItem = ({ id, label }) => {
       style={style}
       {...listeners}
       {...attributes}
-      className="cursor-move p-2 bg-white border rounded shadow"
+      className="cursor-move p-2 bg-white border rounded shadow z-20"
     >
       {label}
     </div>
