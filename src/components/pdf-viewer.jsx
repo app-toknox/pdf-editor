@@ -122,16 +122,16 @@ export const PdfViewer = ({ pdf, dropped, droppedItem }) => {
                 </div>
               }
             >
-              <Page pageNumber={pageNumber} x />
+              <Page pageNumber={pageNumber} />
             </Document>
 
             {droppedItem && droppedItem.position ? (
               <div
-                className="absolute bg-yellow-200 px-4 py-2 rounded font-bold shadow"
+                className="absolute bg-yellow-200 px-4 py-2 rounded font-bold shadow border-2"
                 style={{
                   top: `${droppedItem.position.y}px`,
                   left: `${droppedItem.position.x}px`,
-                  position: "absolute",
+                  position: "absolte",
                   pointerEvents: "none",
                 }}
               >
