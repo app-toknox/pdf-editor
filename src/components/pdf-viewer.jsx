@@ -45,7 +45,6 @@ export const PdfViewer = ({ pdf, dropped, droppedItem }) => {
   };
 
   const handleMouseMove = (e) => {
-    console.log(signature.url);
     if (!pdf || !signature) return;
     const canvas = pdfWrapperRef.current?.querySelector("canvas");
     if (!canvas) return;
@@ -105,10 +104,16 @@ export const PdfViewer = ({ pdf, dropped, droppedItem }) => {
           <div
             className="relative z-10 max-w-xl shadow-2xl"
             onClick={handleMouseMove}
-            ref={pdfWrapperRef}
           >
             {/* logica per droppable element */}
-            <div id="pdf" ref={setNodeRef}>
+            <div
+              className="relative"
+              id="pdf"
+              ref={(el) => {
+                setNodeRef(el);
+                pdfWrapperRef.current = el;
+              }}
+            >
               <div className="absolute top-4 left-4 text-xl bg-white p-2 rounded shadow z-20">
                 {!dropped && "Drop here"}
               </div>
