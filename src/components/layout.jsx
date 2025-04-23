@@ -1,11 +1,13 @@
 import { cn } from "../utils";
-import { Sidebar } from "./Sidebar";
+import { Sidebar } from "./sidebar";
 
 export const Layout = ({ children, className }) => {
   return (
-    <div className="flex h-screen">
+    <div className="flex min-h-screen">
       <Sidebar />
-      <div className={cn("flex h-screen w-screen", className)}>{children}</div>
+      <div className={cn("flex min-h-screen w-screen", className)}>
+        {children}
+      </div>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { DndContext } from "@dnd-kit/core";
 import { useState } from "react";
 
 import { Layout } from "./components/layout";
-import { Home } from "./pages/Home";
+import { Home } from "./pages/home";
 
 const App = () => {
   const [isDropped, setIsDropped] = useState(false);
