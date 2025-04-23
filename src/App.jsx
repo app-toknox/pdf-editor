@@ -11,18 +11,15 @@ const App = () => {
   const handleDragEnd = (event) => {
     if (!event.over) return;
 
-    if (event.over.id === "droppable") {
+    if (event.over.id === "pdf") {
       const { clientX, clientY } = event.activatorEvent;
+      const canvas = document.getElementById("pdf");
 
-      const dropZone = document.getElementById("pdf");
-      if (!dropZone) return;
-
+      const rect = canvas.getBoundingClientRect();
       const x = clientX;
       const y = clientY;
-
       setIsDropped(true);
       setDroppedItem({
-        type: event.active.data.current?.type,
         id: event.active.id,
         position: { x, y },
         label: event.active.id,
@@ -33,6 +30,7 @@ const App = () => {
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <Layout>
+        {JSON.stringify(droppedItem)}
         <Home dropped={isDropped} droppedItem={droppedItem} />
       </Layout>
     </DndContext>

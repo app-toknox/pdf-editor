@@ -83,7 +83,7 @@ export const PdfViewer = ({ pdf, dropped, droppedItem }) => {
 
   //Logica per aggiungere su PDF con drag & drop
   const { setNodeRef } = useDroppable({
-    id: "droppable",
+    id: "pdf",
   });
 
   return (
@@ -101,35 +101,29 @@ export const PdfViewer = ({ pdf, dropped, droppedItem }) => {
               Download Pdf
             </button>
           ) : null}
+
           <div
             className="relative z-10 max-w-xl shadow-2xl"
             onClick={handleMouseMove}
+            id="pdf"
+            ref={(el) => {
+              setNodeRef(el);
+              pdfWrapperRef.current = el;
+            }}
           >
             {/* logica per droppable element */}
-            <div
-              className="relative"
-              id="pdf"
-              ref={(el) => {
-                setNodeRef(el);
-                pdfWrapperRef.current = el;
-              }}
+            <Document
+              options={options}
+              file={pdf}
+              onLoadSuccess={onDocumentLoadSuccess}
+              loading={
+                <div className="w-full flex items-center justify-center ">
+                  <Loader />
+                </div>
+              }
             >
-              <div className="absolute top-4 left-4 text-xl bg-white p-2 rounded shadow z-20">
-                {!dropped && "Drop here"}
-              </div>
-              <Document
-                options={options}
-                file={pdf}
-                onLoadSuccess={onDocumentLoadSuccess}
-                loading={
-                  <div className="w-full flex items-center justify-center ">
-                    <Loader />
-                  </div>
-                }
-              >
-                <Page pageNumber={pageNumber} x />
-              </Document>
-            </div>
+              <Page pageNumber={pageNumber} x />
+            </Document>
 
             {droppedItem && droppedItem.position ? (
               <div
@@ -137,6 +131,7 @@ export const PdfViewer = ({ pdf, dropped, droppedItem }) => {
                 style={{
                   top: `${droppedItem.position.y}px`,
                   left: `${droppedItem.position.x}px`,
+                  position: "absolute",
                   pointerEvents: "none",
                 }}
               >
