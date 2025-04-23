@@ -1,4 +1,4 @@
-import { DraggableItem } from "./DraggableItem";
+import { DraggableItem } from "./draggableItem";
 
 export const Sidebar = () => {
   //esempio di items

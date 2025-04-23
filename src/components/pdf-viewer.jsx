@@ -1,6 +1,7 @@
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 
+import { useDroppable } from "@dnd-kit/core";
 import { saveAs } from "file-saver";
 import { PDFDocument } from "pdf-lib";
 import { useState } from "react";
@@ -16,7 +17,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 const options = {
   standardFontDataUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/standard_fonts`,
 };
-export const PdfViewer = ({ pdf }) => {
+export const PdfViewer = ({ pdf, dropped }) => {
   const [numPages, setNumPages] = useState();
   const [pageNumber, setPageNumber] = useState(1);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -81,6 +82,11 @@ export const PdfViewer = ({ pdf }) => {
     saveAs(blob, "signed.pdf");
   };
 
+  //Logica per PDF
+  const { setNodeRef } = useDroppable({
+    id: "droppable",
+  });
+
   return (
     <div className="flex flex-col gap-8 py-8">
       {pdf ? (
@@ -101,18 +107,24 @@ export const PdfViewer = ({ pdf }) => {
             onClick={handleMouseMove}
             ref={pdfWrapperRef}
           >
-            <Document
-              options={options}
-              file={pdf}
-              onLoadSuccess={onDocumentLoadSuccess}
-              loading={
-                <div className="w-full flex items-center justify-center ">
-                  <Loader />
-                </div>
-              }
-            >
-              <Page pageNumber={pageNumber} x />
-            </Document>
+            {/* logica per droppable element */}
+            <div ref={setNodeRef}>
+              <div className="absolute top-4 left-4 text-xl bg-white p-2 rounded shadow z-20">
+                {!dropped && "Drop here"}
+              </div>
+              <Document
+                options={options}
+                file={pdf}
+                onLoadSuccess={onDocumentLoadSuccess}
+                loading={
+                  <div className="w-full flex items-center justify-center ">
+                    <Loader />
+                  </div>
+                }
+              >
+                <Page pageNumber={pageNumber} x />
+              </Document>
+            </div>
             {signature && signaturePos ? (
               <img
                 src={signature}

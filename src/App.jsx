@@ -1,13 +1,23 @@
 import { DndContext } from "@dnd-kit/core";
+import { useState } from "react";
 
 import { Layout } from "./components/layout";
 import { Home } from "./pages/Home";
 
 const App = () => {
+  const [isDropped, setIsDropped] = useState(false);
+  //const draggableMarkup = <DraggableItem>Drag me</DraggableItem>;
+
+  const handleDragEnd = (event) => {
+    if (event.over && event.over.id === "droppable") {
+      setIsDropped(true);
+    }
+  };
+
   return (
-    <DndContext>
+    <DndContext onDragEnd={handleDragEnd}>
       <Layout>
-        <Home />
+        <Home dropped={isDropped} />
       </Layout>
     </DndContext>
   );
