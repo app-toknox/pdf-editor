@@ -27,6 +27,13 @@ function useDragAndDrop() {
         };
       });
       setIsDropped(true);
+    } else if (over && over.id === "sidebar") {
+      setPositions((prev) => {
+        const newPositions = { ...prev };
+        delete newPositions[active.id];
+        return newPositions;
+      });
+      setIsDropped(false);
     } else {
       console.log("Rilasciato fuori dal canvas");
       setIsDropped(false);
