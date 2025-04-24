@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useRef } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 
+import { DraggableItem } from "./draggable-item";
 import { Loader } from "./loading";
 //import { SignaturePad } from "./signature-pad";
 
@@ -14,7 +15,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 const options = {
   standardFontDataUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/standard_fonts`,
 };
-export const PdfViewer = ({ pdf, dropped, droppedItem }) => {
+export const PdfViewer = ({ pdf, droppedItem }) => {
   const [numPages, setNumPages] = useState();
   const [pageNumber, setPageNumber] = useState(1);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -78,7 +79,6 @@ export const PdfViewer = ({ pdf, dropped, droppedItem }) => {
                   top: `${droppedItem.position.y}px`,
                   left: `${droppedItem.position.x}px`,
                   position: "absolte",
-                  pointerEvents: "none",
                 }}
               >
                 {droppedItem.label}

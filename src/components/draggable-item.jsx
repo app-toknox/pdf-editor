@@ -1,6 +1,6 @@
 import { useDraggable } from "@dnd-kit/core";
 
-export const DraggableItem = ({ id, label }) => {
+export const DraggableItem = ({ id, label, lastPosition }) => {
   const { attributes, listeners, transform, isDragging, setNodeRef } =
     useDraggable({ id });
 
@@ -8,7 +8,9 @@ export const DraggableItem = ({ id, label }) => {
     // sposta l'elemento secondo i valori X e Y del drag
     transform: transform
       ? `translate(${transform.x}px, ${transform.y}px)`
-      : undefined,
+      : lastPosition
+        ? `translate(${lastPosition.x}px, ${lastPosition.y}px)`
+        : undefined,
     // abbassa l'opacità mentre trascini
     opacity: isDragging ? 0.5 : 1,
     cursor: "move",

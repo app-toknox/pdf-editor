@@ -5,10 +5,10 @@ import { Layout } from "./components/layout";
 import { Home } from "./pages/home";
 
 const App = () => {
-  const [isDropped, setIsDropped] = useState(false);
+  const [, setIsDropped] = useState(false);
   const [droppedItem, setDroppedItem] = useState(null);
   // Track size of the draggable element
-  const [dragSize, setDragSize] = useState({ width: 0, height: 0 });
+  const [, setDragSize] = useState({ width: 0, height: 0 });
 
   const handleDragEnd = (event) => {
     if (!event.over) return;
@@ -54,7 +54,7 @@ const App = () => {
   return (
     <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
       <Layout>
-        <Home dropped={isDropped} droppedItem={droppedItem} />
+        <Home droppedItem={droppedItem} />
       </Layout>
     </DndContext>
   );
