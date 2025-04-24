@@ -5,10 +5,10 @@ import useDragAndDrop from "./hooks/useDragAndDrop";
 import { Home } from "./pages/home";
 
 const App = () => {
-  const { position, sensors, handleDragEnd } = useDragAndDrop();
+  const { positions, sensors, handleDragEnd } = useDragAndDrop();
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-      <Layout position={position}>
+      <Layout positions={positions}>
         <Home />
       </Layout>
     </DndContext>

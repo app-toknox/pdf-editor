@@ -1,5 +1,4 @@
 import { useState } from "react";
-import React from "react";
 
 import { InputPdfFile } from "../components/input-pdf-file";
 import { PdfViewer } from "../components/pdf-viewer";

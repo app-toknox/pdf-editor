@@ -2,40 +2,32 @@ import { PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { useState } from "react";
 
 function useDragAndDrop() {
-  const [isDropped, setIsDropped] = useState(false);
-  const [position, setPosition] = useState();
+  const [isDropped, setIsDropped] = useState();
+  const [positions, setPositions] = useState({});
 
   const handleDragEnd = (event) => {
-    const { over, delta } = event;
+    const { over, delta, active } = event;
 
     console.log("Drag end:", {
       over: over?.id,
       delta,
       isDropped,
-      position,
+      positions,
     });
 
-    // Se rilasciato nel canvas
     if (over && over.id === "pdf") {
-      if (!isDropped) {
-        // Prima volta nel canvas - usiamo una posizione predefinita
-        console.log("Primo rilascio nel canvas");
-        setPosition({
-          x: delta.x + 20,
-          y: delta.y + 80,
-        });
-        setIsDropped(true);
-        // Non modifichiamo la posizione qui, usiamo quella predefinita in useState
-      } else {
-        // Aggiorna posizione con delta
-        console.log("Aggiornamento posizione con delta:", delta);
-        setPosition({
-          x: position.x + delta.x,
-          y: position.y + delta.y,
-        });
-      }
+      setPositions((prev) => {
+        const prevPos = prev[active.id] || { x: 20, y: 80 };
+        return {
+          ...prev,
+          [active.id]: {
+            x: prevPos.x + delta.x,
+            y: prevPos.y + delta.y,
+          },
+        };
+      });
+      setIsDropped(true);
     } else {
-      // Rilasciato fuori dal canvas
       console.log("Rilasciato fuori dal canvas");
       setIsDropped(false);
     }
@@ -49,7 +41,7 @@ function useDragAndDrop() {
 
   return {
     sensors,
-    position,
+    positions,
     handleDragEnd,
   };
 }

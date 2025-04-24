@@ -1,6 +1,6 @@
 import { DraggableItem } from "./draggable-item";
 
-export const Sidebar = ({ finalPosition }) => {
+export const Sidebar = ({ finalPositions }) => {
   //esempio di items
   const items = [
     { id: "stamp", label: "Timbro" },
@@ -12,7 +12,10 @@ export const Sidebar = ({ finalPosition }) => {
       <h2 className="text-lg font-bold mb-4">Strumenti</h2>
       <div className="flex flex-col gap-2">
         {items.map((item, index) => {
-          const position = finalPosition ?? { x: 20, y: 80 + 20 * 3 * index };
+          const position = finalPositions?.[item.id] ?? {
+            x: 20,
+            y: 80 + 20 * 3 * index,
+          };
 
           return (
             <DraggableItem
