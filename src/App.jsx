@@ -1,60 +1,60 @@
 import { DndContext } from "@dnd-kit/core";
+import { PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { useState } from "react";
 
 import { Layout } from "./components/layout";
 import { Home } from "./pages/home";
 
 const App = () => {
-  const [, setIsDropped] = useState(false);
-  const [droppedItem, setDroppedItem] = useState(null);
-  // Track size of the draggable element
-  const [, setDragSize] = useState({ width: 0, height: 0 });
+  const [isDropped, setIsDropped] = useState(false);
+  const [position, setPosition] = useState();
 
   const handleDragEnd = (event) => {
-    if (!event.over) return;
+    const { over, delta } = event;
 
-    const startX = event.activatorEvent.pageX;
-    const startY = event.activatorEvent.pageY;
-    const { x: dx, y: dy } = event.delta;
+    console.log("Drag end:", {
+      over: over?.id,
+      delta,
+      isDropped,
+      position,
+    });
 
-    const { left, top } = document
-      .getElementById("pdf")
-      .getBoundingClientRect();
-    console.log(left + window.scrollX, top + window.scrollY);
-
-    // posizione di drop sul documento
-    const dropPageX = startX + dx - (left + window.scrollX);
-    const dropPageY = startY + dy - (top + window.scrollY);
-
-    console.log("Drop document coords:", dropPageX, dropPageY);
-
-    if (event.over.id === "pdf") {
-      setIsDropped(true);
-      setDroppedItem({
-        id: event.active.id,
-        position: {
-          x: dropPageX,
-          y: dropPageY,
-        },
-        label: event.active.id,
-      });
+    // Se rilasciato nel canvas
+    if (over && over.id === "pdf") {
+      if (!isDropped) {
+        // Prima volta nel canvas - usiamo una posizione predefinita
+        console.log("Primo rilascio nel canvas");
+        setPosition({
+          x: delta.x + 20,
+          y: delta.y + 80,
+        });
+        setIsDropped(true);
+        // Non modifichiamo la posizione qui, usiamo quella predefinita in useState
+      } else {
+        // Aggiorna posizione con delta
+        console.log("Aggiornamento posizione con delta:", delta);
+        setPosition({
+          x: position.x + delta.x,
+          y: position.y + delta.y,
+        });
+      }
+    } else {
+      // Rilasciato fuori dal canvas
+      console.log("Rilasciato fuori dal canvas");
+      setIsDropped(false);
     }
   };
 
-  const handleDragStart = (event) => {
-    const draggable = document.getElementById(event.active.id);
-    console.log(draggable);
-    if (draggable) {
-      const { width, height } = draggable.getBoundingClientRect();
-      setDragSize({ width, height });
-      console.log("Draggable size:", width, height);
-    }
-  };
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: { distance: 5 },
+    })
+  );
 
   return (
-    <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
-      <Layout>
-        <Home droppedItem={droppedItem} />
+    <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+      <Layout position={position}>
+        <Home />
       </Layout>
     </DndContext>
   );

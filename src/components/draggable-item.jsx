@@ -1,19 +1,16 @@
 import { useDraggable } from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
 
-export const DraggableItem = ({ id, label, lastPosition }) => {
+export const DraggableItem = ({ id, label, position }) => {
   const { attributes, listeners, transform, isDragging, setNodeRef } =
     useDraggable({ id });
 
   const style = {
-    // sposta l'elemento secondo i valori X e Y del drag
-    transform: transform
-      ? `translate(${transform.x}px, ${transform.y}px)`
-      : lastPosition
-        ? `translate(${lastPosition.x}px, ${lastPosition.y}px)`
-        : undefined,
-    // abbassa l'opacità mentre trascini
     opacity: isDragging ? 0.5 : 1,
-    cursor: "move",
+    position: "absolute",
+    left: `${position.x}px`,
+    top: `${position.y}px`,
+    transform: CSS.Translate.toString(transform),
   };
 
   return (
@@ -22,7 +19,7 @@ export const DraggableItem = ({ id, label, lastPosition }) => {
       style={style}
       {...listeners}
       {...attributes}
-      className="cursor-move p-2 bg-white border rounded shadow z-20"
+      className="cursor-move p-2 bg-white border rounded shadow z-20 w-40"
     >
       {label}
     </div>
