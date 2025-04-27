@@ -1,9 +1,12 @@
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 
-export const DraggableItem = ({ id, label, position }) => {
+export const DraggableItem = ({ id, label, position, index }) => {
   const { attributes, listeners, transform, isDragging, setNodeRef } =
-    useDraggable({ id });
+    useDraggable({
+      id,
+      data: { index },
+    });
 
   const style = {
     opacity: isDragging ? 0.5 : 1,

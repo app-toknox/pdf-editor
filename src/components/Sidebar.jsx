@@ -5,8 +5,8 @@ import { DraggableItem } from "./draggable-item";
 export const Sidebar = ({ finalPositions }) => {
   //esempio di items
   const items = [
-    { id: "stamp", label: "Timbro" },
-    { id: "signature", label: "Firma" },
+    { id: "stamp", label: "Timbro", index: 0 },
+    { id: "signature", label: "Firma", index: 1 },
   ];
 
   const { setNodeRef } = useDroppable({
@@ -21,10 +21,10 @@ export const Sidebar = ({ finalPositions }) => {
     >
       <h2 className="text-lg font-bold mb-4">Strumenti</h2>
       <div className="flex flex-col gap-2">
-        {items.map((item, index) => {
+        {items.map((item) => {
           const position = finalPositions?.[item.id] ?? {
             x: 20,
-            y: 80 + 20 * 3 * index,
+            y: 80 + 20 * 3 * item.index,
           };
 
           return (
@@ -33,6 +33,7 @@ export const Sidebar = ({ finalPositions }) => {
               id={item.id}
               label={item.label}
               position={position}
+              index={item.index}
             />
           );
         })}

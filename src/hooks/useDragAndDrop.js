@@ -2,11 +2,15 @@ import { PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { useState } from "react";
 
 function useDragAndDrop() {
+  // Creo una lista con tutti gli oggetti droppati
+  const [droppedItems, setDroppedItems] = useState([]);
+
   const [isDropped, setIsDropped] = useState();
   const [positions, setPositions] = useState({});
 
   const handleDragEnd = (event) => {
     const { over, delta, active } = event;
+    const index = active.data.current?.index ?? 0;
 
     console.log("Drag end:", {
       over: over?.id,
@@ -17,7 +21,10 @@ function useDragAndDrop() {
 
     if (over && over.id === "pdf") {
       setPositions((prev) => {
-        const prevPos = prev[active.id] || { x: 20, y: 80 };
+        const prevPos = prev[active.id] || {
+          x: 20,
+          y: 80 + 20 * 3 * index,
+        };
         return {
           ...prev,
           [active.id]: {
@@ -27,6 +34,7 @@ function useDragAndDrop() {
         };
       });
       setIsDropped(true);
+      setDroppedItems((prev) => [...prev, prev]);
     } else if (over && over.id === "sidebar") {
       setPositions((prev) => {
         const newPositions = { ...prev };
