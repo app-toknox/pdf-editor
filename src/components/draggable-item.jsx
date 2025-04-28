@@ -5,7 +5,7 @@ export const DraggableItem = ({ id, label, position, index }) => {
   const { attributes, listeners, transform, isDragging, setNodeRef } =
     useDraggable({
       id,
-      data: { index },
+      data: { label, index },
     });
 
   const style = {
