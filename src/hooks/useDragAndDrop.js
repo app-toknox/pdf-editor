@@ -18,22 +18,20 @@ function useDragAndDrop() {
     if (over && over.id === "pdf") {
       const alreadyDropped = droppedItems.some((item) => item.id === active.id);
       if (!alreadyDropped) {
-        const isTextItem = active.id === "text";
-
         const newItem = {
           id: active.id + "-" + Date.now(),
           positions: {
             x: 20 + delta.x,
             y: 80 + 20 * 3 * index + delta.y,
           },
-          label: active.data.current?.label,
+          data: {
+            label: active.data.current?.label,
+            index: active.data.current?.index,
+            description: active.data.current?.description || "",
+          },
         };
-
-        if (isTextItem) {
-          setItemWaitingForText(newItem);
-        } else {
-          setDroppedItems((prev) => [...prev, newItem]);
-        }
+        setItemWaitingForText(newItem);
+        //setDroppedItems((prev) => [...prev, newItem]);
       } else {
         setDroppedItems((prev) =>
           prev.map((item) => {
@@ -44,6 +42,9 @@ function useDragAndDrop() {
                   x: item.positions.x + delta.x,
                   y: item.positions.y + delta.y,
                 },
+                data: {
+                  ...item.data,
+                },
               };
             }
             return item;
@@ -51,6 +52,7 @@ function useDragAndDrop() {
         );
       }
       setIsDropped(true);
+      console.log(event);
     } else if (over && over.id === "sidebar") {
       setPositions((prev) => {
         const newPositions = { ...prev };
@@ -62,6 +64,20 @@ function useDragAndDrop() {
     } else {
       console.log("Rilasciato fuori dal canvas");
       setIsDropped(false);
+    }
+  };
+
+  const handleSubmitForm = (text) => {
+    if (itemWaitingForText) {
+      const completedItems = {
+        ...itemWaitingForText,
+        data: {
+          ...itemWaitingForText.data,
+          description: text,
+        },
+      };
+      setDroppedItems((prev) => [...prev, completedItems]);
+      setItemWaitingForText(null);
     }
   };
 
@@ -77,12 +93,14 @@ function useDragAndDrop() {
     setDroppedItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const confirmText = (text) => {
-    if (itemWaitingForText) {
-      const completedItem = { ...itemWaitingForText, description: text };
-      setDroppedItems((prev) => [...prev, completedItem]);
-      setItemWaitingForText(null);
-    }
+  const updateItem = (id, newDescription) => {
+    setDroppedItems((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? { ...item, data: { ...item.data, description: newDescription } }
+          : item,
+      ),
+    );
   };
 
   const sensors = useSensors(
@@ -97,9 +115,10 @@ function useDragAndDrop() {
     droppedItems,
     handleDragEnd,
     itemWaitingForText,
-    confirmText,
     setItemWaitingForText,
     deleteItem,
+    updateItem,
+    handleSubmitForm,
   };
 }
 

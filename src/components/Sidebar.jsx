@@ -7,9 +7,10 @@ export const Sidebar = () => {
   //esempio di items
   const { positions } = useDragAndDropContext();
   const items = [
-    { id: "stamp", label: "Timbro", index: 0 },
-    { id: "signature", label: "Firma", index: 1 },
+    { id: "stamp", label: "Timbro", index: 0, description: "" },
+    { id: "signature", label: "Firma", index: 1, description: "" },
     { id: "text", label: "Testo", index: 2, description: "" },
+    { id: "data", label: "Data", index: 3, description: "" },
   ];
 
   const { setNodeRef } = useDroppable({

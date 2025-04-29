@@ -1,5 +1,6 @@
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
+import { useState } from "react";
 
 import { useDragAndDropContext } from "../content/dragAndDropContext";
 
@@ -10,6 +11,8 @@ export const DraggableItem = ({ id, label, position, index, description }) => {
       id,
       data: { label, index, description },
     });
+
+  const [text, setText] = useState(label);
 
   const style = {
     opacity: isDragging ? 0.5 : 1,
@@ -27,13 +30,30 @@ export const DraggableItem = ({ id, label, position, index, description }) => {
       {...attributes}
       className="cursor-move p-2 bg-white border rounded shadow z-20 w-40"
     >
-      <button
-        onClick={() => deleteItem(id)}
-        className="absolute top-1 right-1 text-red-500"
-      >
-        X
-      </button>
-      {label}
+      {!id.includes("-") ? (
+        // Elemento principale
+        <div>{label}</div>
+      ) : (
+        // Elemento copiato
+        <>
+          <button
+            onClick={() => deleteItem(id)}
+            className="absolute top-1 right-1 text-red-500"
+          >
+            X
+          </button>
+          {id.includes(["signature", "stamp", "text"]) ? (
+            <input
+              type="text"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              className="w-full p-1 border rounded"
+            />
+          ) : (
+            <span>{text}</span>
+          )}
+        </>
+      )}
     </div>
   );
 };

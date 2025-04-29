@@ -12,9 +12,10 @@ const App = () => {
     droppedItems,
     handleDragEnd,
     itemWaitingForText,
-    confirmText,
     setItemWaitingForText,
     deleteItem,
+    updateItem,
+    handleSubmitForm,
   } = useDragAndDrop();
   return (
     <DragAndDropContext.Provider
@@ -24,9 +25,10 @@ const App = () => {
         sensors,
         handleDragEnd,
         itemWaitingForText,
-        confirmText,
         setItemWaitingForText,
         deleteItem,
+        updateItem,
+        handleSubmitForm,
       }}
     >
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>

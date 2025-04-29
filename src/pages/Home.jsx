@@ -1,16 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { InputPdfFile } from "../components/input-pdf-file";
+import { ModalExample } from "../components/modal/formSignatureAndStamp"; // importa il tuo form
 import { PdfViewer } from "../components/pdf-viewer";
+import { useDragAndDropContext } from "../content/dragAndDropContext"; // importa il context
 
 export const Home = () => {
   const [pdf, setPdf] = useState();
+
+  const { itemWaitingForText, setItemWaitingForText, handleSubmitForm } =
+    useDragAndDropContext();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (itemWaitingForText) {
+      setIsModalOpen(true);
+    }
+  }, [itemWaitingForText]);
+
+  const handleTextSubmit = (text) => {
+    handleSubmitForm(text);
+    setIsModalOpen(false);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setItemWaitingForText(null);
+  };
 
   return (
     <div className="flex w-full items-center flex-col gap-4 my-8">
       <h1 className="text-2xl">PDF EDITOR TOKNOX DEMO</h1>
       <InputPdfFile setPdf={setPdf} />
       <PdfViewer pdf={pdf} />
+
+      {isModalOpen && (
+        <ModalExample
+          onTextSubmit={handleTextSubmit}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 };
