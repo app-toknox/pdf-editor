@@ -1,5 +1,6 @@
-import { PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { useState } from "react";
+
+import { getBasePosition } from "../utils";
 
 function useDragAndDrop() {
   // Creo una lista con tutti gli oggetti droppati
@@ -20,10 +21,7 @@ function useDragAndDrop() {
       if (!alreadyDropped) {
         const newItem = {
           id: active.id + "-" + Date.now(),
-          positions: {
-            x: 20 + delta.x,
-            y: 80 + 20 * 3 * index + delta.y,
-          },
+          positions: getBasePosition(index, delta),
           data: {
             label: active.data.current?.label,
             index: active.data.current?.index,
@@ -48,7 +46,7 @@ function useDragAndDrop() {
               };
             }
             return item;
-          }),
+          })
         );
       }
       setIsDropped(true);
@@ -98,19 +96,12 @@ function useDragAndDrop() {
       prev.map((item) =>
         item.id === id
           ? { ...item, data: { ...item.data, description: newDescription } }
-          : item,
-      ),
+          : item
+      )
     );
   };
 
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: { distance: 5 },
-    }),
-  );
-
   return {
-    sensors,
     positions,
     droppedItems,
     handleDragEnd,

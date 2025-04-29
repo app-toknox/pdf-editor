@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useRef } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 
-import { useDragAndDropContext } from "../content/dragAndDropContext";
+import { useDragAndDropContext } from "../providers/drag-and-drop-provider";
 import { DraggableItem } from "./draggable-item";
 import { Loader } from "./loading";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { InputPdfFile } from "../components/input-pdf-file";
 import { ModalExample } from "../components/modal/formSignatureAndStamp"; // importa il tuo form
 import { PdfViewer } from "../components/pdf-viewer";
-import { useDragAndDropContext } from "../content/dragAndDropContext"; // importa il context
+import { useDragAndDropContext } from "../providers/drag-and-drop-provider"; // importa il context
 
 export const Home = () => {
   const [pdf, setPdf] = useState();

@@ -2,7 +2,7 @@ import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
 
-import { useDragAndDropContext } from "../content/dragAndDropContext";
+import { useDragAndDropContext } from "../providers/drag-and-drop-provider";
 
 export const DraggableItem = ({ id, label, position, index, description }) => {
   const { deleteItem } = useDragAndDropContext();

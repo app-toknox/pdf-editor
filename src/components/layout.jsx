@@ -1,5 +1,4 @@
 import { cn } from "../utils";
-import { ModalExample } from "./modal/formSignatureAndStamp";
 import { Sidebar } from "./sidebar";
 
 export const Layout = ({ children, className }) => {

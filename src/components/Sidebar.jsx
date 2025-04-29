@@ -1,6 +1,7 @@
 import { useDroppable } from "@dnd-kit/core";
 
-import { useDragAndDropContext } from "../content/dragAndDropContext";
+import { useDragAndDropContext } from "../providers/drag-and-drop-provider";
+import { getBasePosition } from "../utils";
 import { DraggableItem } from "./draggable-item";
 
 export const Sidebar = () => {
@@ -26,10 +27,7 @@ export const Sidebar = () => {
       <h2 className="text-lg font-bold mb-4">Strumenti</h2>
       <div className="flex flex-col gap-2">
         {items.map((item) => {
-          const position = positions?.[item.id] ?? {
-            x: 20,
-            y: 80 + 20 * 3 * item.index,
-          };
+          const position = positions?.[item.id] ?? getBasePosition(item.index);
 
           return (
             <DraggableItem
