@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useRef } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 
+import { useDragAndDropContext } from "../content/dragAndDropContext";
 import { DraggableItem } from "./draggable-item";
 import { Loader } from "./loading";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
@@ -13,7 +14,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 const options = {
   standardFontDataUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/standard_fonts`,
 };
-export const PdfViewer = ({ pdf, droppedItems, deleteItem }) => {
+export const PdfViewer = ({ pdf }) => {
   const [numPages, setNumPages] = useState();
   const [pageNumber, setPageNumber] = useState(1);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -21,6 +22,7 @@ export const PdfViewer = ({ pdf, droppedItems, deleteItem }) => {
 
   const pdfWrapperRef = useRef();
 
+  const { droppedItems } = useDragAndDropContext();
   async function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
     setIsLoaded(true);
@@ -79,7 +81,6 @@ export const PdfViewer = ({ pdf, droppedItems, deleteItem }) => {
                 position={item.positions}
                 index={item.index}
                 description={item?.description}
-                deleteItem={deleteItem}
               />
             );
           })}

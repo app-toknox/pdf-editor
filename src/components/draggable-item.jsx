@@ -1,14 +1,10 @@
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 
-export const DraggableItem = ({
-  id,
-  label,
-  position,
-  index,
-  description,
-  deleteItem,
-}) => {
+import { useDragAndDropContext } from "../content/dragAndDropContext";
+
+export const DraggableItem = ({ id, label, position, index, description }) => {
+  const { deleteItem } = useDragAndDropContext();
   const { attributes, listeners, transform, isDragging, setNodeRef } =
     useDraggable({
       id,
