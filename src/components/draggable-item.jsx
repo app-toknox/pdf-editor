@@ -1,11 +1,18 @@
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 
-export const DraggableItem = ({ id, label, position, index }) => {
+export const DraggableItem = ({
+  id,
+  label,
+  position,
+  index,
+  description,
+  deleteItem,
+}) => {
   const { attributes, listeners, transform, isDragging, setNodeRef } =
     useDraggable({
       id,
-      data: { label, index },
+      data: { label, index, description },
     });
 
   const style = {
@@ -24,6 +31,12 @@ export const DraggableItem = ({ id, label, position, index }) => {
       {...attributes}
       className="cursor-move p-2 bg-white border rounded shadow z-20 w-40"
     >
+      <button
+        onClick={() => deleteItem(id)}
+        className="absolute top-1 right-1 text-red-500"
+      >
+        X
+      </button>
       {label}
     </div>
   );

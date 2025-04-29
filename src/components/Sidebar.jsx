@@ -7,6 +7,7 @@ export const Sidebar = ({ finalPositions }) => {
   const items = [
     { id: "stamp", label: "Timbro", index: 0 },
     { id: "signature", label: "Firma", index: 1 },
+    { id: "text", label: "Testo", index: 2, description: "" },
   ];
 
   const { setNodeRef } = useDroppable({
@@ -34,6 +35,7 @@ export const Sidebar = ({ finalPositions }) => {
               label={item.label}
               position={position}
               index={item.index}
+              description={item?.description}
             />
           );
         })}
