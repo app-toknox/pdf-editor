@@ -8,10 +8,10 @@ export const Sidebar = () => {
   //esempio di items
   const { positions } = useDragAndDropContext();
   const items = [
-    { id: "stamp", label: "Timbro", index: 0, description: "" },
-    { id: "signature", label: "Firma", index: 1, description: "" },
-    { id: "text", label: "Testo", index: 2, description: "" },
-    { id: "data", label: "Data", index: 3, description: "" },
+    { id: "stamp", content: "Timbro", index: 0 },
+    { id: "signature", content: "Firma", index: 1 },
+    { id: "text", content: "Testo", index: 2 },
+    { id: "data", content: "Data", index: 3 },
   ];
 
   const { setNodeRef } = useDroppable({
@@ -33,10 +33,9 @@ export const Sidebar = () => {
             <DraggableItem
               key={item.id}
               id={item.id}
-              label={item.label}
+              content={item.content}
               position={position}
               index={item.index}
-              description={item?.description}
             />
           );
         })}

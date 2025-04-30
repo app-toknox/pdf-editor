@@ -1,5 +1,5 @@
 import { cn } from "../utils";
-import { Sidebar } from "./sidebar";
+import { Sidebar } from "./Sidebar";
 
 export const Layout = ({ children, className }) => {
   return (

@@ -12,14 +12,11 @@ const DragAndDropContext = createContext(undefined);
 
 export const DragAndDropProvider = ({ children }) => {
   const {
-    positions,
     droppedItems,
     handleDragEnd,
-    itemWaitingForText,
-    setItemWaitingForText,
-    deleteItem,
-    updateItem,
-    handleSubmitForm,
+    itemWaitingForContent,
+    setItemWaitingForContent,
+    setDroppedItems,
   } = useDragAndDrop();
 
   const sensors = useSensors(
@@ -29,15 +26,11 @@ export const DragAndDropProvider = ({ children }) => {
   );
 
   const context = {
-    positions,
     droppedItems,
-    itemWaitingForText,
-    setItemWaitingForText,
-    deleteItem,
-    updateItem,
-    handleSubmitForm,
+    itemWaitingForContent,
+    setItemWaitingForContent,
+    setDroppedItems,
   };
-  console.log("===", positions);
   return (
     <DragAndDropContext.Provider value={context}>
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>

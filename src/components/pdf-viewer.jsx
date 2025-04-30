@@ -77,10 +77,9 @@ export const PdfViewer = ({ pdf }) => {
               <DraggableItem
                 key={item.id}
                 id={item.id}
-                label={item.label}
+                content={item.data.content}
                 position={item.positions}
                 index={item.index}
-                description={item?.description}
               />
             );
           })}
