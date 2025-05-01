@@ -7,7 +7,7 @@ function useDragAndDrop() {
   const [droppedItems, setDroppedItems] = useState([]);
 
   // Sato per gestire l'inserimentod del testo
-  const [itemWaitingForContent, setItemWaitingForContent] = useState([]);
+  const [itemWaitingForContent, setItemWaitingForContent] = useState({});
 
   const handleDragEnd = (event) => {
     const { over, delta, active } = event;
@@ -26,8 +26,9 @@ function useDragAndDrop() {
         };
 
         if (["stamp", "signature"].includes(active.id)) {
-          setItemWaitingForContent((prev) => [...prev, newItem]);
-        }else{
+          setItemWaitingForContent(newItem);
+          console.log(itemWaitingForContent);
+        } else {
           setDroppedItems((prev) => [...prev, newItem]);
         }
       } else {

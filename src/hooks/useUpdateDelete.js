@@ -1,31 +1,7 @@
-import { useEffect } from "react";
-import { useState } from "react";
-
 import { useDragAndDropContext } from "../providers/drag-and-drop-provider";
 
 function useUpdateDelete() {
-  const { setDroppedItems, itemWaitingForContent ,setItemWaitingForContent } = useDragAndDropContext();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(() => {
-    if (itemWaitingForContent) {
-      setIsModalOpen(true);
-    }
-  }, [itemWaitingForContent]);
-
-  const handleSubmitForm = (text) => {
-    if (itemWaitingForContent) {
-      const completedItems = {
-        ...itemWaitingForContent,
-        data: {
-          ...itemWaitingForContent.data,
-        },
-      };
-      setDroppedItems((prev) => [...prev, completedItems]);
-      setItemWaitingForContent(null);
-    }
-  };
-
+  const { setDroppedItems, setItemWaitingForContent } = useDragAndDropContext();
   const deleteItem = (id) => {
     console.log("Deleting item with id:", id);
     setDroppedItems((prev) => prev.filter((item) => item.id !== id));
@@ -41,7 +17,20 @@ function useUpdateDelete() {
     );
   };
 
-  return { deleteItem, updateItem };
+  const newItem = (itemWaitingForContent, newContent) => {
+    const newIt = {
+      ...itemWaitingForContent,
+      data: {
+        ...itemWaitingForContent.data,
+        content: newContent,
+      },
+    };
+    console.log("new item con content nuovo", newIt);
+    setDroppedItems((prev) => [...prev, newIt]);
+    setItemWaitingForContent({});
+  };
+
+  return { deleteItem, updateItem, newItem };
 }
 
 export default useUpdateDelete;

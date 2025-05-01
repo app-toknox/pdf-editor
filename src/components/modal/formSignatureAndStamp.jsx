@@ -1,19 +1,24 @@
 import { useState } from "react";
 
-export const ModalExample = ({ onTextSubmit, onClose }) => {
-  const [text, setText] = useState("");
+import useUpdateDelete from "../../hooks/useUpdateDelete";
 
-  function handleSubmit(e) {
+export const ModalExample = ({ setIsModalOpen, itemWaitingForContent }) => {
+  const [text, setText] = useState("");
+  const { newItem } = useUpdateDelete();
+
+  const handleSubmitForm = (e) => {
     e.preventDefault();
-    onTextSubmit(text);
-  }
+    console.log("prima del drop", itemWaitingForContent);
+    newItem(itemWaitingForContent, text);
+    setIsModalOpen(false);
+  };
 
   return (
     <dialog id="my_modal_1" className="modal" open>
       <div className="modal-box">
         <h3 className="font-bold text-lg">Aggiungi il tuo testo</h3>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmitForm}>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1">Testo</label>
             <textarea
@@ -25,7 +30,11 @@ export const ModalExample = ({ onTextSubmit, onClose }) => {
           </div>
 
           <div className="modal-action flex justify-end space-x-2">
-            <button type="button" onClick={onClose} className="btn btn-outline">
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(false)}
+              className="btn btn-outline"
+            >
               Annulla
             </button>
             <button type="submit" className="btn btn-primary">
