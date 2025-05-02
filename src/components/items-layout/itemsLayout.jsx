@@ -20,6 +20,16 @@ export const ItemsLayout = ({ id, content }) => {
           </button>
           <img src={content} className="w-10 h-10" />
         </div>
+      ) : id.includes("data") ? (
+        <div className="w-32">
+          <button
+            onClick={() => deleteItem(id)}
+            className="absolute top-1 right-1 text-red-500"
+          >
+            X
+          </button>
+          <div className="border p-2">{new Date().toLocaleDateString()}</div>
+        </div>
       ) : (
         <div className="w-32">
           <button
