@@ -18,7 +18,7 @@ export const ItemsLayout = ({ id, content }) => {
           >
             X
           </button>
-          {content}
+          <img src={content} className="w-10 h-10" />
         </div>
       ) : (
         <div className="w-32">
