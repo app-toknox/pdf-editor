@@ -7,7 +7,7 @@ export const ItemsLayout = ({ id, content }) => {
   const [text, setText] = useState(content);
 
   return (
-    <div>
+    <div className="">
       {!id.includes("-") ? (
         <div>{id}</div>
       ) : id.includes("stamp") ? (
