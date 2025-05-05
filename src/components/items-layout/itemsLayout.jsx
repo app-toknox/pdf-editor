@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 import useUpdateDelete from "../../hooks/useUpdateDelete";
+import { Data } from "./data/data";
+import { DataDropped } from "./data/data-dropped";
 
 export const ItemsLayout = ({ id, content }) => {
   const { deleteItem } = useUpdateDelete();
@@ -9,7 +11,11 @@ export const ItemsLayout = ({ id, content }) => {
   return (
     <div className="">
       {!id.includes("-") ? (
-        <div>{id}</div>
+        id.includes("data") ? (
+          <Data dataId={id} />
+        ) : (
+          <div>{id}</div>
+        )
       ) : id.includes("stamp") ? (
         <div className="w-32">
           <button
@@ -22,13 +28,7 @@ export const ItemsLayout = ({ id, content }) => {
         </div>
       ) : id.includes("data") ? (
         <div className="w-32">
-          <button
-            onClick={() => deleteItem(id)}
-            className="absolute top-1 right-1 text-red-500"
-          >
-            X
-          </button>
-          <div className="border p-2">{new Date().toLocaleDateString()}</div>
+          <DataDropped dataId={id} />
         </div>
       ) : (
         <div className="w-32">

@@ -6,7 +6,7 @@
       "baseUrl": ".",
       "moduleResolution": "node",
       "allowSyntheticDefaultImports": true,
-      //"checkJs": true
+      "checkJs": true
     },
     "include": ["src/**/*"]
 }

@@ -2,8 +2,6 @@ import "react-resizable/css/styles.css";
 
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
-import { useState } from "react";
-import { ResizableBox } from "react-resizable";
 
 import { ItemsLayout } from "./items-layout/itemsLayout";
 
@@ -14,12 +12,6 @@ export const DraggableItem = ({ id, content, position, index }) => {
       data: { content, index },
     });
 
-  const [size, setSize] = useState({ width: 100, height: 35 });
-
-  const handleResize = (event, { size }) => {
-    setSize(size);
-  };
-
   const style = {
     opacity: isDragging ? 0.5 : 1,
     position: "absolute",
@@ -29,28 +21,26 @@ export const DraggableItem = ({ id, content, position, index }) => {
   };
 
   return (
-    <div style={style} className="z-20">
-      <ResizableBox
-        width={size.width}
-        height={size.height}
-        minConstraints={[150, 75]}
-        maxConstraints={[400, 300]}
-        resizeHandles={["se"]}
-        className="border bg-white shadow"
-        onResize={handleResize}
-      >
-        <div
-          ref={setNodeRef}
-          {...listeners}
-          {...attributes}
-          className="w-full h-full p-3 flex items-center justify-center cursor-move border-amber-200"
-          style={{
-            fontSize: `${Math.max(12, size.width / 10)}px`,
-          }}
-        >
-          <ItemsLayout id={id} content={content} />
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+      className="z-20"
+    >
+      {isDragging ? (
+        <div className="relative bg-white px-4 py-2 text-center">
+          <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-gray-300"></div>
+          <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-gray-300"></div>
+          <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-gray-300"></div>
+          <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-gray-300"></div>
+          <span className="relative text-gray-800 font-semibold">
+            {id}.....
+          </span>
         </div>
-      </ResizableBox>
+      ) : (
+        <ItemsLayout id={id} content={content} />
+      )}
     </div>
   );
 };
