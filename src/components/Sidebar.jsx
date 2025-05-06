@@ -25,7 +25,7 @@ export const Sidebar = () => {
       ref={setNodeRef}
     >
       <h2 className="text-lg font-bold mb-4">Strumenti</h2>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         {items.map((item) => {
           const position = positions?.[item.id] ?? getBasePosition(item.index);
 

@@ -2,14 +2,18 @@ import "react-resizable/css/styles.css";
 
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
+import { useState } from "react";
 
 import { ItemsLayout } from "./items-layout/itemsLayout";
 
 export const DraggableItem = ({ id, content, position, index }) => {
+  const [isResizing, setIsResizing] = useState(false);
+
   const { attributes, listeners, transform, isDragging, setNodeRef } =
     useDraggable({
       id,
       data: { content, index },
+      disabled: isResizing,
     });
 
   const style = {
@@ -24,9 +28,9 @@ export const DraggableItem = ({ id, content, position, index }) => {
     <div
       ref={setNodeRef}
       style={style}
-      {...listeners}
+      {...(!isResizing ? listeners : {})}
       {...attributes}
-      className="z-20"
+      className="z-20 mb-10"
     >
       {isDragging ? (
         <div className="relative bg-white px-4 py-2 text-center">
@@ -39,7 +43,7 @@ export const DraggableItem = ({ id, content, position, index }) => {
           </span>
         </div>
       ) : (
-        <ItemsLayout id={id} content={content} />
+        <ItemsLayout id={id} content={content} setIsResizing={setIsResizing} />
       )}
     </div>
   );

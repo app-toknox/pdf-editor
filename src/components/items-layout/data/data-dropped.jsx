@@ -4,11 +4,11 @@ import { ResizableBox } from "react-resizable";
 
 import useUpdateDelete from "../../../hooks/useUpdateDelete";
 
-export const DataDropped = ({ dataId }) => {
+export const DataDropped = ({ dataId, setIsResizing }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFormat, setSelectedFormat] = useState("dd-mm-yyyy");
 
-  const [size, setSize] = useState({ width: 100, height: 35 });
+  const [size, setSize] = useState({ width: 120, height: 40 });
 
   const handleResize = (event, { size }) => {
     console.log(event);
@@ -55,123 +55,125 @@ export const DataDropped = ({ dataId }) => {
     <ResizableBox
       width={size.width}
       height={size.height}
-      minConstraints={[150, 75]}
-      maxConstraints={[400, 300]}
       resizeHandles={["se"]}
-      className="border border-blue-500 rounded-lg bg-white shadow-sm"
+      onResizeStart={() => setIsResizing(true)}
+      onResizeStop={() => setIsResizing(false)}
       onResize={handleResize}
       lockAspectRatio={true}
     >
-      <div className="relative">
+      <div className="flex items-center w-full h-full px-3 py-2 relative text-gray-800 text-[12px] font-medium font-sans border-1 rounded-sm">
+        {/* Pulsante elimina */}
         <button
           onClick={() => deleteItem(dataId)}
-          className="absolute top-2 right-2 text-gray-500 hover:text-red-700"
+          className="absolute top-1 right-1 text-red-400 hover:text-red-700 "
         >
-          <FaTimes size={18} />
+          <FaTimes size={14} />
         </button>
 
-        <div className="border border-blue-500 rounded-lg px-4 py-2 text-center w-full font-medium text-gray-800 bg-white shadow-sm text-sm">
+        {/* Contenuto principale */}
+        <div className="flex items-center justify-center h-full">
           {dateFormat(selectedFormat)}
         </div>
 
+        {/* Pulsante modifica */}
         <div
           onClick={handleModify}
-          className="absolute bottom-2 right-2 text-gray-400 hover:text-gray-700 cursor-pointer"
+          className="absolute -left-5 text-gray-400 hover:text-gray-700 cursor-pointer"
         >
-          <FaPencilAlt />
+          <FaPencilAlt size={14} />
         </div>
-
-        {isModalOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-b from-transparent via-gray-300/30 to-transparent backdrop-blur-sm z-50">
-            <form
-              onSubmit={handleSetDate}
-              className="bg-white p-6 rounded-lg shadow-lg w-96 space-y-4"
-            >
-              <label>
-                <input
-                  type="radio"
-                  name="format"
-                  value="dd-mm-yyyy"
-                  defaultChecked={selectedFormat === "dd-mm-yyyy"}
-                />{" "}
-                dd-mm-yyyy
-              </label>
-              <br />
-
-              <label>
-                <input
-                  type="radio"
-                  name="format"
-                  value="dd/mm/yyyy"
-                  defaultChecked={selectedFormat === "dd/mm/yyyy"}
-                />{" "}
-                dd/mm/yyyy
-              </label>
-              <br />
-
-              <label>
-                <input
-                  type="radio"
-                  name="format"
-                  value="yyyy-mm-dd"
-                  defaultChecked={selectedFormat === "yyyy-mm-dd"}
-                />{" "}
-                yyyy-mm-dd
-              </label>
-              <br />
-
-              <label>
-                <input
-                  type="radio"
-                  name="format"
-                  value="yyyy/mm/dd"
-                  defaultChecked={selectedFormat === "yyyy/mm/dd"}
-                />{" "}
-                yyyy/mm/dd
-              </label>
-              <br />
-
-              <label>
-                <input
-                  type="radio"
-                  name="format"
-                  value="mm-dd-yyyy"
-                  defaultChecked={selectedFormat === "mm-dd-yyyy"}
-                />{" "}
-                mm-dd-yyyy
-              </label>
-              <br />
-
-              <label>
-                <input
-                  type="radio"
-                  name="format"
-                  value="mm/dd/yyyy"
-                  defaultChecked={selectedFormat === "mm/dd/yyyy"}
-                />{" "}
-                mm/dd/yyyy
-              </label>
-              <br />
-
-              <div className="flex justify-end gap-4">
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded border border-gray-400 text-gray-700 hover:bg-gray-100"
-                >
-                  Annulla
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600"
-                >
-                  Applica
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-b from-transparent via-gray-300/30 to-transparent backdrop-blur-sm z-50">
+          <form
+            onSubmit={handleSetDate}
+            className="bg-white p-6 rounded-lg shadow-lg w-96 space-y-4"
+          >
+            <label>
+              <input
+                type="radio"
+                name="format"
+                value="dd-mm-yyyy"
+                defaultChecked={selectedFormat === "dd-mm-yyyy"}
+              />{" "}
+              dd-mm-yyyy
+            </label>
+            <br />
+
+            <label>
+              <input
+                type="radio"
+                name="format"
+                value="dd/mm/yyyy"
+                defaultChecked={selectedFormat === "dd/mm/yyyy"}
+              />{" "}
+              dd/mm/yyyy
+            </label>
+            <br />
+
+            <label>
+              <input
+                type="radio"
+                name="format"
+                value="yyyy-mm-dd"
+                defaultChecked={selectedFormat === "yyyy-mm-dd"}
+              />{" "}
+              yyyy-mm-dd
+            </label>
+            <br />
+
+            <label>
+              <input
+                type="radio"
+                name="format"
+                value="yyyy/mm/dd"
+                defaultChecked={selectedFormat === "yyyy/mm/dd"}
+              />{" "}
+              yyyy/mm/dd
+            </label>
+            <br />
+
+            <label>
+              <input
+                type="radio"
+                name="format"
+                value="mm-dd-yyyy"
+                defaultChecked={selectedFormat === "mm-dd-yyyy"}
+              />{" "}
+              mm-dd-yyyy
+            </label>
+            <br />
+
+            <label>
+              <input
+                type="radio"
+                name="format"
+                value="mm/dd/yyyy"
+                defaultChecked={selectedFormat === "mm/dd/yyyy"}
+              />{" "}
+              mm/dd/yyyy
+            </label>
+            <br />
+
+            <div className="flex justify-end gap-4">
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(false)}
+                className="px-4 py-2 rounded border border-gray-400 text-gray-700 hover:bg-gray-100"
+              >
+                Annulla
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600"
+              >
+                Applica
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </ResizableBox>
   );
 };

@@ -1,21 +1,23 @@
-import { useState } from "react";
-
 import useUpdateDelete from "../../hooks/useUpdateDelete";
 import { Data } from "./data/data";
 import { DataDropped } from "./data/data-dropped";
+import { Signature } from "./signature/signature";
+import { Text } from "./text/text";
+import { TextDropped } from "./text/text-dropped";
 
-export const ItemsLayout = ({ id, content }) => {
+export const ItemsLayout = ({ id, content, setIsResizing }) => {
   const { deleteItem } = useUpdateDelete();
-  const [text, setText] = useState(content);
 
   return (
     <div className="">
       {!id.includes("-") ? (
         id.includes("data") ? (
           <Data dataId={id} />
-        ) : (
-          <div>{id}</div>
-        )
+        ) : id.includes("text") ? (
+          <Text textId={id} />
+        ) : id.includes("signature") ? (
+          <Signature signId={id} />
+        ) : ( <div>{id}</div>)
       ) : id.includes("stamp") ? (
         <div className="w-32">
           <button
@@ -27,24 +29,9 @@ export const ItemsLayout = ({ id, content }) => {
           <img src={content} className="w-10 h-10" />
         </div>
       ) : id.includes("data") ? (
-        <div className="w-32">
-          <DataDropped dataId={id} />
-        </div>
+        <DataDropped dataId={id} setIsResizing={setIsResizing} />
       ) : (
-        <div className="w-32">
-          <button
-            onClick={() => deleteItem(id)}
-            className="absolute top-1 right-1 text-red-500"
-          >
-            X
-          </button>
-          <input
-            type="text"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            className="border px-1 w-28"
-          />
-        </div>
+        <TextDropped textId={id} content={content} />
       )}
     </div>
   );
