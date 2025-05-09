@@ -1,5 +1,6 @@
+import { NewSidebar } from "../pages/NewSidebar";
+import { Sidebar } from "../pages/Sidebar";
 import { cn } from "../utils";
-import { Sidebar } from "./Sidebar";
 
 export const Layout = ({ children, className }) => {
   return (
@@ -8,6 +9,7 @@ export const Layout = ({ children, className }) => {
       <div className={cn("flex min-h-screen w-screen", className)}>
         {children}
       </div>
+      <NewSidebar />
     </div>
   );
 };

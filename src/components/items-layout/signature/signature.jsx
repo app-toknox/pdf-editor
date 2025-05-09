@@ -6,7 +6,7 @@ import useNumberItems from "../../../hooks/useNumberItems";
 export const Signature = ({ signId }) => {
   const { numberItems } = useNumberItems(signId);
   return (
-    <div className="flex items-center border border-blue-500 rounded-lg w-36 px-3 py-3 bg-white shadow-sm w-fit">
+    <div className="flex items-center border border-blue-500 rounded-lg px-3 py-3 bg-white shadow-sm w-fit">
       {numberItems != 0 && (
         <div className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
           {numberItems}

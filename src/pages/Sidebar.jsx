@@ -1,8 +1,8 @@
 import { useDroppable } from "@dnd-kit/core";
 
+import { DraggableItem } from "../components/draggable-item";
 import { useDragAndDropContext } from "../providers/drag-and-drop-provider";
 import { getBasePosition } from "../utils";
-import { DraggableItem } from "./draggable-item";
 
 export const Sidebar = () => {
   //esempio di items
