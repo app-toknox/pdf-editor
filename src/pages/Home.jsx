@@ -31,6 +31,7 @@ export const Home = () => {
       y,
       width: 170,
       height: 50,
+      payload: "",
     };
     setItems((prev) => [...prev, newItem]);
   };
@@ -54,7 +55,8 @@ export const Home = () => {
   };
 
   // richaimo hook per form
-  const { editingItemId, openEditForm, closeEditForm } = useItemManager();
+  const { editingItemId, openEditForm, closeEditForm, editItem } =
+    useItemManager();
   const editingItem = items.find((i) => i.id === editingItemId);
   const FormElement = editingItem
     ? ELEMENT_TYPES[editingItem.type]?.form
@@ -81,6 +83,7 @@ export const Home = () => {
             onResize={handleResizeStop}
             onRemove={handleRemove}
             openEditForm={openEditForm}
+            editItem={editItem}
           />
         ))}
       </div>

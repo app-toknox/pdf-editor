@@ -3,6 +3,7 @@ import { FiCheck, FiX } from "react-icons/fi";
 
 export const SignatureForm = ({ initialValue = "", onSubmit, onClose }) => {
   const [text, setText] = useState(initialValue);
+  const [font, setFont] = useState("Arial");
 
   return (
     <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
@@ -22,12 +23,23 @@ export const SignatureForm = ({ initialValue = "", onSubmit, onClose }) => {
           }}
           className="flex flex-col items-center"
         >
+          <select
+            value={font}
+            onChange={(e) => setFont(e.target.value)}
+            className="select select-bordered w-full mb-4"
+          >
+            <option value="Arial">Arial</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Georgia">Georgia</option>
+          </select>
           <input
             type="text"
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Inserisci firma..."
             autoFocus
+            style={{ fontFamily: font }}
             className="input input-bordered w-full mb-4 text-center"
           />
           <button

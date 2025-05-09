@@ -8,6 +8,7 @@ export const NewDraggableItem = ({
   onResize,
   onRemove,
   openEditForm,
+  editItem,
 }) => {
   const Element = ELEMENT_TYPES[item.type]?.component;
 
@@ -28,7 +29,12 @@ export const NewDraggableItem = ({
       bounds="parent"
     >
       {Element ? (
-        <Element onRemove={onRemove} item={item} openEditForm={openEditForm} />
+        <Element
+          onRemove={onRemove}
+          item={item}
+          openEditForm={openEditForm}
+          editItem={editItem}
+        />
       ) : (
         item.type
       )}
