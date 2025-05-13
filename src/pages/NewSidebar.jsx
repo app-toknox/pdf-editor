@@ -7,7 +7,7 @@ export const NewSidebar = () => {
 
   console.log(Icon, sidebarItems);
   return (
-    <aside className="w-64 h-screen bg-base-200 p-6 border-l-1 flex flex-col">
+    <aside className="w-96 bg-base-200 p-6 border-l-1 flex flex-col">
       <h2 className="text-xl font-semibold mb-6 text-gray-800">Items</h2>
       <nav className="overflow-y-auto">
         <ul className="space-y-3">

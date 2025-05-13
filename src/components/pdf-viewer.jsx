@@ -6,8 +6,6 @@ import { useState } from "react";
 import { useRef } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 
-import { useDragAndDropContext } from "../providers/drag-and-drop-provider";
-import { DraggableItem } from "./draggable-item";
 import { Loader } from "./loading";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
@@ -21,8 +19,6 @@ export const PdfViewer = ({ pdf }) => {
   //const [signature, setSignature] = useState();
 
   const pdfWrapperRef = useRef();
-
-  const { droppedItems } = useDragAndDropContext();
   async function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
     setIsLoaded(true);
@@ -72,17 +68,6 @@ export const PdfViewer = ({ pdf }) => {
               <Page pageNumber={pageNumber} />
             </Document>
           </div>
-          {droppedItems.map((item) => {
-            return (
-              <DraggableItem
-                key={item.id}
-                id={item.id}
-                content={item.data.content}
-                position={item.positions}
-                index={item.index}
-              />
-            );
-          })}
           {isLoaded ? (
             <div className="w-full flex flex-row justify-between items-center px-8">
               <button
