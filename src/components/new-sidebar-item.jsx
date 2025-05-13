@@ -5,9 +5,13 @@ export const NewSidebarItem = ({ item, Icon }) => {
   };
 
   return (
-    <div draggable={true} onDragStart={handleDragStart} className="flex">
-      {Icon && <Icon size="1.25em" className="text-gray-600 mr-2" />}
-      {item}
+    <div
+      draggable
+      onDragStart={handleDragStart}
+      className="flex items-center p-4 mb-3 bg-white border border-gray-200 shadow-sm rounded-lg cursor-move hover:shadow-md transition-shadow space-x-3"
+    >
+      {Icon && <Icon size="1.25em" className="text-gray-600" />}
+      <span className="text-gray-800 font-medium">{item}</span>
     </div>
   );
 };

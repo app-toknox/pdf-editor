@@ -11,7 +11,6 @@ export const DataDropped = ({ dataId, setIsResizing }) => {
   const [size, setSize] = useState({ width: 120, height: 40 });
 
   const handleResize = (event, { size }) => {
-    console.log(event);
     setSize(size);
   };
   const { deleteItem } = useUpdateDelete();

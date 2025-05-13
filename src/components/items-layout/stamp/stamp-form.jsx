@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
-export const StampForm = ({ initialValue = "", onSubmit, onClose }) => {
+export const StampForm = ({ initialValue = "", onSubmit, onClose, item }) => {
   const [imageSrc, setImageSrc] = useState(initialValue);
 
   const handleFileChange = (e) => {
@@ -31,7 +31,7 @@ export const StampForm = ({ initialValue = "", onSubmit, onClose }) => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            onSubmit(imageSrc);
+            onSubmit(item, imageSrc);
           }}
           className="flex flex-col items-center"
         >

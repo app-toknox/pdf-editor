@@ -10,6 +10,7 @@ import { SignatureForm } from "../components/items-layout/signature/signature-fo
 import { StampComponent } from "../components/items-layout/stamp/stamp-component";
 import { StampForm } from "../components/items-layout/stamp/stamp-form";
 import { TextComponent } from "../components/items-layout/text/text-component";
+import { TextForm } from "../components/items-layout/text/text-form";
 
 export const ELEMENT_TYPES = {
   Signature: {
@@ -24,6 +25,7 @@ export const ELEMENT_TYPES = {
   },
   Text: {
     component: TextComponent,
+    form: TextForm,
     icon: BsChatSquareTextFill,
   },
   Data: {

@@ -9,6 +9,8 @@ export const NewDraggableItem = ({
   onRemove,
   openEditForm,
   editItem,
+  selectItem,
+  handleSelection,
 }) => {
   const Element = ELEMENT_TYPES[item.type]?.component;
 
@@ -34,6 +36,8 @@ export const NewDraggableItem = ({
           item={item}
           openEditForm={openEditForm}
           editItem={editItem}
+          selectItem={selectItem}
+          handleSelection={handleSelection}
         />
       ) : (
         item.type

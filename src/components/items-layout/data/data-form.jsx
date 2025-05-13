@@ -5,6 +5,7 @@ export const DataForm = ({
   initialFormat = "dd-mm-yyyy",
   onSubmit,
   onClose,
+  item,
 }) => {
   const [format, setFormat] = useState(initialFormat);
 
@@ -45,7 +46,7 @@ export const DataForm = ({
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            onSubmit(format);
+            onSubmit(item, getFormattedDate(format));
           }}
           className="flex flex-col"
         >
