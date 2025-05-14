@@ -1,6 +1,6 @@
 import { NewSidebar } from "../pages/NewSidebar";
 import { Sidebar } from "../pages/Sidebar";
-import { cn } from "../utils";
+import { cn } from "../utils/index";
 
 export const Layout = ({ children, className }) => {
   return (

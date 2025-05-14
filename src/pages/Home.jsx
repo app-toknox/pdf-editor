@@ -88,30 +88,33 @@ export const Home = () => {
 
   return (
     <div className="flex w-full items-center flex-col gap-4 my-8">
-      <h1 className="text-2xl">PDF EDITOR TOKNOX DEMO</h1>
+      <h1 className="text-3xl font-bold text-gray-800 items-center">
+        PDF EDITOR TOKNOX DEMO
+      </h1>
       <InputPdfFile setPdf={setPdf} />
-      <PdfViewer pdf={pdf} />
 
       {/* Questo è il mio container che sarà poi PDFviewer */}
       <div
-        className="w-200 h-screen border-2"
+        className="z-40 relative"
         onDrop={handleOnDrop}
         onDragOver={handleOnDragOver}
       >
-        {/* qui gestisco il child component */}
-        {items.map((item) => (
-          <NewDraggableItem
-            key={item.id}
-            item={item}
-            onDragStop={handleDragStop}
-            onResize={handleResizeStop}
-            onRemove={handleRemove}
-            openEditForm={openEditForm}
-            editItem={editItem}
-            selectItem={selectItem}
-            handleSelection={handleSelection}
-          />
-        ))}
+        <PdfViewer pdf={pdf} />
+        <div className="absolute inset-0 z-50">
+          {items.map((item) => (
+            <NewDraggableItem
+              key={item.id}
+              item={item}
+              onDragStop={handleDragStop}
+              onResize={handleResizeStop}
+              onRemove={handleRemove}
+              openEditForm={openEditForm}
+              editItem={editItem}
+              selectItem={selectItem}
+              handleSelection={handleSelection}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Qui mostro il form se attivo */}

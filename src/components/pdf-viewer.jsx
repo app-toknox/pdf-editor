@@ -1,7 +1,6 @@
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 
-import { useDroppable } from "@dnd-kit/core";
 import { useState } from "react";
 import { useRef } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
@@ -37,11 +36,6 @@ export const PdfViewer = ({ pdf }) => {
     }
   };
 
-  //Logica per aggiungere su PDF con drag & drop
-  const { setNodeRef } = useDroppable({
-    id: "pdf",
-  });
-
   return (
     <div className="flex flex-col gap-8 py-8">
       {pdf ? (
@@ -50,7 +44,6 @@ export const PdfViewer = ({ pdf }) => {
             className="relative z-10 max-w-xl shadow-2xl"
             id="pdf"
             ref={(el) => {
-              setNodeRef(el);
               pdfWrapperRef.current = el;
             }}
           >

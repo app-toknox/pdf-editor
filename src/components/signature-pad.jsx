@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
 
-import { cn, trimCanvas } from "../utils";
+import { cn, trimCanvas } from "../utils/index";
 
 export const SignaturePad = ({ onSaveSignatureCallback }) => {
   const sigCanvasRef = useRef(null);

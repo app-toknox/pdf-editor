@@ -9,7 +9,7 @@ export const StampComponent = ({
 }) => {
   return (
     <div
-      className="relative w-full h-full bg-white border-2 border-dashed border-gray-300 rounded cursor-move"
+      className="relative w-full h-full bg-transparent border-2 border-dashed border-gray-300 rounded cursor-move"
       style={{ fontSize: `${Math.min(item.width, item.height) / 4}px` }}
       onClick={() => handleSelection(item)}
       onDoubleClick={() => openEditForm(item.id)}

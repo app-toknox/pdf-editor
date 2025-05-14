@@ -5,7 +5,7 @@ export const InputPdfFile = ({ setPdf }) => {
   };
   return (
     <fieldset className="fieldset">
-      <legend className="fieldset-legend">Seleziona un file pdf</legend>
+      <legend className="fieldset-legend">Select a PDF file</legend>
       <input
         accept="application/pdf"
         onChange={(e) => handleOnChange(e.target.files)}
