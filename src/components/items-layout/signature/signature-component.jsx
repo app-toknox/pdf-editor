@@ -13,7 +13,10 @@ export const SignatureComponent = ({
         item.id === selectItem?.id ? "border border-dashed border-gray-400" : ""
       }`}
       style={{ fontSize: `${Math.min(item.width, item.height) / 4}px` }}
-      onClick={() => handleSelection(item)}
+      onClick={(e) => {
+        e.stopPropagation();
+        handleSelection(item);
+      }}
       onDoubleClick={() => openEditForm(item.id)}
     >
       {item.id === selectItem?.id && (

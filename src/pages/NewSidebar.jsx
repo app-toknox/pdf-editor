@@ -5,7 +5,6 @@ export const NewSidebar = () => {
   const sidebarItems = Object.keys(ELEMENT_TYPES);
   const Icon = ELEMENT_TYPES[sidebarItems]?.icon;
 
-  console.log(Icon, sidebarItems);
   return (
     <aside className="w-1/3 bg-base-200 p-6 border-l border-gray-200 flex flex-col rounded-tl-3xl rounded-bl-3xl shadow-md relative overflow-hidden">
       <h2 className="text-2xl font-bold mb-4 text-gray-900 border-b pb-2 border-gray-300">

@@ -41,7 +41,7 @@ export const PdfViewer = ({ pdf }) => {
       {pdf ? (
         <>
           <div
-            className="relative z-10 max-w-xl shadow-2xl"
+            className="relative z-10 max-w-2xl shadow-2xl"
             id="pdf"
             ref={(el) => {
               pdfWrapperRef.current = el;
