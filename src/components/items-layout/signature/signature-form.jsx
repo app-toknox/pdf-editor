@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
+import { useManagerZustand } from "../../../hooks/useManagerZustand";
 import { SignaturePad } from "../../signature-pad"; // Assuming SignaturePad is imported from this path
-
-export const SignatureForm = ({
-  initialValue = "",
-  onSubmit,
-  onClose,
-  item,
-}) => {
+export const SignatureForm = ({ initialValue = "" }) => {
   const [text, setText] = useState(initialValue);
   const [font, setFont] = useState("Arial");
   const [mode, setMode] = useState("text");
+  const {
+    closeEditForm,
+    submitEditForm,
+    editingItem,
+    editingTemplates,
+    submitConfiguredTemplates,
+  } = useManagerZustand();
 
   return (
     <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
@@ -20,7 +22,7 @@ export const SignatureForm = ({
         <FiX
           size="1em"
           className="absolute top-3 right-3 text-gray-500 hover:text-red-600 cursor-pointer"
-          onClick={onClose}
+          onClick={closeEditForm}
         />
 
         <div className="tabs tabs-boxed flex justify-center">
@@ -48,7 +50,11 @@ export const SignatureForm = ({
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              onSubmit(item, text);
+              if (editingItem) {
+                submitEditForm(editingItem.id, "text", text);
+              } else if (editingTemplates) {
+                submitConfiguredTemplates("text", text);
+              }
             }}
             className="flex flex-col items-center"
           >
@@ -83,7 +89,9 @@ export const SignatureForm = ({
 
         {mode === "draw" && (
           <SignaturePad
-            onSaveSignatureCallback={(dataUrl) => onSubmit(item, dataUrl)}
+            onSaveSignatureCallback={(dataUrl) =>
+              submitEditForm(editingItem.id, dataUrl)
+            }
           />
         )}
 
@@ -98,7 +106,7 @@ export const SignatureForm = ({
                 if (file) {
                   const reader = new FileReader();
                   reader.onload = () => {
-                    onSubmit(item, reader.result);
+                    submitEditForm(editingItem.id, reader.result);
                   };
                   reader.readAsDataURL(file);
                 }

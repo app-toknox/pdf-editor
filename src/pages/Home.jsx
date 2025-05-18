@@ -3,8 +3,7 @@ import { useState } from "react";
 import { InputPdfFile } from "../components/input-pdf-file";
 import { NewDraggableItem } from "../components/new-draggable-item";
 import { PdfViewer } from "../components/pdf-viewer";
-import useDraggableItems from "../hooks/useDraggableItems";
-import useItemManager from "../hooks/useItemManager";
+import { useManagerZustand } from "../hooks/useManagerZustand";
 import { ELEMENT_TYPES } from "../types/element-types";
 
 export const Home = () => {
@@ -12,31 +11,23 @@ export const Home = () => {
 
   const {
     items,
-    setItems,
-    configuredTemplates,
-    setConfiguredTemplates,
     handleDragStop,
     handleResizeStop,
     handleRemove,
-    handleNumberItems,
     selectItem,
     handleSelection,
-  } = useDraggableItems();
-  const {
-    editingItemId,
-    openEditForm,
-    closeEditForm,
+    editingItem,
+    handleDropData,
+    handleAddTemplate,
+    editingTemplates,
     editItem,
-    submitEditForm,
-  } = useItemManager({
-    items,
-    setItems,
-    setConfiguredTemplates,
-  });
-  const editingItem = items.find((i) => i.id === editingItemId);
+  } = useManagerZustand();
+
   const FormElement = editingItem
     ? ELEMENT_TYPES[editingItem.type]?.form
-    : null;
+    : editingTemplates
+      ? ELEMENT_TYPES[editingTemplates.type]?.form
+      : null;
 
   const handleOnDragOver = (e) => {
     e.preventDefault();
@@ -44,46 +35,12 @@ export const Home = () => {
 
   const handleOnDrop = (e) => {
     e.preventDefault();
-    const data = e.dataTransfer.getData("application/json");
+    const type = e.dataTransfer.getData("application/json");
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // c'è gia sui template?
-    const isAlreadyConfigured = configuredTemplates.find(
-      (item) => item.data === data,
-    );
-    if (isAlreadyConfigured) {
-      const newItem = {
-        id: `${data}-${Date.now()}`,
-        type: data,
-        data,
-        x,
-        y,
-        width: 170,
-        height: 50,
-        payload: isAlreadyConfigured.payload,
-      };
-      setItems((prev) => [...prev, newItem]);
-      handleNumberItems(newItem);
-      handleSelection(newItem);
-    } else {
-      const newItem = {
-        id: `${data}-${Date.now()}`,
-        type: data,
-        data,
-        x,
-        y,
-        width: 170,
-        height: 50,
-        payload: "",
-      };
-      setConfiguredTemplates((prev) => [...prev, newItem]);
-      setItems((prev) => [...prev, newItem]);
-      handleNumberItems(newItem);
-      handleSelection(newItem);
-      openEditForm(newItem.id);
-    }
+    handleDropData(type, x, y);
   };
 
   return (
@@ -95,7 +52,7 @@ export const Home = () => {
 
       {/* Questo è il mio container che sarà poi PDFviewer */}
       <div
-        className="z-40 relative"
+        className="z-40 relative border-2 w-200 h-200"
         onDrop={handleOnDrop}
         onDragOver={handleOnDragOver}
       >
@@ -108,7 +65,6 @@ export const Home = () => {
               onDragStop={handleDragStop}
               onResize={handleResizeStop}
               onRemove={handleRemove}
-              openEditForm={openEditForm}
               editItem={editItem}
               selectItem={selectItem}
               handleSelection={handleSelection}
@@ -117,14 +73,10 @@ export const Home = () => {
         </div>
       </div>
 
+      <button onClick={() => handleAddTemplate("Signature")}>test</button>
+
       {/* Qui mostro il form se attivo */}
-      {editingItemId && (
-        <FormElement
-          onClose={closeEditForm}
-          onSubmit={submitEditForm}
-          item={editingItemId}
-        />
-      )}
+      {editingItem && <FormElement />}
     </div>
   );
 };

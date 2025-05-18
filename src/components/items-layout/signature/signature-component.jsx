@@ -1,12 +1,14 @@
 import { FiEdit2, FiX } from "react-icons/fi";
 
+import { useManagerZustand } from "../../../hooks/useManagerZustand";
+
 export const SignatureComponent = ({
   item,
   onRemove,
-  openEditForm,
   selectItem,
   handleSelection,
 }) => {
+  const { openEditForm } = useManagerZustand();
   return (
     <div
       className={`relative w-full h-full bg-transparent rounded cursor-move ${
@@ -17,7 +19,7 @@ export const SignatureComponent = ({
         e.stopPropagation();
         handleSelection(item);
       }}
-      onDoubleClick={() => openEditForm(item.id)}
+      onDoubleClick={() => openEditForm(item)}
     >
       {item.id === selectItem?.id && (
         <>
@@ -32,7 +34,7 @@ export const SignatureComponent = ({
           />
           <FiEdit2
             className="absolute top-1 -right-6 text-gray-500 hover:text-blue-600 cursor-pointer"
-            onClick={() => openEditForm(item.id)}
+            onClick={() => openEditForm(item)}
           />
         </>
       )}
@@ -46,7 +48,7 @@ export const SignatureComponent = ({
             draggable="false"
           />
         ) : (
-          item.payload
+          item.payload.text
         )}
       </div>
     </div>

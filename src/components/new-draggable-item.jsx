@@ -7,7 +7,6 @@ export const NewDraggableItem = ({
   onDragStop,
   onResize,
   onRemove,
-  openEditForm,
   editItem,
   selectItem,
   handleSelection,
@@ -34,7 +33,6 @@ export const NewDraggableItem = ({
         <Element
           onRemove={onRemove}
           item={item}
-          openEditForm={openEditForm}
           editItem={editItem}
           selectItem={selectItem}
           handleSelection={handleSelection}

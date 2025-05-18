@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
-export const StampForm = ({ initialValue = "", onSubmit, onClose, item }) => {
-  const [imageSrc, setImageSrc] = useState(initialValue);
+import { useManagerZustand } from "../../../hooks/useManagerZustand";
+
+export const StampForm = () => {
+  const { editingItem, submitEditForm, closeEditForm } = useManagerZustand();
+
+  const [imageSrc, setImageSrc] = useState("");
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -23,7 +27,7 @@ export const StampForm = ({ initialValue = "", onSubmit, onClose, item }) => {
         <FiX
           size="1em"
           className="absolute top-3 right-3 text-gray-500 hover:text-red-600 cursor-pointer"
-          onClick={onClose}
+          onClick={closeEditForm}
         />
         <h2 className="text-xl font-semibold mb-4 text-gray-800">
           Modifica Timbro
@@ -31,7 +35,7 @@ export const StampForm = ({ initialValue = "", onSubmit, onClose, item }) => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            onSubmit(item, imageSrc);
+            submitEditForm(editingItem.id, imageSrc);
           }}
           className="flex flex-col items-center"
         >
