@@ -1,14 +1,16 @@
 import { create } from "zustand";
 
+import { getItemByType } from "../types/base-droppable-types";
+
 export const useManagerZustand = create((set, get) => ({
   items: [],
-  configuredTemplates: [], //questo è il preload di tutti i componenti
+  // configuredTemplates: [], //questo è il preload di tutti i componenti
   numberItems: [],
   selectItem: null,
-  selectTemplateItem: null,
+  //selectTemplateItem: null,
   copiedItem: null,
   editingItem: null,
-  editingTemplates: null,
+  //editingTemplates: null,
 
   setItems: (newItem) => {
     const current = get().items;
@@ -16,77 +18,87 @@ export const useManagerZustand = create((set, get) => ({
     set({ items: updated });
   },
 
-  // gestiscono il preload templates
   // setConfiguredTemplates: (templates) => {
   //   const current = get().configuredTemplates;
   //   const updated = [...current, templates];
   //   set({ configuredTemplates: updated });
   // },
 
-  setDeleteTemplates: (template) => {
-    const current = get().configuredTemplates;
-    const updated = current.filter((item) => item !== template);
-    set({ configuredTemplates: updated });
-  },
+  // setDeleteTemplates: (template) => {
+  //   const current = get().configuredTemplates;
+  //   const updated = current.filter((item) => item !== template);
+  //   set({ configuredTemplates: updated });
+  // },
 
-  submitConfiguredTemplates: (type, newPayload) => {
-    const timestamp = Date.now();
-    const newTemplate = {
-      id: `${type}-${timestamp}`,
-      type: type,
-      payload: {
-        [type]: newPayload,
-      },
-      selected: true,
-    };
-    const current = get().configuredTemplates;
-    const updated = [...current, newTemplate];
-    set({ configuredTemplates: updated });
-    set({
-      editingTemplates: null,
-    });
-    console.log("step 3 upgrade templates", updated);
-  },
+  // submitConfiguredTemplates: (type, newPayload) => {
+  //   const timestamp = Date.now();
+  //   const newTemplate = {
+  //     id: `${type}-${timestamp}`,
+  //     type: type,
+  //     payload: {
+  //       [type]: newPayload,
+  //     },
+  //     selected: true,
+  //   };
+  //   const current = get().configuredTemplates;
+  //   const updated = [...current, newTemplate];
+  //   set({ configuredTemplates: updated });
+  //   set({
+  //     editingTemplates: null,
+  //   });
+  //   console.log("step 3 upgrade templates", updated);
+  // },
 
-  handleAddTemplate: (templateType) => {
-    const timestamp = Date.now();
-    const newTemplate = {
-      id: `${templateType}-${timestamp}`,
-      type: templateType,
-      payload: {
-        type: "",
-        data: "",
-        style: "",
-      },
-      selected: true,
-    };
+  // handleAddTemplate: (templateType) => {
+  //   const timestamp = Date.now();
+  //   const newTemplate = {
+  //     id: `${templateType}-${timestamp}`,
+  //     type: templateType,
+  //     payload: {
+  //       type: "",
+  //       data: "",
+  //       style: "",
+  //     },
+  //     selected: true,
+  //   };
 
-    set({
-      editingTemplates: newTemplate,
-    });
-  },
+  //   set({
+  //     editingTemplates: newTemplate,
+  //   });
+  // },
 
-  submitFormTemplate: (itemId, type, newPayload) => {
-    const updatedTemplates = get().configuredTemplates.map((template) =>
-      template.id === itemId
-        ? {
-            ...template,
-            payload: {
-              ...template.payload,
-              [type]: newPayload,
-            },
-          }
-        : template
-    );
-    set({ configuredTemplates: updatedTemplates });
-    set({ editingTemplates: null });
-  },
-  // handleDropData: (type, x, y) => {
-  //   // data: "timbro", "firma", "testo", "data"
-  //   const isAlreadyConfigured = get().configuredTemplates.find(
-  //     (t) => t.id === type,
+  // submitFormTemplate: (itemId, type, newPayload) => {
+  //   const updatedTemplates = get().configuredTemplates.map((template) =>
+  //     template.id === itemId
+  //       ? {
+  //           ...template,
+  //           payload: {
+  //             ...template.payload,
+  //             [type]: newPayload,
+  //           },
+  //         }
+  //       : template
   //   );
+  //   set({ configuredTemplates: updatedTemplates });
+  //   set({ editingTemplates: null });
+  // },
 
+  handleDropData: (type, x, y) => {
+    const newItem = getItemByType(type, x, y);
+
+    if (type === "Signature" || type === "Stamp") {
+      get().openEditForm(newItem);
+    }
+
+    get().setItems(newItem);
+    get().handleNumberItems(newItem);
+    get().handleSelection(newItem);
+  },
+
+  // handleDropData: (type, x, y) => {
+  //   const isAlreadyConfigured = get().configuredTemplates.find(
+  //     (t) => t.type === type,
+  //   );
   //   const newItem = {
   //     id: `${type}-${Date.now()}`,
   //     type,
@@ -98,64 +110,28 @@ export const useManagerZustand = create((set, get) => ({
   //   };
 
   //   if (!isAlreadyConfigured) {
-  //     get().setConfiguredTemplates(newItem);
   //     get().openEditForm(newItem);
+  //     console.log("step 1 form + newItem", newItem);
   //   }
-
   //   get().setItems(newItem);
-  //   get().handleNumberItems(newItem);
-  //   get().handleSelection(newItem);
   // },
 
-  handleDropData: (type, x, y) => {
-    const isAlreadyConfigured = get().configuredTemplates.find(
-      (t) => t.type === type,
-    );
-    const newItem = {
-      id: `${type}-${Date.now()}`,
-      type,
-      x,
-      y,
-      width: 170,
-      height: 50,
-      payload: isAlreadyConfigured?.payload || "",
-    };
-
-    if (!isAlreadyConfigured) {
-      get().openEditForm(newItem);
-      console.log("step 1 form + newItem", newItem);
-    }
-    get().setItems(newItem);
-  },
-
-  // gestione form
   openEditForm: (item) => set({ editingItem: item }),
 
-  submitEditForm: (itemId, type, newPayload) => {
-    const isAlreadyConfigured = get().configuredTemplates.find(
-      (t) => t.type === type,
-    );
+  closeEditForm: () => set({ editingItem: null }),
 
+  submitEditForm: (itemId, newPayload) => {
     const updatedItems = get().items.map((item) =>
-      item.id === itemId
-        ? { ...item, payload: { ...item.payload, [type]: newPayload } }
-        : item,
+      item.id === itemId ? { ...item, payload: newPayload } : item,
     );
-    console.log("step 2 cambio item payload", updatedItems);
     set({ items: updatedItems });
-    if (!isAlreadyConfigured) {
-      get().submitConfiguredTemplates(itemId, type, newPayload);
-    }
     set({ editingItem: null });
-  },
-
-  closeEditForm: () => {
-    set({ editingItem: null });
+    console.log(updatedItems);
   },
 
   setSelectItem: (item) => set({ selectItem: item }),
   setCopiedItem: (item) => set({ copiedItem: item }),
-  setSelectTemplateItem: (item) => set({ selectTemplateItem: item }),
+  // setSelectTemplateItem: (item) => set({ selectTemplateItem: item }),
 
   handleDragStop: (itemId, x, y) => {
     const currentItems = get().items;
@@ -163,6 +139,10 @@ export const useManagerZustand = create((set, get) => ({
       item.id === itemId ? { ...item, x, y } : item,
     );
     set({ items: updatedItems });
+  },
+
+  handleDragStart: (item) => {
+    get().handleSelection(item);
   },
 
   handleResizeStop: (itemId, width, height, x, y) => {
@@ -185,16 +165,16 @@ export const useManagerZustand = create((set, get) => ({
 
   handleNumberItems: (droppedItem) => {
     const current = get().numberItems;
-    const existingItem = current.find((item) => item.data === droppedItem.data);
+    const existingItem = current.find((item) => item.type === droppedItem.type);
     if (existingItem) {
       const updated = current.map((item) =>
-        item.data === droppedItem.data
+        item.type === droppedItem.type
           ? { ...item, number: item.number + 1 }
           : item,
       );
       set({ numberItems: updated });
     } else {
-      set({ numberItems: [...current, { data: droppedItem.data, number: 1 }] });
+      set({ numberItems: [...current, { type: droppedItem.type, number: 1 }] });
     }
   },
 
@@ -216,13 +196,17 @@ export const useManagerZustand = create((set, get) => ({
 
   handleCopy: () => {
     const selected = get().selectItem;
+    console.log(selected);
     if (selected) {
       set({ copiedItem: selected });
+    } else {
+      set({ copiedItem: null });
     }
   },
 
   handlePaste: () => {
     const copied = get().copiedItem;
+    console.log(copied);
     if (copied) {
       const newItem = {
         ...copied,

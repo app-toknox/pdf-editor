@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function useDraggableItems() {
   const [items, setItems] = useState([]);
@@ -64,57 +64,6 @@ function useDraggableItems() {
   };
 
   // Comportamenti da tastiera
-  const handleCopy = () => {
-    if (selectItem) {
-      setCopiedItem(selectItem);
-    }
-  };
-
-  const handlePaste = () => {
-    if (copiedItem) {
-      const newItem = {
-        ...copiedItem,
-        id: `${copiedItem.data}-${Date.now()}`,
-        x: copiedItem.x + 20,
-        y: copiedItem.y + 20,
-      };
-      setItems((prev) => [...prev, newItem]);
-      setSelectItem(newItem);
-      setCopiedItem(newItem);
-    }
-  };
-
-  const handleDelete = () => {
-    if (selectItem) {
-      setItems((prev) => prev.filter((item) => item.id !== selectItem.id));
-      setSelectItem(null);
-    }
-  };
-
-  // useEffect(() => {
-  //   const handleKeyDown = (e) => {
-  //     if ((e.ctrlKey || e.metaKey) && e.key === "c") {
-  //       e.preventDefault();
-  //       handleCopy();
-  //     }
-
-  //     if ((e.ctrlKey || e.metaKey) && e.key === "v") {
-  //       e.preventDefault();
-  //       handlePaste();
-  //     }
-
-  //     if (e.key === "Delete" || e.key === "Backspace") {
-  //       e.preventDefault();
-  //       handleDelete();
-  //     }
-  //   };
-
-  //   window.addEventListener("keydown", handleKeyDown);
-
-  //   return () => {
-  //     window.removeEventListener("keydown", handleKeyDown);
-  //   };
-  // }, [selectItem, copiedItem, items]);
 
 
   return {

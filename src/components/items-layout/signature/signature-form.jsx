@@ -7,13 +7,7 @@ export const SignatureForm = ({ initialValue = "" }) => {
   const [text, setText] = useState(initialValue);
   const [font, setFont] = useState("Arial");
   const [mode, setMode] = useState("text");
-  const {
-    closeEditForm,
-    submitEditForm,
-    editingItem,
-    editingTemplates,
-    submitConfiguredTemplates,
-  } = useManagerZustand();
+  const { closeEditForm, submitEditForm, editingItem } = useManagerZustand();
 
   return (
     <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
@@ -48,13 +42,8 @@ export const SignatureForm = ({ initialValue = "" }) => {
 
         {mode === "text" && (
           <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (editingItem) {
-                submitEditForm(editingItem.id, "text", text);
-              } else if (editingTemplates) {
-                submitConfiguredTemplates("text", text);
-              }
+            onSubmit={() => {
+              submitEditForm(editingItem.id, { text: text, style: font });
             }}
             className="flex flex-col items-center"
           >
@@ -90,7 +79,7 @@ export const SignatureForm = ({ initialValue = "" }) => {
         {mode === "draw" && (
           <SignaturePad
             onSaveSignatureCallback={(dataUrl) =>
-              submitEditForm(editingItem.id, dataUrl)
+              submitEditForm(editingItem.id, { img: dataUrl })
             }
           />
         )}
@@ -106,7 +95,7 @@ export const SignatureForm = ({ initialValue = "" }) => {
                 if (file) {
                   const reader = new FileReader();
                   reader.onload = () => {
-                    submitEditForm(editingItem.id, reader.result);
+                    submitEditForm(editingItem.id, { img: reader.result });
                   };
                   reader.readAsDataURL(file);
                 }

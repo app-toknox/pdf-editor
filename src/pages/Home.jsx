@@ -11,23 +11,15 @@ export const Home = () => {
 
   const {
     items,
-    handleDragStop,
-    handleResizeStop,
-    handleRemove,
-    selectItem,
     handleSelection,
     editingItem,
     handleDropData,
-    handleAddTemplate,
     editingTemplates,
-    editItem,
   } = useManagerZustand();
 
   const FormElement = editingItem
     ? ELEMENT_TYPES[editingItem.type]?.form
-    : editingTemplates
-      ? ELEMENT_TYPES[editingTemplates.type]?.form
-      : null;
+    : editingTemplates;
 
   const handleOnDragOver = (e) => {
     e.preventDefault();
@@ -42,7 +34,6 @@ export const Home = () => {
 
     handleDropData(type, x, y);
   };
-
   return (
     <div className="flex w-full items-center flex-col gap-4 my-8">
       <h1 className="text-3xl font-bold text-gray-800 items-center">
@@ -55,25 +46,15 @@ export const Home = () => {
         className="z-40 relative border-2 w-200 h-200"
         onDrop={handleOnDrop}
         onDragOver={handleOnDragOver}
+        onClick={() => handleSelection(null)}
       >
         <PdfViewer pdf={pdf} />
         <div className="absolute inset-0 z-50">
           {items.map((item) => (
-            <NewDraggableItem
-              key={item.id}
-              item={item}
-              onDragStop={handleDragStop}
-              onResize={handleResizeStop}
-              onRemove={handleRemove}
-              editItem={editItem}
-              selectItem={selectItem}
-              handleSelection={handleSelection}
-            />
+            <NewDraggableItem key={item.id} item={item} />
           ))}
         </div>
       </div>
-
-      <button onClick={() => handleAddTemplate("Signature")}>test</button>
 
       {/* Qui mostro il form se attivo */}
       {editingItem && <FormElement />}

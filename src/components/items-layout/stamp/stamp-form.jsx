@@ -35,7 +35,7 @@ export const StampForm = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            submitEditForm(editingItem.id, imageSrc);
+            submitEditForm(editingItem.id, { img: imageSrc })
           }}
           className="flex flex-col items-center"
         >

@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
-export const DataForm = ({
-  initialFormat = "dd-mm-yyyy",
-  onSubmit,
-  onClose,
-  item,
-}) => {
-  const [format, setFormat] = useState(initialFormat);
+import { useManagerZustand } from "../../../hooks/useManagerZustand";
 
+export const DataForm = ({ initialFormat = "dd-mm-yyyy" }) => {
+  const [format, setFormat] = useState(initialFormat);
+  const { editingItem, submitEditForm, closeEditForm } = useManagerZustand();
   const getFormattedDate = (format) => {
     const today = new Date();
     const day = today.getDate().toString().padStart(2, "0");
@@ -38,7 +35,7 @@ export const DataForm = ({
         <FiX
           size="1em"
           className="absolute top-3 right-3 text-gray-500 hover:text-red-600 cursor-pointer"
-          onClick={onClose}
+          onClick={() => closeEditForm()}
         />
         <h2 className="text-xl font-semibold mb-4 text-gray-800">
           Seleziona Formato Data
@@ -46,7 +43,7 @@ export const DataForm = ({
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            onSubmit(item, getFormattedDate(format));
+            submitEditForm(editingItem.id, { text: getFormattedDate(format) });
           }}
           className="flex flex-col"
         >

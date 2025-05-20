@@ -1,10 +1,13 @@
+import { EditorWrapper } from "./components/editor-wrapper";
 import { Layout } from "./components/layout";
 import { Home } from "./pages/Home";
 
 const App = () => {
   return (
     <Layout>
-      <Home />
+      <EditorWrapper>
+        <Home />
+      </EditorWrapper>
     </Layout>
   );
 };

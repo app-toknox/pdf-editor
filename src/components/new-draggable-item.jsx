@@ -1,25 +1,20 @@
 import { Rnd } from "react-rnd";
 
+import { useManagerZustand } from "../hooks/useManagerZustand";
 import { ELEMENT_TYPES } from "../types/element-types";
 
-export const NewDraggableItem = ({
-  item,
-  onDragStop,
-  onResize,
-  onRemove,
-  editItem,
-  selectItem,
-  handleSelection,
-}) => {
+export const NewDraggableItem = ({ item }) => {
   const Element = ELEMENT_TYPES[item.type]?.component;
-
+  const { handleDragStart, handleDragStop, handleResizeStop } =
+    useManagerZustand();
   return (
     <Rnd
       size={{ width: item.width, height: item.height }}
       position={{ x: item.x, y: item.y }}
-      onDragStop={(e, d) => onDragStop(item.id, d.x, d.y)}
+      onDragStop={(e, d) => handleDragStop(item.id, d.x, d.y)}
+      onDragStart={() => handleDragStart(item)}
       onResize={(e, direction, ref, delta, position) =>
-        onResize(
+        handleResizeStop(
           item.id,
           ref.offsetWidth,
           ref.offsetHeight,
@@ -29,17 +24,7 @@ export const NewDraggableItem = ({
       }
       bounds="parent"
     >
-      {Element ? (
-        <Element
-          onRemove={onRemove}
-          item={item}
-          editItem={editItem}
-          selectItem={selectItem}
-          handleSelection={handleSelection}
-        />
-      ) : (
-        item.type
-      )}
+      {Element ? <Element item={item} /> : item.type}
     </Rnd>
   );
 };

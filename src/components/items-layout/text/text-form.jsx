@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
 export const TextForm = ({ initialValue = "", onSubmit, onClose, item }) => {
+  
   const [text, setText] = useState(initialValue);
 
   return (
