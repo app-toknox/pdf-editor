@@ -20,7 +20,6 @@ export const SignaturePad = ({ onSaveSignatureCallback }) => {
     const signatureCanvas = trimmedCanvas.toDataURL();
     onSaveSignatureCallback(signatureCanvas);
     setEnableSalve(false);
-    alert("Clicca dove vuoi posizionare la firma sul documento");
   };
 
   return (

@@ -128,7 +128,7 @@ export const useManagerZustand = create((set, get) => ({
     set({ editingItem: null });
     console.log(updatedItems);
   },
-
+ 
   setSelectItem: (item) => set({ selectItem: item }),
   setCopiedItem: (item) => set({ copiedItem: item }),
   // setSelectTemplateItem: (item) => set({ selectTemplateItem: item }),
@@ -220,6 +220,7 @@ export const useManagerZustand = create((set, get) => ({
         selectItem: newItem,
         copiedItem: newItem,
       });
+      get().handleNumberItems(newItem);
     }
   },
 
@@ -230,6 +231,7 @@ export const useManagerZustand = create((set, get) => ({
         (item) => item.id !== selected.id,
       );
       set({ items: filteredItems, selectItem: null });
+      get().decrementNumberItems(filteredItems);
     }
   },
 

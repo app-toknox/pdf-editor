@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
-export const TextForm = ({ initialValue = "", onSubmit, onClose, item }) => {
-  
+import { useManagerZustand } from "../../../hooks/useManagerZustand";
+
+export const TextForm = ({ initialValue = "" }) => {
   const [text, setText] = useState(initialValue);
+  const { editingItem, submitEditForm, closeEditForm } = useManagerZustand();
 
   return (
     <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
@@ -14,12 +16,12 @@ export const TextForm = ({ initialValue = "", onSubmit, onClose, item }) => {
         <FiX
           size="1em"
           className="absolute top-3 right-3 text-gray-500 hover:text-red-600 cursor-pointer"
-          onClick={onClose}
+          onClick={() => closeEditForm()}
         />
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            onSubmit(item, text);
+            submitEditForm(editingItem.id, { text: text });
           }}
           className="flex flex-col items-center"
         >

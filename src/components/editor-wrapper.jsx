@@ -8,6 +8,11 @@ export const EditorWrapper = ({ children }) => {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
+      const active = document.activeElement;
+      const isEditing = active.getAttribute("contenteditable") === "true";
+
+      //if (isEditing) return;
+
       if ((e.ctrlKey || e.metaKey) && e.key === "c") {
         e.preventDefault();
         handleCopy();
@@ -18,7 +23,7 @@ export const EditorWrapper = ({ children }) => {
         handlePaste();
       }
 
-      if (e.key === "Delete" || e.key === "Backspace") {
+      if ((e.key === "Delete" || e.key === "Backspace") && !isEditing) {
         e.preventDefault();
         handleDelete();
       }
@@ -30,5 +35,7 @@ export const EditorWrapper = ({ children }) => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [selectItem]);
-  return <div>{children}</div>;
+  return (
+    <div className="flex-1 flex flex-col items-center w-full">{children}</div>
+  );
 };

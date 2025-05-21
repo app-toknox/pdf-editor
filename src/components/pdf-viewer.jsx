@@ -1,40 +1,18 @@
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 
-import { useState } from "react";
-import { useRef } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
+import { Document, Page } from "react-pdf";
 
+import { usePDFStore } from "../hooks/usePDF";
 import { Loader } from "./loading";
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-const options = {
-  standardFontDataUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/standard_fonts`,
-};
 export const PdfViewer = ({ pdf }) => {
-  const [numPages, setNumPages] = useState();
-  const [pageNumber, setPageNumber] = useState(1);
-  const [isLoaded, setIsLoaded] = useState(false);
-  //const [signature, setSignature] = useState();
-
-  const pdfWrapperRef = useRef();
-  async function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-    setIsLoaded(true);
-  }
-
-  // Handlers for next and previous page
-  const goToNextPage = () => {
-    if (pageNumber < numPages) {
-      setPageNumber(pageNumber + 1);
-    }
-  };
-
-  const goToPrevPage = () => {
-    if (pageNumber > 1) {
-      setPageNumber(pageNumber - 1);
-    }
-  };
+  const pageNumber = usePDFStore((state) => state.pageNumber);
+  const onDocumentLoadSuccess = usePDFStore(
+    (state) => state.onDocumentLoadSuccess,
+  );
+  const options = usePDFStore((state) => state.options);
+  const setPdfWrapperRef = usePDFStore((state) => state.setPdfWrapperRef);
 
   return (
     <div className="flex flex-col gap-8 py-8">
@@ -44,7 +22,7 @@ export const PdfViewer = ({ pdf }) => {
             className="relative z-10 max-w-2xl shadow-2xl"
             id="pdf"
             ref={(el) => {
-              pdfWrapperRef.current = el;
+              setPdfWrapperRef(el);
             }}
           >
             {/* logica per droppable element */}
@@ -61,7 +39,7 @@ export const PdfViewer = ({ pdf }) => {
               <Page pageNumber={pageNumber} />
             </Document>
           </div>
-          {isLoaded ? (
+          {/* {isLoaded ? (
             <div className="w-full flex flex-row justify-between items-center px-8">
               <button
                 className="btn w-32 btn-primary"
@@ -81,7 +59,7 @@ export const PdfViewer = ({ pdf }) => {
                 Next
               </button>
             </div>
-          ) : null}
+          ) : null} */}
         </>
       ) : null}
     </div>

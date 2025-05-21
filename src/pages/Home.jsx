@@ -1,13 +1,13 @@
-import { useState } from "react";
-
 import { InputPdfFile } from "../components/input-pdf-file";
 import { NewDraggableItem } from "../components/new-draggable-item";
 import { PdfViewer } from "../components/pdf-viewer";
 import { useManagerZustand } from "../hooks/useManagerZustand";
+import { usePDFStore } from "../hooks/usePDF";
 import { ELEMENT_TYPES } from "../types/element-types";
 
 export const Home = () => {
-  const [pdf, setPdf] = useState();
+  const setPDFFile = usePDFStore((state) => state.setPDFFile);
+  const pdfFile = usePDFStore((state) => state.pdfFile);
 
   const {
     items,
@@ -39,16 +39,16 @@ export const Home = () => {
       <h1 className="text-3xl font-bold text-gray-800 items-center">
         PDF EDITOR TOKNOX DEMO
       </h1>
-      <InputPdfFile setPdf={setPdf} />
+      <InputPdfFile setPdf={setPDFFile} />
 
       {/* Questo è il mio container che sarà poi PDFviewer */}
       <div
-        className="z-40 relative border-2 w-200 h-200"
+        className="z-40 relative"
         onDrop={handleOnDrop}
         onDragOver={handleOnDragOver}
         onClick={() => handleSelection(null)}
       >
-        <PdfViewer pdf={pdf} />
+        <PdfViewer pdf={pdfFile} />
         <div className="absolute inset-0 z-50">
           {items.map((item) => (
             <NewDraggableItem key={item.id} item={item} />

@@ -12,7 +12,7 @@ export const dataItem = (type, x, y) => ({
   x,
   y,
   width: 170,
-  height: 50,
+  height: 85,
   payload: { text: getFormattedDate() },
 });
 
@@ -22,7 +22,7 @@ export const generalItem = (type, x, y) => ({
   x,
   y,
   width: 170,
-  height: 50,
+  height: 100,
   payload: { text: `${type} not provided` },
 });
 
@@ -31,9 +31,9 @@ export const textItem = (type, x, y) => ({
   type,
   x,
   y,
-  width: 170,
-  height: 50,
-  payload: { text: "text" },
+  width: 150,
+  height: 85,
+  payload: { textEditable: "text" },
 });
 
 export const getItemByType = (type, x, y) => {

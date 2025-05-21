@@ -1,21 +1,32 @@
+import { useState } from "react";
+import { FaCopy } from "react-icons/fa";
 import { FiEdit2, FiX } from "react-icons/fi";
 
 import { useManagerZustand } from "../../hooks/useManagerZustand";
 
 const GeneralItemLayout = ({ item }) => {
-  const { openEditForm, selectItem, handleSelection, handleRemove } =
-    useManagerZustand();
+  const [textEditable] = useState(item.payload?.textEditable);
+  const [isHover, setIsHover] = useState(false);
+  const {
+    openEditForm,
+    selectItem,
+    handleSelection,
+    handleRemove,
+    submitEditForm,
+  } = useManagerZustand();
   return (
     <div
-      className={`relative w-full h-full bg-transparent rounded cursor-move ${
-        item.id === selectItem?.id ? "border border-dashed border-gray-400" : ""
-      }`}
-      style={{ fontSize: `${Math.min(item.width, item.height) / 4}px` }}
+      className={`relative w-full h-full bg-transparent rounded cursor-move p-5 flex items-center justify-center
+        ${item.id === selectItem?.id ? "border border-dashed border-gray-400" : ""}
+        ${isHover ? "border border-dashed border-blue-500" : ""}
+      `}
       onClick={(e) => {
         e.stopPropagation();
         handleSelection(item);
       }}
       onDoubleClick={() => openEditForm(item)}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
     >
       {item.id === selectItem?.id && (
         <>
@@ -25,16 +36,23 @@ const GeneralItemLayout = ({ item }) => {
           <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-blue-500 cursor-se-resize rounded-full" />
           <FiX
             size="1em"
-            className="absolute top-1 right-1 text-gray-500 hover:text-red-600 cursor-pointer"
+            className="absolute top-1 -right-6 text-gray-500 hover:text-red-600 cursor-pointer"
             onClick={() => handleRemove(item.id)}
           />
           <FiEdit2
-            className="absolute top-1 -right-6 text-gray-500 hover:text-blue-600 cursor-pointer"
+            className="absolute top-1 right-1 text-gray-500 hover:text-blue-600 cursor-pointer w-3 h-3"
+            onClick={() => openEditForm(item)}
+          />
+          <FaCopy
+            className="absolute top-6 right-1 text-gray-500 hover:text-blue-600 cursor-pointer w-3 h-3"
             onClick={() => openEditForm(item)}
           />
         </>
       )}
-      <div className="w-full h-full flex items-center justify-center text-center">
+
+      <div
+        className={`w-full h-full ${isHover && "border border-red-300"} ${item.id === selectItem?.id && "border border-blue-400"} flex items-center justify-center text-center`}
+      >
         {item.payload.img ? (
           <img
             src={item.payload.img}
@@ -45,6 +63,17 @@ const GeneralItemLayout = ({ item }) => {
         ) : item.payload.text ? (
           <div style={{ fontFamily: item.payload.style }}>
             {item.payload.text}
+          </div>
+        ) : item.payload.textEditable ? (
+          <div
+            contentEditable
+            suppressContentEditableWarning
+            onBlur={(e) => {
+              submitEditForm(item.id, { textEditable: e.target.innerText });
+            }}
+            className=" p-2 w-fit"
+          >
+            {textEditable}
           </div>
         ) : null}
       </div>
