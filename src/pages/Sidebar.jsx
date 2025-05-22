@@ -1,6 +1,6 @@
 import { Document, Page } from "react-pdf";
 
-import { usePDFStore } from "../hooks/usePDF";
+import { usePDFStore } from "../hooks/usePdf";
 
 export const Sidebar = () => {
   const numPages = usePDFStore((state) => state.numPages);

@@ -2,13 +2,13 @@ import { InputPdfFile } from "../components/input-pdf-file";
 import { NewDraggableItem } from "../components/new-draggable-item";
 import { PdfViewer } from "../components/pdf-viewer";
 import { useManagerZustand } from "../hooks/useManagerZustand";
-import { usePDFStore } from "../hooks/usePDF";
+import { usePDFStore } from "../hooks/usePdf";
 import { ELEMENT_TYPES } from "../types/element-types";
 
 export const Home = () => {
   const setPDFFile = usePDFStore((state) => state.setPDFFile);
   const pdfFile = usePDFStore((state) => state.pdfFile);
-
+  const pageNumber = usePDFStore((state) => state.pageNumber);
   const {
     items,
     handleSelection,
@@ -32,7 +32,7 @@ export const Home = () => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    handleDropData(type, x, y);
+    handleDropData(type, x, y, pageNumber);
   };
   return (
     <div className="flex w-full items-center flex-col gap-4 my-8">
@@ -50,9 +50,11 @@ export const Home = () => {
       >
         <PdfViewer pdf={pdfFile} />
         <div className="absolute inset-0 z-50">
-          {items.map((item) => (
-            <NewDraggableItem key={item.id} item={item} />
-          ))}
+          {items
+            .filter((item) => item.page === pageNumber)
+            .map((item) => (
+              <NewDraggableItem key={item.id} item={item} />
+            ))}
         </div>
       </div>
 

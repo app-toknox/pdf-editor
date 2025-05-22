@@ -18,7 +18,6 @@ function useItemManager({ items, setItems, setConfiguredTemplates }) {
 
   const openEditForm = (itemId) => {
     setEditingItemId(itemId);
-    console.log(editingItemId);
   };
 
   const closeEditForm = () => {

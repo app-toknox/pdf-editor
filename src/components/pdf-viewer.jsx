@@ -3,7 +3,7 @@ import "react-pdf/dist/Page/TextLayer.css";
 
 import { Document, Page } from "react-pdf";
 
-import { usePDFStore } from "../hooks/usePDF";
+import { usePDFStore } from "../hooks/usePdf";
 import { Loader } from "./loading";
 
 export const PdfViewer = ({ pdf }) => {

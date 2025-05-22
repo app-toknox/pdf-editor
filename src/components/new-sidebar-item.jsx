@@ -10,7 +10,6 @@ export const NewSidebarItem = ({ item, Icon }) => {
   const { numberItems } = useManagerZustand();
 
   const itemCount = numberItems.find((el) => el.type === item)?.number || 0;
-  console.log(numberItems, itemCount, item);
   return (
     <div
       draggable

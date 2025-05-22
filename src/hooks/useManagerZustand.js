@@ -83,9 +83,9 @@ export const useManagerZustand = create((set, get) => ({
   //   set({ editingTemplates: null });
   // },
 
-  handleDropData: (type, x, y) => {
-    const newItem = getItemByType(type, x, y);
-
+  handleDropData: (type, x, y, page) => {
+    const newItem = getItemByType(type, x, y, page);
+    console.log(newItem);
     if (type === "Signature" || type === "Stamp") {
       get().openEditForm(newItem);
     }

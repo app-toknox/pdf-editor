@@ -6,38 +6,41 @@ export const getFormattedDate = () => {
   return `${day}-${month}-${year}`;
 };
 
-export const dataItem = (type, x, y) => ({
+export const dataItem = (type, x, y, page) => ({
   id: `${type}-${Date.now()}`,
   type,
   x,
   y,
+  page,
   width: 170,
   height: 85,
   payload: { text: getFormattedDate() },
 });
 
-export const generalItem = (type, x, y) => ({
+export const generalItem = (type, x, y, page) => ({
   id: `${type}-${Date.now()}`,
   type,
   x,
   y,
+  page,
   width: 170,
   height: 100,
   payload: { text: `${type} not provided` },
 });
 
-export const textItem = (type, x, y) => ({
+export const textItem = (type, x, y, page) => ({
   id: `${type}-${Date.now()}`,
   type,
   x,
   y,
+  page,
   width: 150,
   height: 85,
   payload: { textEditable: "text" },
 });
 
-export const getItemByType = (type, x, y) => {
-  if (type === "Data") return dataItem(type, x, y);
-  if (type === "Text") return textItem(type, x, y);
-  return generalItem(type, x, y);
+export const getItemByType = (type, x, y, page) => {
+  if (type === "Data") return dataItem(type, x, y, page);
+  if (type === "Text") return textItem(type, x, y, page);
+  return generalItem(type, x, y, page);
 };
