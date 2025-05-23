@@ -1,14 +1,15 @@
 import { InputPdfFile } from "../components/input-pdf-file";
 import { NewDraggableItem } from "../components/new-draggable-item";
+import { PdfExport } from "../components/pdf-export";
 import { PdfViewer } from "../components/pdf-viewer";
 import { useManagerZustand } from "../hooks/useManagerZustand";
 import { usePDFStore } from "../hooks/usePdf";
 import { ELEMENT_TYPES } from "../types/element-types";
-
 export const Home = () => {
   const setPDFFile = usePDFStore((state) => state.setPDFFile);
   const pdfFile = usePDFStore((state) => state.pdfFile);
   const pageNumber = usePDFStore((state) => state.pageNumber);
+
   const {
     items,
     handleSelection,
@@ -27,10 +28,12 @@ export const Home = () => {
 
   const handleOnDrop = (e) => {
     e.preventDefault();
+    //const zone = dropZoneRef.current.getBoundingClientRect();
+
     const type = e.dataTransfer.getData("application/json");
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const x = e.clientX - rect.left - 85;
+    const y = e.clientY - rect.top - 42.5;
 
     handleDropData(type, x, y, pageNumber);
   };
@@ -57,7 +60,7 @@ export const Home = () => {
             ))}
         </div>
       </div>
-
+      <PdfExport pdf={pdfFile} />
       {/* Qui mostro il form se attivo */}
       {editingItem && <FormElement />}
     </div>

@@ -15,7 +15,7 @@ export const PdfViewer = ({ pdf }) => {
   const setPdfWrapperRef = usePDFStore((state) => state.setPdfWrapperRef);
 
   return (
-    <div className="flex flex-col gap-8 py-8">
+    <div className="flex flex-col gap-8">
       {pdf ? (
         <>
           <div

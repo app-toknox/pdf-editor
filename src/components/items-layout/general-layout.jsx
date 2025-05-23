@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaCopy } from "react-icons/fa";
 import { FiEdit2, FiX } from "react-icons/fi";
 
@@ -7,13 +7,22 @@ import { useManagerZustand } from "../../hooks/useManagerZustand";
 const GeneralItemLayout = ({ item }) => {
   const [textEditable] = useState(item.payload?.textEditable);
   const [isHover, setIsHover] = useState(false);
+
+  const ref = useRef(null);
+  useEffect(() => {
+    registerRef(item.id, ref);
+  }, [item.id]);
   const {
     openEditForm,
     selectItem,
     handleSelection,
     handleRemove,
     submitEditForm,
+    handleCopy,
+    handlePaste,
+    registerRef,
   } = useManagerZustand();
+
   return (
     <div
       className={`relative w-full h-full bg-transparent rounded cursor-move p-5 flex items-center justify-center
@@ -45,7 +54,10 @@ const GeneralItemLayout = ({ item }) => {
           />
           <FaCopy
             className="absolute top-6 right-1 text-gray-500 hover:text-blue-600 cursor-pointer w-3 h-3"
-            onClick={() => openEditForm(item)}
+            onClick={() => {
+              handleCopy();
+              handlePaste();
+            }}
           />
         </>
       )}
@@ -55,23 +67,25 @@ const GeneralItemLayout = ({ item }) => {
       >
         {item.payload.img ? (
           <img
+            ref={ref}
             src={item.payload.img}
             alt="Signature"
             className="max-h-full max-w-full object-contain ml-2"
             draggable={false}
           />
         ) : item.payload.text ? (
-          <div style={{ fontFamily: item.payload.style }}>
+          <div style={{ fontFamily: item.payload.style }} ref={ref}>
             {item.payload.text}
           </div>
         ) : item.payload.textEditable ? (
           <div
+            ref={ref}
             contentEditable
             suppressContentEditableWarning
             onBlur={(e) => {
               submitEditForm(item.id, { textEditable: e.target.innerText });
             }}
-            className=" p-2 w-fit"
+            //className=" p-2 w-fit"
           >
             {textEditable}
           </div>

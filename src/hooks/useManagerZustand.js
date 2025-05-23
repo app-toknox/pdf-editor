@@ -11,7 +11,7 @@ export const useManagerZustand = create((set, get) => ({
   copiedItem: null,
   editingItem: null,
   //editingTemplates: null,
-
+  refs: {},
   setItems: (newItem) => {
     const current = get().items;
     const updated = [...current, newItem];
@@ -246,4 +246,15 @@ export const useManagerZustand = create((set, get) => ({
     const filteredItems = get().items.filter((item) => item.id !== itemId);
     set({ items: filteredItems });
   },
+
+  registerRef: (id, ref) => {
+    set((state) => ({
+      refs: {
+        ...state.refs,
+        [id]: ref,
+      },
+    }));
+  },
+
+  getRefById: (id) => get().refs[id],
 }));
