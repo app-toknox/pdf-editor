@@ -69,14 +69,13 @@ export const PdfExport = ({ pdf }) => {
     <>
       {pdf ? (
         <button
-          onClick={() => {
-            handleDownload();
-          }}
+          onClick={handleDownload}
+          className="px-6 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition duration-200"
         >
-          ESPORTA
+          Export PDF
         </button>
       ) : (
-        <p>Nessun PDF caricato</p>
+        <p>No PDF file yet</p>
       )}
     </>
   );

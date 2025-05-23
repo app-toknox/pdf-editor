@@ -16,7 +16,7 @@ export const SignaturePad = ({ onSaveSignatureCallback }) => {
 
   const handleSave = () => {
     const canvas = sigCanvasRef.current.getCanvas();
-    const trimmedCanvas = trimCanvas(canvas); // usa il nostro compatibile
+    const trimmedCanvas = trimCanvas(canvas);
     const signatureCanvas = trimmedCanvas.toDataURL();
     onSaveSignatureCallback(signatureCanvas);
     setEnableSalve(false);

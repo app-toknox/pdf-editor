@@ -39,27 +39,6 @@ export const PdfViewer = ({ pdf }) => {
               <Page pageNumber={pageNumber} />
             </Document>
           </div>
-          {/* {isLoaded ? (
-            <div className="w-full flex flex-row justify-between items-center px-8">
-              <button
-                className="btn w-32 btn-primary"
-                onClick={goToPrevPage}
-                disabled={pageNumber === 1}
-              >
-                Previous
-              </button>
-              <p>
-                Page {pageNumber} of {numPages}
-              </p>
-              <button
-                className="btn w-32 btn-primary"
-                onClick={goToNextPage}
-                disabled={pageNumber === numPages}
-              >
-                Next
-              </button>
-            </div>
-          ) : null} */}
         </>
       ) : null}
     </div>

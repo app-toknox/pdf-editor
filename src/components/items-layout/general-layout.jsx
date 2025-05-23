@@ -20,10 +20,9 @@ const GeneralItemLayout = ({ item }) => {
       heightSmallDiv: rect.height,
       fontSize: parseFloat(styles.fontSize),
     });
-    
   }, [item.id]);
 
-  console.log(item)
+  console.log(item);
   const {
     openEditForm,
     selectItem,
@@ -105,7 +104,6 @@ const GeneralItemLayout = ({ item }) => {
             onBlur={(e) => {
               submitEditForm(item.id, { textEditable: e.target.innerText });
             }}
-            //className=" p-2 w-fit"
           >
             {textEditable}
           </div>

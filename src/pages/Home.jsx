@@ -28,7 +28,6 @@ export const Home = () => {
 
   const handleOnDrop = (e) => {
     e.preventDefault();
-    //const zone = dropZoneRef.current.getBoundingClientRect();
 
     const type = e.dataTransfer.getData("application/json");
     const rect = e.currentTarget.getBoundingClientRect();
@@ -61,6 +60,7 @@ export const Home = () => {
         </div>
       </div>
       <PdfExport pdf={pdfFile} />
+
       {/* Qui mostro il form se attivo */}
       {editingItem && <FormElement />}
     </div>

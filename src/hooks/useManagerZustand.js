@@ -4,83 +4,15 @@ import { getItemByType } from "../types/base-droppable-types";
 
 export const useManagerZustand = create((set, get) => ({
   items: [],
-  // configuredTemplates: [], //questo è il preload di tutti i componenti
   numberItems: [],
   selectItem: null,
-  //selectTemplateItem: null,
   copiedItem: null,
   editingItem: null,
-  //editingTemplates: null,
   setItems: (newItem) => {
     const current = get().items;
     const updated = [...current, newItem];
     set({ items: updated });
   },
-
-  // setConfiguredTemplates: (templates) => {
-  //   const current = get().configuredTemplates;
-  //   const updated = [...current, templates];
-  //   set({ configuredTemplates: updated });
-  // },
-
-  // setDeleteTemplates: (template) => {
-  //   const current = get().configuredTemplates;
-  //   const updated = current.filter((item) => item !== template);
-  //   set({ configuredTemplates: updated });
-  // },
-
-  // submitConfiguredTemplates: (type, newPayload) => {
-  //   const timestamp = Date.now();
-  //   const newTemplate = {
-  //     id: `${type}-${timestamp}`,
-  //     type: type,
-  //     payload: {
-  //       [type]: newPayload,
-  //     },
-  //     selected: true,
-  //   };
-  //   const current = get().configuredTemplates;
-  //   const updated = [...current, newTemplate];
-  //   set({ configuredTemplates: updated });
-  //   set({
-  //     editingTemplates: null,
-  //   });
-  //   console.log("step 3 upgrade templates", updated);
-  // },
-
-  // handleAddTemplate: (templateType) => {
-  //   const timestamp = Date.now();
-  //   const newTemplate = {
-  //     id: `${templateType}-${timestamp}`,
-  //     type: templateType,
-  //     payload: {
-  //       type: "",
-  //       data: "",
-  //       style: "",
-  //     },
-  //     selected: true,
-  //   };
-
-  //   set({
-  //     editingTemplates: newTemplate,
-  //   });
-  // },
-
-  // submitFormTemplate: (itemId, type, newPayload) => {
-  //   const updatedTemplates = get().configuredTemplates.map((template) =>
-  //     template.id === itemId
-  //       ? {
-  //           ...template,
-  //           payload: {
-  //             ...template.payload,
-  //             [type]: newPayload,
-  //           },
-  //         }
-  //       : template
-  //   );
-  //   set({ configuredTemplates: updatedTemplates });
-  //   set({ editingTemplates: null });
-  // },
 
   handleDropData: (type, x, y, page) => {
     const newItem = getItemByType(type, x, y, page);
@@ -93,27 +25,6 @@ export const useManagerZustand = create((set, get) => ({
     get().handleNumberItems(newItem);
     get().handleSelection(newItem);
   },
-
-  // handleDropData: (type, x, y) => {
-  //   const isAlreadyConfigured = get().configuredTemplates.find(
-  //     (t) => t.type === type,
-  //   );
-  //   const newItem = {
-  //     id: `${type}-${Date.now()}`,
-  //     type,
-  //     x,
-  //     y,
-  //     width: 170,
-  //     height: 50,
-  //     payload: isAlreadyConfigured?.payload || "",
-  //   };
-
-  //   if (!isAlreadyConfigured) {
-  //     get().openEditForm(newItem);
-  //     console.log("step 1 form + newItem", newItem);
-  //   }
-  //   get().setItems(newItem);
-  // },
 
   openEditForm: (item) => set({ editingItem: item }),
 
@@ -130,7 +41,6 @@ export const useManagerZustand = create((set, get) => ({
 
   setSelectItem: (item) => set({ selectItem: item }),
   setCopiedItem: (item) => set({ copiedItem: item }),
-  // setSelectTemplateItem: (item) => set({ selectTemplateItem: item }),
 
   handleDragStop: (itemId, x, y) => {
     const currentItems = get().items;
