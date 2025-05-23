@@ -3,7 +3,7 @@ import { PDFDocument } from "pdf-lib";
 import { useManagerZustand } from "../hooks/useManagerZustand";
 
 export const PdfExport = ({ pdf }) => {
-  const { items, getRefById } = useManagerZustand();
+  const { items } = useManagerZustand();
   const handleDownload = async () => {
     if (!pdf) return;
     const arrayBuffer = await pdf.arrayBuffer();
@@ -15,34 +15,40 @@ export const PdfExport = ({ pdf }) => {
       const pageItems = items.filter((item) => item.page === index + 1);
 
       for (const item of pageItems) {
-        const ref = getRefById(item.id);
+        if (item.payload) {
+          // Calcolo dimensioni per testo
+          const textWidth = item.payload.widthSmallDiv;
+          const textHeight = item.payload.heightSmallDiv;
 
-        const rect = ref.current.getBoundingClientRect();
-        const centerX = rect.width;
-        const centerY = rect.height / 2;
-        console.log("ITEM", item);
-        if (item.payload && ref && ref.current) {
           if (item.payload.text || item.payload.textEditable) {
             const text = item.payload.textEditable || item.payload.text;
-            const styles = window.getComputedStyle(ref.current);
-            const fontSize = styles.fontSize;
+            const fontSize = item.payload.fontSize;
 
             page.drawText(text, {
-              x: item.x + item.width / 2 - centerX / 2,
-              y: page.getHeight() - item.y - item.height / 2 - centerY / 2,
+              x: item.x + item.width / 2 - textWidth / 2,
+              y: page.getHeight() - item.y - item.height / 2 - textHeight / 2,
               size: parseFloat(fontSize),
             });
           }
-        }
-        if (item.payload.img) {
-          const ref = getRefById(item.id);
-          const img = await pdfDoc.embedPng(item.payload.img);
-          page.drawImage(img, {
-            x: item.x + item.width / 2 - centerX / 2,
-            y: page.getHeight() - item.y - item.height / 2 - centerY,
-            height: ref.current.height,
-            width: ref.current.width,
-          });
+
+          if (item.payload.img) {
+            // Calcolo dimensioni per immagine
+            const imgWidth = item.payload.widthImage;
+            const imgHeight = item.payload.heightImage;
+            if (isNaN(imgWidth) || isNaN(imgHeight)) {
+              console.warn("Invalid image dimensions for item", item);
+              continue;
+            }
+            const image = await pdfDoc.embedPng(item.payload.img);
+            const xPos = item.x + item.width / 2 - imgWidth / 2;
+            const yPos = page.getHeight() - item.y - item.height / 2 - imgHeight / 2;
+            page.drawImage(image, {
+              x: xPos,
+              y: yPos,
+              width: imgWidth,
+              height: imgHeight,
+            });
+          }
         }
       }
     }

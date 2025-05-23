@@ -11,7 +11,6 @@ export const useManagerZustand = create((set, get) => ({
   copiedItem: null,
   editingItem: null,
   //editingTemplates: null,
-  refs: {},
   setItems: (newItem) => {
     const current = get().items;
     const updated = [...current, newItem];
@@ -128,7 +127,7 @@ export const useManagerZustand = create((set, get) => ({
     set({ editingItem: null });
     console.log(updatedItems);
   },
- 
+
   setSelectItem: (item) => set({ selectItem: item }),
   setCopiedItem: (item) => set({ copiedItem: item }),
   // setSelectTemplateItem: (item) => set({ selectTemplateItem: item }),
@@ -242,19 +241,12 @@ export const useManagerZustand = create((set, get) => ({
     set({ items: editedItems });
   },
 
-  removeItem: (itemId) => {
-    const filteredItems = get().items.filter((item) => item.id !== itemId);
-    set({ items: filteredItems });
-  },
-
-  registerRef: (id, ref) => {
+  updateItemMetadata: (id, data) =>
     set((state) => ({
-      refs: {
-        ...state.refs,
-        [id]: ref,
-      },
-    }));
-  },
-
-  getRefById: (id) => get().refs[id],
+      items: state.items.map((item) =>
+        item.id === id
+          ? { ...item, payload: { ...item.payload, ...data } }
+          : item,
+      ),
+    })),
 }));

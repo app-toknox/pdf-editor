@@ -7,11 +7,23 @@ import { useManagerZustand } from "../../hooks/useManagerZustand";
 const GeneralItemLayout = ({ item }) => {
   const [textEditable] = useState(item.payload?.textEditable);
   const [isHover, setIsHover] = useState(false);
-
   const ref = useRef(null);
+
   useEffect(() => {
-    registerRef(item.id, ref);
+    if (!ref.current) return;
+
+    const rect = ref.current.getBoundingClientRect();
+    const styles = window.getComputedStyle(ref.current);
+
+    updateItemMetadata(item.id, {
+      widthSmallDiv: rect.width,
+      heightSmallDiv: rect.height,
+      fontSize: parseFloat(styles.fontSize),
+    });
+    
   }, [item.id]);
+
+  console.log(item)
   const {
     openEditForm,
     selectItem,
@@ -20,7 +32,7 @@ const GeneralItemLayout = ({ item }) => {
     submitEditForm,
     handleCopy,
     handlePaste,
-    registerRef,
+    updateItemMetadata,
   } = useManagerZustand();
 
   return (
@@ -72,6 +84,14 @@ const GeneralItemLayout = ({ item }) => {
             alt="Signature"
             className="max-h-full max-w-full object-contain ml-2"
             draggable={false}
+            onLoad={() => {
+              if (!ref.current) return;
+              const rect = ref.current.getBoundingClientRect();
+              updateItemMetadata(item.id, {
+                widthImage: rect.width,
+                heightImage: rect.height,
+              });
+            }}
           />
         ) : item.payload.text ? (
           <div style={{ fontFamily: item.payload.style }} ref={ref}>
