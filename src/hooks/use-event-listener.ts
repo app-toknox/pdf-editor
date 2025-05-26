@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { useToolManager } from "../hooks/useToolManager";
 
-export const EditorWrapper = ({ children }) => {
+export const useEventListener = () => {
   const { selectItem, handleDelete, handleCopy, handlePaste } =
     useToolManager();
 
@@ -34,8 +34,5 @@ export const EditorWrapper = ({ children }) => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [selectItem]);
-  return (
-    <div className="flex-1 flex flex-col items-center w-full">{children}</div>
-  );
+  }, [handleCopy, handleDelete, handlePaste, selectItem]);
 };

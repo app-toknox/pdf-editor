@@ -1,15 +1,7 @@
-import { EditorWrapper } from "./components/editor-wrapper";
-import { Layout } from "./components/layout";
-import { Home } from "./pages/Home";
+import { PdfEditor } from "./components/pdf-editor";
 
 const App = () => {
-  return (
-    <Layout>
-      <EditorWrapper>
-        <Home />
-      </EditorWrapper>
-    </Layout>
-  );
+  return <PdfEditor />;
 };
 
 export default App;
