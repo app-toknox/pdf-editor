@@ -2,12 +2,23 @@ import { useEffect, useRef, useState } from "react";
 import { FaCopy } from "react-icons/fa";
 import { FiEdit2, FiX } from "react-icons/fi";
 
-import { useToolManager } from "../../hooks/useToolManager";
+import { useToolManager } from "@/hooks/useToolManager";
 
 const GeneralItemLayout = ({ item }) => {
   const [textEditable] = useState(item.payload?.textEditable);
   const [isHover, setIsHover] = useState(false);
   const ref = useRef(null);
+
+  const {
+    openEditForm,
+    selectItem,
+    handleSelection,
+    handleRemove,
+    submitEditForm,
+    handleCopy,
+    handlePaste,
+    updateItemMetadata,
+  } = useToolManager();
 
   useEffect(() => {
     if (!ref.current) return;
@@ -20,19 +31,7 @@ const GeneralItemLayout = ({ item }) => {
       heightSmallDiv: rect.height,
       fontSize: parseFloat(styles.fontSize),
     });
-  }, [item.id]);
-
-  console.log(item);
-  const {
-    openEditForm,
-    selectItem,
-    handleSelection,
-    handleRemove,
-    submitEditForm,
-    handleCopy,
-    handlePaste,
-    updateItemMetadata,
-  } = useToolManager();
+  }, [item.id, updateItemMetadata]);
 
   return (
     <div

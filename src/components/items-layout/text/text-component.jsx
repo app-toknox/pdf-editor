@@ -1,4 +1,4 @@
-import GeneralItemLayout from "../general-layout";
+import GeneralItemLayout from "@/components/items-layout/general-layout";
 
 export const TextComponent = ({ item }) => {
   return (

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
-import { useToolManager } from "../../../hooks/useToolManager";
-import { SignaturePad } from "../../signature-pad"; // Assuming SignaturePad is imported from this path
+import { SignaturePad } from "@/components/signature-pad"; // Assuming SignaturePad is imported from this path
+import { useToolManager } from "@/hooks/useToolManager";
 export const SignatureForm = ({ initialValue = "" }) => {
   const [text, setText] = useState(initialValue);
   const [font, setFont] = useState("Arial");

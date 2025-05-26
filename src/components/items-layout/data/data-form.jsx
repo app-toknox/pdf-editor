@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
-import { useToolManager } from "../../../hooks/useToolManager";
+import { useToolManager } from "@/hooks/useToolManager";
 
 export const DataForm = ({ initialFormat = "dd-mm-yyyy" }) => {
   const [format, setFormat] = useState(initialFormat);
