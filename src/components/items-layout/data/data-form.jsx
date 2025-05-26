@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
-import { useManagerZustand } from "../../../hooks/useManagerZustand";
+import { useToolManager } from "../../../hooks/useToolManager";
 
 export const DataForm = ({ initialFormat = "dd-mm-yyyy" }) => {
   const [format, setFormat] = useState(initialFormat);
-  const { editingItem, submitEditForm, closeEditForm } = useManagerZustand();
+  const { editingItem, submitEditForm, closeEditForm } = useToolManager();
   const getFormattedDate = (format) => {
     const today = new Date();
     const day = today.getDate().toString().padStart(2, "0");

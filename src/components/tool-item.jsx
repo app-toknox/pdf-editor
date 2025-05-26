@@ -1,13 +1,13 @@
 import { RxDragHandleDots1 } from "react-icons/rx";
 
-import { useManagerZustand } from "../hooks/useManagerZustand";
+import { useToolManager } from "../hooks/useToolManager";
 
-export const NewSidebarItem = ({ item, Icon }) => {
+export const ToolItem = ({ item, Icon }) => {
   const handleDragStart = (e) => {
     e.dataTransfer.setData("application/json", item);
   };
 
-  const { numberItems } = useManagerZustand();
+  const { numberItems } = useToolManager();
 
   const itemCount = numberItems.find((el) => el.type === item)?.number || 0;
   return (

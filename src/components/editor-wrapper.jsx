@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 
-import { useManagerZustand } from "../hooks/useManagerZustand";
+import { useToolManager } from "../hooks/useToolManager";
 
 export const EditorWrapper = ({ children }) => {
   const { selectItem, handleDelete, handleCopy, handlePaste } =
-    useManagerZustand();
+    useToolManager();
 
   useEffect(() => {
     const handleKeyDown = (e) => {

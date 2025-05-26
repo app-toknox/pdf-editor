@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { FaCopy } from "react-icons/fa";
 import { FiEdit2, FiX } from "react-icons/fi";
 
-import { useManagerZustand } from "../../hooks/useManagerZustand";
+import { useToolManager } from "../../hooks/useToolManager";
 
 const GeneralItemLayout = ({ item }) => {
   const [textEditable] = useState(item.payload?.textEditable);
@@ -32,7 +32,7 @@ const GeneralItemLayout = ({ item }) => {
     handleCopy,
     handlePaste,
     updateItemMetadata,
-  } = useManagerZustand();
+  } = useToolManager();
 
   return (
     <div

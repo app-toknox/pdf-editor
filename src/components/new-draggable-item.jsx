@@ -1,12 +1,12 @@
 import { Rnd } from "react-rnd";
 
-import { useManagerZustand } from "../hooks/useManagerZustand";
+import { useToolManager } from "../hooks/useToolManager";
 import { ELEMENT_TYPES } from "../types/element-types";
 
 export const NewDraggableItem = ({ item }) => {
   const Element = ELEMENT_TYPES[item.type]?.component;
   const { handleDragStart, handleDragStop, handleResizeStop } =
-    useManagerZustand();
+    useToolManager();
   return (
     <Rnd
       size={{ width: item.width, height: item.height }}
@@ -19,7 +19,7 @@ export const NewDraggableItem = ({ item }) => {
           ref.offsetWidth,
           ref.offsetHeight,
           position.x,
-          position.y,
+          position.y
         )
       }
       bounds="parent"

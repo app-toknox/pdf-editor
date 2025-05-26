@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
-import { useManagerZustand } from "../../../hooks/useManagerZustand";
+import { useToolManager } from "../../../hooks/useToolManager";
 
 export const StampForm = () => {
-  const { editingItem, submitEditForm, closeEditForm } = useManagerZustand();
+  const { editingItem, submitEditForm, closeEditForm } = useToolManager();
 
   const [imageSrc, setImageSrc] = useState("");
 

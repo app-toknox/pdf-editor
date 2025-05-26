@@ -2,8 +2,8 @@ import { InputPdfFile } from "../components/input-pdf-file";
 import { NewDraggableItem } from "../components/new-draggable-item";
 import { PdfExport } from "../components/pdf-export";
 import { PdfViewer } from "../components/pdf-viewer";
-import { useManagerZustand } from "../hooks/useManagerZustand";
 import { usePDFStore } from "../hooks/usePdf";
+import { useToolManager } from "../hooks/useToolManager";
 import { ELEMENT_TYPES } from "../types/element-types";
 export const Home = () => {
   const setPDFFile = usePDFStore((state) => state.setPDFFile);
@@ -16,7 +16,7 @@ export const Home = () => {
     editingItem,
     handleDropData,
     editingTemplates,
-  } = useManagerZustand();
+  } = useToolManager();
 
   const FormElement = editingItem
     ? ELEMENT_TYPES[editingItem.type]?.form

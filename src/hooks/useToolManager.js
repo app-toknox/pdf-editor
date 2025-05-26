@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 import { getItemByType } from "../types/base-droppable-types";
 
-export const useManagerZustand = create((set, get) => ({
+export const useToolManager = create((set, get) => ({
   items: [],
   numberItems: [],
   selectItem: null,

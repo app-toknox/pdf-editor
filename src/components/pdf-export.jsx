@@ -1,9 +1,9 @@
 import { PDFDocument } from "pdf-lib";
 
-import { useManagerZustand } from "../hooks/useManagerZustand";
+import { useToolManager } from "../hooks/useToolManager";
 
 export const PdfExport = ({ pdf }) => {
-  const { items } = useManagerZustand();
+  const { items } = useToolManager();
   const handleDownload = async () => {
     if (!pdf) return;
     const arrayBuffer = await pdf.arrayBuffer();
@@ -41,7 +41,8 @@ export const PdfExport = ({ pdf }) => {
             }
             const image = await pdfDoc.embedPng(item.payload.img);
             const xPos = item.x + item.width / 2 - imgWidth / 2;
-            const yPos = page.getHeight() - item.y - item.height / 2 - imgHeight / 2;
+            const yPos =
+              page.getHeight() - item.y - item.height / 2 - imgHeight / 2;
             page.drawImage(image, {
               x: xPos,
               y: yPos,

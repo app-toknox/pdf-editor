@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
-import { useManagerZustand } from "../../../hooks/useManagerZustand";
+import { useToolManager } from "../../../hooks/useToolManager";
 
 export const TextForm = ({ initialValue = "" }) => {
   const [text, setText] = useState(initialValue);
-  const { editingItem, submitEditForm, closeEditForm } = useManagerZustand();
+  const { editingItem, submitEditForm, closeEditForm } = useToolManager();
 
   return (
     <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">

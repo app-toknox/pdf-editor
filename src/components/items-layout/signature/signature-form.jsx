@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
-import { useManagerZustand } from "../../../hooks/useManagerZustand";
+import { useToolManager } from "../../../hooks/useToolManager";
 import { SignaturePad } from "../../signature-pad"; // Assuming SignaturePad is imported from this path
 export const SignatureForm = ({ initialValue = "" }) => {
   const [text, setText] = useState(initialValue);
   const [font, setFont] = useState("Arial");
   const [mode, setMode] = useState("text");
-  const { closeEditForm, submitEditForm, editingItem } = useManagerZustand();
+  const { closeEditForm, submitEditForm, editingItem } = useToolManager();
 
   return (
     <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
