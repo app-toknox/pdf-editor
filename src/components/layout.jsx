@@ -2,7 +2,7 @@ import { NewSidebar } from "../pages/NewSidebar";
 import { Sidebar } from "../pages/Sidebar";
 import { cn } from "../utils/index";
 
-export const Layout = ({ children, className }) => {
+export const Layout = ({ children, className = "" }) => {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
