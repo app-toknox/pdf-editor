@@ -3,7 +3,6 @@ import { NewSidebarItem } from "./new-sidebar-item";
 
 export const ToolsSidebar = () => {
   const sidebarItems = Object.keys(ELEMENT_TYPES);
-  const Icon = ELEMENT_TYPES[sidebarItems]?.icon;
 
   return (
     <aside className="w-1/3 bg-base-200 p-6 border-l border-gray-200 flex flex-col rounded-tl-3xl rounded-bl-3xl shadow-md relative overflow-hidden">
