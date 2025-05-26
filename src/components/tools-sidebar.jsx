@@ -12,10 +12,10 @@ export const ToolsSidebar = () => {
       <div className="flex-1 overflow-y-auto pb-24">
         <nav>
           <ul className="space-y-3">
-            {sidebarItems.map((item) => {
+            {sidebarItems.map((item, index) => {
               const Icon = ELEMENT_TYPES[item]?.icon;
               return (
-                <li key={item}>
+                <li key={`item-${index}`}>
                   <NewSidebarItem item={item} Icon={Icon} />
                 </li>
               );
