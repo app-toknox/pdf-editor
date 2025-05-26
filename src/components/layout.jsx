@@ -1,14 +1,11 @@
-import { cn } from "../utils/index";
 import { PdfPagesSidebar } from "./pdf-pages-sidebar";
 import { ToolsSidebar } from "./tools-sidebar";
 
-export const Layout = ({ children, className = "" }) => {
+export const Layout = ({ children }) => {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex h-screen w-screen overflow-hidden">
       <PdfPagesSidebar />
-      <div className={cn("flex min-h-screen w-screen", className)}>
-        {children}
-      </div>
+      {children}
       <ToolsSidebar />
     </div>
   );

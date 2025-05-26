@@ -7,7 +7,7 @@ export const PdfPagesSidebar = () => {
     usePDFStore();
 
   return (
-    <aside className="w-80 bg-base-200 p-6 border-r border-gray-200 flex flex-col rounded-tr-3xl rounded-br-3xl shadow-md relative overflow-hidden overflow-y-auto">
+    <aside className="w-80 bg-base-200 p-6 border-r border-gray-200 flex flex-col rounded-tr-3xl rounded-br-3xl shadow-md relative overflow-y-scroll ">
       <h2 className="text-lg font-semibold mb-4">PDF Pages</h2>
       <Document
         file={pdfFile}

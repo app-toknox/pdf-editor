@@ -42,7 +42,7 @@ export const PdfEditor = () => {
   };
   return (
     <Layout>
-      <div className="flex w-full items-center flex-col gap-4 my-8">
+      <div className="flex  w-full items-center flex-col gap-4 my-8 overflow-scroll">
         <h1 className="text-3xl font-bold text-gray-800 items-center">
           PDF EDITOR TOKNOX DEMO
         </h1>
