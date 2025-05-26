@@ -1,7 +1,7 @@
-import { NewSidebarItem } from "../components/new-sidebar-item";
 import { ELEMENT_TYPES } from "../types/element-types";
+import { NewSidebarItem } from "./new-sidebar-item";
 
-export const NewSidebar = () => {
+export const ToolsSidebar = () => {
   const sidebarItems = Object.keys(ELEMENT_TYPES);
   const Icon = ELEMENT_TYPES[sidebarItems]?.icon;
 

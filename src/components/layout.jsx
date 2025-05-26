@@ -1,15 +1,15 @@
-import { NewSidebar } from "../pages/NewSidebar";
-import { Sidebar } from "../pages/Sidebar";
 import { cn } from "../utils/index";
+import { PdfPagesSidebar } from "./pdf-pages-sidebar";
+import { ToolsSidebar } from "./tools-sidebar";
 
 export const Layout = ({ children, className = "" }) => {
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
+      <PdfPagesSidebar />
       <div className={cn("flex min-h-screen w-screen", className)}>
         {children}
       </div>
-      <NewSidebar />
+      <ToolsSidebar />
     </div>
   );
 };
