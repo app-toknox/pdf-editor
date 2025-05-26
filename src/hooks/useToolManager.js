@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import { getItemByType } from "../types/base-droppable-types";
+import { getItemByType } from "@/types/base-droppable-types";
 
 export const useToolManager = create((set, get) => ({
   items: [],
@@ -32,7 +32,7 @@ export const useToolManager = create((set, get) => ({
 
   submitEditForm: (itemId, newPayload) => {
     const updatedItems = get().items.map((item) =>
-      item.id === itemId ? { ...item, payload: newPayload } : item,
+      item.id === itemId ? { ...item, payload: newPayload } : item
     );
     set({ items: updatedItems });
     set({ editingItem: null });
@@ -45,7 +45,7 @@ export const useToolManager = create((set, get) => ({
   handleDragStop: (itemId, x, y) => {
     const currentItems = get().items;
     const updatedItems = currentItems.map((item) =>
-      item.id === itemId ? { ...item, x, y } : item,
+      item.id === itemId ? { ...item, x, y } : item
     );
     set({ items: updatedItems });
   },
@@ -57,7 +57,7 @@ export const useToolManager = create((set, get) => ({
   handleResizeStop: (itemId, width, height, x, y) => {
     const currentItems = get().items;
     const updatedItems = currentItems.map((item) =>
-      item.id === itemId ? { ...item, width, height, x, y } : item,
+      item.id === itemId ? { ...item, width, height, x, y } : item
     );
     set({ items: updatedItems });
   },
@@ -79,7 +79,7 @@ export const useToolManager = create((set, get) => ({
       const updated = current.map((item) =>
         item.type === droppedItem.type
           ? { ...item, number: item.number + 1 }
-          : item,
+          : item
       );
       set({ numberItems: updated });
     } else {
@@ -93,7 +93,7 @@ export const useToolManager = create((set, get) => ({
       .map((item) =>
         item.data === removedItem.data
           ? { ...item, number: item.number - 1 }
-          : item,
+          : item
       )
       .filter((item) => item.number > 0);
     set({ numberItems: updated });
@@ -137,7 +137,7 @@ export const useToolManager = create((set, get) => ({
     const selected = get().selectItem;
     if (selected) {
       const filteredItems = get().items.filter(
-        (item) => item.id !== selected.id,
+        (item) => item.id !== selected.id
       );
       set({ items: filteredItems, selectItem: null });
       get().decrementNumberItems(filteredItems);
@@ -146,7 +146,7 @@ export const useToolManager = create((set, get) => ({
 
   editItem: (itemId, newValues) => {
     const editedItems = get().items.map((item) =>
-      item.id === itemId ? { ...item, ...newValues } : item,
+      item.id === itemId ? { ...item, ...newValues } : item
     );
     set({ items: editedItems });
   },
@@ -156,7 +156,7 @@ export const useToolManager = create((set, get) => ({
       items: state.items.map((item) =>
         item.id === id
           ? { ...item, payload: { ...item.payload, ...data } }
-          : item,
+          : item
       ),
     })),
 }));

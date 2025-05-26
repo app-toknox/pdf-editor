@@ -3,16 +3,12 @@ import "react-pdf/dist/Page/TextLayer.css";
 
 import { Document, Page } from "react-pdf";
 
-import { usePDFStore } from "../hooks/usePdf";
-import { Loader } from "./loading";
+import { Loader } from "@/components/loading";
+import { usePDFStore } from "@/hooks/usePdf";
 
 export const PdfViewer = ({ pdf }) => {
-  const pageNumber = usePDFStore((state) => state.pageNumber);
-  const onDocumentLoadSuccess = usePDFStore(
-    (state) => state.onDocumentLoadSuccess,
-  );
-  const options = usePDFStore((state) => state.options);
-  const setPdfWrapperRef = usePDFStore((state) => state.setPdfWrapperRef);
+  const { pageNumber, options, setPdfWrapperRef, onDocumentLoadSuccess } =
+    usePDFStore();
 
   return (
     <div className="flex flex-col gap-8">

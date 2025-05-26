@@ -1,7 +1,7 @@
 import { Rnd } from "react-rnd";
 
-import { useToolManager } from "../hooks/useToolManager";
-import { ELEMENT_TYPES } from "../types/element-types";
+import { useToolManager } from "@/hooks/useToolManager";
+import { ELEMENT_TYPES } from "@/types/element-types";
 
 export const NewDraggableItem = ({ item }) => {
   const Element = ELEMENT_TYPES[item.type]?.component;

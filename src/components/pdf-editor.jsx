@@ -1,16 +1,15 @@
-import { useEventListener } from "../hooks/use-event-listener";
-import { usePDFStore } from "../hooks/usePdf";
-import { useToolManager } from "../hooks/useToolManager";
-import { ELEMENT_TYPES } from "../types/element-types";
-import { InputPdfFile } from "./input-pdf-file";
-import { Layout } from "./layout";
-import { NewDraggableItem } from "./new-draggable-item";
-import { PdfExport } from "./pdf-export";
-import { PdfViewer } from "./pdf-viewer";
+import { InputPdfFile } from "@/components/input-pdf-file";
+import { Layout } from "@/components/layout";
+import { NewDraggableItem } from "@/components/new-draggable-item";
+import { PdfExport } from "@/components/pdf-export";
+import { PdfViewer } from "@/components/pdf-viewer";
+import { useEventListener } from "@/hooks/use-event-listener";
+import { usePDFStore } from "@/hooks/usePdf";
+import { useToolManager } from "@/hooks/useToolManager";
+import { ELEMENT_TYPES } from "@/types/element-types";
+
 export const PdfEditor = () => {
-  const setPDFFile = usePDFStore((state) => state.setPDFFile);
-  const pdfFile = usePDFStore((state) => state.pdfFile);
-  const pageNumber = usePDFStore((state) => state.pageNumber);
+  const { setPDFFile, pdfFile, pageNumber } = usePDFStore();
 
   useEventListener();
 

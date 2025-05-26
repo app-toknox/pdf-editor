@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { useToolManager } from "./useToolManager";
+import { useToolManager } from "@/hooks/useToolManager";
 
 export const useEventListener = () => {
   const { selectItem, handleDelete, handleCopy, handlePaste } =

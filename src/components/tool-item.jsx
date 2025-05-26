@@ -1,6 +1,6 @@
 import { RxDragHandleDots1 } from "react-icons/rx";
 
-import { useToolManager } from "../hooks/useToolManager";
+import { useToolManager } from "@/hooks/useToolManager";
 
 export const ToolItem = ({ item, Icon }) => {
   const handleDragStart = (e) => {

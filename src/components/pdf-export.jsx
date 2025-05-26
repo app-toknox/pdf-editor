@@ -1,6 +1,6 @@
 import { PDFDocument } from "pdf-lib";
 
-import { useToolManager } from "../hooks/useToolManager";
+import { useToolManager } from "@/hooks/useToolManager";
 
 export const PdfExport = ({ pdf }) => {
   const { items } = useToolManager();

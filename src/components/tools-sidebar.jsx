@@ -1,5 +1,5 @@
-import { ELEMENT_TYPES } from "../types/element-types";
-import { ToolItem } from "./tool-item";
+import { ToolItem } from "@/components/tool-item";
+import { ELEMENT_TYPES } from "@/types/element-types";
 
 export const ToolsSidebar = () => {
   const sidebarItems = Object.keys(ELEMENT_TYPES);

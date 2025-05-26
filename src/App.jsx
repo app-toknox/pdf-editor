@@ -1,4 +1,4 @@
-import { PdfEditor } from "./components/pdf-editor";
+import { PdfEditor } from "@/components/pdf-editor";
 
 const App = () => {
   return <PdfEditor />;

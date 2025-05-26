@@ -1,5 +1,5 @@
-import { PdfPagesSidebar } from "./pdf-pages-sidebar";
-import { ToolsSidebar } from "./tools-sidebar";
+import { PdfPagesSidebar } from "@/components/pdf-pages-sidebar";
+import { ToolsSidebar } from "@/components/tools-sidebar";
 
 export const Layout = ({ children }) => {
   return (
