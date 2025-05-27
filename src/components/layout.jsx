@@ -3,7 +3,7 @@ import { ToolsSidebar } from "@/components/tools-sidebar";
 
 export const Layout = ({ children }) => {
   return (
-    <div className="flex h-screen w-screen overflow-hidden">
+    <div className="flex h-full w-full overflow-hidden">
       <PdfPagesSidebar />
       {children}
       <ToolsSidebar />
