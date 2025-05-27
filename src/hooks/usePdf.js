@@ -16,7 +16,12 @@ export const usePDFStore = create((set, get) => ({
   setPDFFile: (file) => set({ pdfFile: file }),
 
   setPageNumber: (page) => set({ pageNumber: page }),
-  setPdfWrapperRef: (ref) => set({ pdfWrapperRef: ref }),
+  setPdfWrapperRef: (ref) => {
+    const { pdfWrapperRef } = get();
+    if (pdfWrapperRef !== ref && ref !== null) {
+      set({ pdfWrapperRef: ref });
+    }
+  },
 
   goToNextPage: () => {
     const { pageNumber, numPages } = get();

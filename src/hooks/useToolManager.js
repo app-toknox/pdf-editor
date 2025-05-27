@@ -29,23 +29,32 @@ export const useToolManager = create((set, get) => ({
   openEditForm: (item) => set({ editingItem: item }),
 
   closeEditForm: () => set({ editingItem: null }),
-
   submitEditForm: (itemId, newPayload) => {
-    const updatedItems = get().items.map((item) =>
-      item.id === itemId ? { ...item, payload: newPayload } : item
-    );
+    const updatedItems = get().items.map((item) => {
+      if (item.id !== itemId) return item;
+
+      // eslint-disable-next-line no-unused-vars
+      const { img, text, textEditable, ...metadata } = item.payload;
+      return {
+        ...item,
+        payload: {
+          ...metadata,
+          ...newPayload,
+        },
+      };
+    });
+
     set({ items: updatedItems });
     set({ editingItem: null });
     console.log(updatedItems);
   },
-
   setSelectItem: (item) => set({ selectItem: item }),
   setCopiedItem: (item) => set({ copiedItem: item }),
 
   handleDragStop: (itemId, x, y) => {
     const currentItems = get().items;
     const updatedItems = currentItems.map((item) =>
-      item.id === itemId ? { ...item, x, y } : item
+      item.id === itemId ? { ...item, x, y } : item,
     );
     set({ items: updatedItems });
   },
@@ -57,7 +66,7 @@ export const useToolManager = create((set, get) => ({
   handleResizeStop: (itemId, width, height, x, y) => {
     const currentItems = get().items;
     const updatedItems = currentItems.map((item) =>
-      item.id === itemId ? { ...item, width, height, x, y } : item
+      item.id === itemId ? { ...item, width, height, x, y } : item,
     );
     set({ items: updatedItems });
   },
@@ -79,7 +88,7 @@ export const useToolManager = create((set, get) => ({
       const updated = current.map((item) =>
         item.type === droppedItem.type
           ? { ...item, number: item.number + 1 }
-          : item
+          : item,
       );
       set({ numberItems: updated });
     } else {
@@ -91,9 +100,9 @@ export const useToolManager = create((set, get) => ({
     const current = get().numberItems;
     const updated = current
       .map((item) =>
-        item.data === removedItem.data
+        item.type === removedItem.type
           ? { ...item, number: item.number - 1 }
-          : item
+          : item,
       )
       .filter((item) => item.number > 0);
     set({ numberItems: updated });
@@ -137,16 +146,16 @@ export const useToolManager = create((set, get) => ({
     const selected = get().selectItem;
     if (selected) {
       const filteredItems = get().items.filter(
-        (item) => item.id !== selected.id
+        (item) => item.id !== selected.id,
       );
       set({ items: filteredItems, selectItem: null });
-      get().decrementNumberItems(filteredItems);
+      get().decrementNumberItems(selected);
     }
   },
 
   editItem: (itemId, newValues) => {
     const editedItems = get().items.map((item) =>
-      item.id === itemId ? { ...item, ...newValues } : item
+      item.id === itemId ? { ...item, ...newValues } : item,
     );
     set({ items: editedItems });
   },
@@ -156,7 +165,7 @@ export const useToolManager = create((set, get) => ({
       items: state.items.map((item) =>
         item.id === id
           ? { ...item, payload: { ...item.payload, ...data } }
-          : item
+          : item,
       ),
     })),
 }));

@@ -9,7 +9,6 @@ export const PdfExport = ({ pdf }) => {
     const arrayBuffer = await pdf.arrayBuffer();
     const pdfDoc = await PDFDocument.load(arrayBuffer);
     const pages = pdfDoc.getPages();
-    console.log("Pagine trovate:", pages.length);
 
     for (const [index, page] of pages.entries()) {
       const pageItems = items.filter((item) => item.page === index + 1);
@@ -24,6 +23,7 @@ export const PdfExport = ({ pdf }) => {
             const text = item.payload.textEditable || item.payload.text;
             const fontSize = item.payload.fontSize;
 
+            console.log(item.payload)
             page.drawText(text, {
               x: item.x + item.width / 2 - textWidth / 2,
               y: page.getHeight() - item.y - item.height / 2 - textHeight / 2,
