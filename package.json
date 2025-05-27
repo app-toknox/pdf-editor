@@ -2,9 +2,10 @@
   "name": "pdf-editor-component",
   "version": "1.0.0",
   "type": "module",
-  "main": "src/index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "files": [
-    "src"
+    "dist"
   ],
   "scripts": {
     "dev": "vite",
