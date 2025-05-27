@@ -4,7 +4,6 @@
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
-  "style": "dist/style.css",
   "files": [
     "dist"
   ],

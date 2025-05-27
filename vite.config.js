@@ -31,12 +31,6 @@ export default defineConfig({
           "react-dom": "ReactDOM",
           "react/jsx-runtime": "jsxRuntime",
         },
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name?.endsWith(".css")) {
-            return "style.css";
-          }
-          return assetInfo.name;
-        },
       },
     },
     sourcemap: true,
