@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { Layout } from "@/components/layout";
 import { NewDraggableItem } from "@/components/new-draggable-item";
 import { PdfExport } from "@/components/pdf-export";
@@ -8,9 +10,15 @@ import { useToolManager } from "@/hooks/useToolManager";
 import { ELEMENT_TYPES } from "@/types/element-types";
 
 export const PdfEditor = ({ pdfFile }) => {
-  const { pageNumber } = usePDFStore();
+  const { pageNumber, setPDFFile } = usePDFStore();
 
   useEventListener();
+
+  useEffect(() => {
+    if (pdfFile) {
+      setPDFFile(pdfFile);
+    }
+  }, [pdfFile, setPDFFile]);
 
   const {
     items,

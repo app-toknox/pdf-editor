@@ -32554,39 +32554,41 @@ const m2 = ({ pdf: i }) => {
     };
   }, [e, t, r, i]);
 }, k2 = ({ pdfFile: i }) => {
-  var h;
-  const { pageNumber: t } = x0();
-  w2();
+  var d;
+  const { pageNumber: t, setPDFFile: e } = x0();
+  w2(), Le(() => {
+    i && e(i);
+  }, [i, e]);
   const {
-    items: e,
-    handleSelection: r,
-    editingItem: n,
-    handleDropData: s,
-    editingTemplates: a
-  } = Vn(), o = n ? (h = Rf[n.type]) == null ? void 0 : h.form : a;
+    items: r,
+    handleSelection: n,
+    editingItem: s,
+    handleDropData: a,
+    editingTemplates: o
+  } = Vn(), l = s ? (d = Rf[s.type]) == null ? void 0 : d.form : o;
   return /* @__PURE__ */ $(MP, { children: /* @__PURE__ */ ke("div", { className: "flex  w-full items-center flex-col gap-4 my-8 overflow-scroll", children: [
     /* @__PURE__ */ $("h1", { className: "text-3xl font-bold text-gray-800 items-center", children: "PDF EDITOR TOKNOX DEMO" }),
     /* @__PURE__ */ ke(
       "div",
       {
         className: "z-40 relative",
-        onDrop: (d) => {
-          d.preventDefault();
-          const f = d.dataTransfer.getData("application/json"), p = d.currentTarget.getBoundingClientRect(), g = d.clientX - p.left - 85, v = d.clientY - p.top - 42.5;
-          s(f, g, v, t);
+        onDrop: (f) => {
+          f.preventDefault();
+          const p = f.dataTransfer.getData("application/json"), g = f.currentTarget.getBoundingClientRect(), v = f.clientX - g.left - 85, b = f.clientY - g.top - 42.5;
+          a(p, v, b, t);
         },
-        onDragOver: (d) => {
-          d.preventDefault();
+        onDragOver: (f) => {
+          f.preventDefault();
         },
-        onClick: () => r(null),
+        onClick: () => n(null),
         children: [
           /* @__PURE__ */ $(b2, { pdf: i }),
-          /* @__PURE__ */ $("div", { className: "absolute inset-0 z-50", children: e.filter((d) => d.page === t).map((d) => /* @__PURE__ */ $(ek, { item: d }, d.id)) })
+          /* @__PURE__ */ $("div", { className: "absolute inset-0 z-50", children: r.filter((f) => f.page === t).map((f) => /* @__PURE__ */ $(ek, { item: f }, f.id)) })
         ]
       }
     ),
     /* @__PURE__ */ $(m2, { pdf: i }),
-    n && /* @__PURE__ */ $(o, {})
+    s && /* @__PURE__ */ $(l, {})
   ] }) });
 };
 export {
