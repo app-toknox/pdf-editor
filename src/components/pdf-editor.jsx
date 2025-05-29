@@ -1,4 +1,3 @@
-import { InputPdfFile } from "@/components/input-pdf-file";
 import { Layout } from "@/components/layout";
 import { NewDraggableItem } from "@/components/new-draggable-item";
 import { PdfExport } from "@/components/pdf-export";
@@ -8,8 +7,8 @@ import { usePDFStore } from "@/hooks/usePdf";
 import { useToolManager } from "@/hooks/useToolManager";
 import { ELEMENT_TYPES } from "@/types/element-types";
 
-export const PdfEditor = () => {
-  const { setPDFFile, pdfFile, pageNumber } = usePDFStore();
+export const PdfEditor = ({ pdfFile }) => {
+  const { pageNumber } = usePDFStore();
 
   useEventListener();
 
@@ -45,7 +44,6 @@ export const PdfEditor = () => {
         <h1 className="text-3xl font-bold text-gray-800 items-center">
           PDF EDITOR TOKNOX DEMO
         </h1>
-        <InputPdfFile setPdf={setPDFFile} />
 
         {/* Questo è il mio container che sarà poi PDFviewer */}
         <div
