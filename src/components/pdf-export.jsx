@@ -2,7 +2,7 @@ import { PDFDocument } from "pdf-lib";
 
 import { useToolManager } from "@/hooks/useToolManager";
 
-export const PdfExport = ({ pdf }) => {
+export const PdfExport = ({ pdf, onExport }) => {
   const { items } = useToolManager();
   const handleDownload = async () => {
     if (!pdf) return;
@@ -23,7 +23,7 @@ export const PdfExport = ({ pdf }) => {
             const text = item.payload.textEditable || item.payload.text;
             const fontSize = item.payload.fontSize;
 
-            console.log(item.payload)
+            console.log(item.payload);
             page.drawText(text, {
               x: item.x + item.width / 2 - textWidth / 2,
               y: page.getHeight() - item.y - item.height / 2 - textHeight / 2,
@@ -56,6 +56,9 @@ export const PdfExport = ({ pdf }) => {
 
     const pdfBytes = await pdfDoc.save();
     const blob = new Blob([pdfBytes], { type: "application/pdf" });
+
+    if (onExport) onExport(blob);
+
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;

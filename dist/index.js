@@ -32476,45 +32476,47 @@ var zi = (
     }, t;
   }(al)
 );
-const m2 = ({ pdf: i }) => {
-  const { items: t } = Vn();
+const m2 = ({ pdf: i, onExport: t }) => {
+  const { items: e } = Vn();
   return /* @__PURE__ */ $($o, { children: i ? /* @__PURE__ */ $(
     "button",
     {
       onClick: () => Tt(void 0, null, function* () {
         if (!i) return;
-        const r = yield i.arrayBuffer(), n = yield Ra.load(r), s = n.getPages();
-        for (const [h, d] of s.entries()) {
-          const f = t.filter((p) => p.page === h + 1);
-          for (const p of f)
-            if (p.payload) {
-              const g = p.payload.widthSmallDiv, v = p.payload.heightSmallDiv;
-              if (p.payload.text || p.payload.textEditable) {
-                const b = p.payload.textEditable || p.payload.text, m = p.payload.fontSize;
-                console.log(p.payload), d.drawText(b, {
-                  x: p.x + p.width / 2 - g / 2,
-                  y: d.getHeight() - p.y - p.height / 2 - v / 2,
-                  size: parseFloat(m)
+        const n = yield i.arrayBuffer(), s = yield Ra.load(n), a = s.getPages();
+        for (const [d, f] of a.entries()) {
+          const p = e.filter((g) => g.page === d + 1);
+          for (const g of p)
+            if (g.payload) {
+              const v = g.payload.widthSmallDiv, b = g.payload.heightSmallDiv;
+              if (g.payload.text || g.payload.textEditable) {
+                const m = g.payload.textEditable || g.payload.text, x = g.payload.fontSize;
+                console.log(g.payload), f.drawText(m, {
+                  x: g.x + g.width / 2 - v / 2,
+                  y: f.getHeight() - g.y - g.height / 2 - b / 2,
+                  size: parseFloat(x)
                 });
               }
-              if (p.payload.img) {
-                const b = p.payload.widthImage, m = p.payload.heightImage;
-                if (isNaN(b) || isNaN(m)) {
-                  console.warn("Invalid image dimensions for item", p);
+              if (g.payload.img) {
+                const m = g.payload.widthImage, x = g.payload.heightImage;
+                if (isNaN(m) || isNaN(x)) {
+                  console.warn("Invalid image dimensions for item", g);
                   continue;
                 }
-                const x = yield n.embedPng(p.payload.img), w = p.x + p.width / 2 - b / 2, E = d.getHeight() - p.y - p.height / 2 - m / 2;
-                d.drawImage(x, {
-                  x: w,
-                  y: E,
-                  width: b,
-                  height: m
+                const w = yield s.embedPng(g.payload.img), E = g.x + g.width / 2 - m / 2, A = f.getHeight() - g.y - g.height / 2 - x / 2;
+                f.drawImage(w, {
+                  x: E,
+                  y: A,
+                  width: m,
+                  height: x
                 });
               }
             }
         }
-        const a = yield n.save(), o = new Blob([a], { type: "application/pdf" }), l = URL.createObjectURL(o), c = document.createElement("a");
-        c.href = l, c.download = "pdf-esportato.pdf", document.body.appendChild(c), c.click(), document.body.removeChild(c), URL.revokeObjectURL(l), console.log("PDF esportato:", l);
+        const o = yield s.save(), l = new Blob([o], { type: "application/pdf" });
+        t && t(l);
+        const c = URL.createObjectURL(l), h = document.createElement("a");
+        h.href = c, h.download = "pdf-esportato.pdf", document.body.appendChild(h), h.click(), document.body.removeChild(h), URL.revokeObjectURL(c), console.log("PDF esportato:", c);
       }),
       className: "px-6 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition duration-200",
       children: "Export PDF"
@@ -32553,42 +32555,42 @@ const m2 = ({ pdf: i }) => {
       window.removeEventListener("keydown", n);
     };
   }, [e, t, r, i]);
-}, k2 = ({ pdfFile: i }) => {
-  var d;
-  const { pageNumber: t, setPDFFile: e } = x0();
+}, k2 = ({ pdfFile: i, handleExport: t }) => {
+  var f;
+  const { pageNumber: e, setPDFFile: r } = x0();
   w2(), Le(() => {
-    i && e(i);
-  }, [i, e]);
+    i && r(i);
+  }, [i, r]);
   const {
-    items: r,
-    handleSelection: n,
-    editingItem: s,
-    handleDropData: a,
-    editingTemplates: o
-  } = Vn(), l = s ? (d = Rf[s.type]) == null ? void 0 : d.form : o;
+    items: n,
+    handleSelection: s,
+    editingItem: a,
+    handleDropData: o,
+    editingTemplates: l
+  } = Vn(), c = a ? (f = Rf[a.type]) == null ? void 0 : f.form : l;
   return /* @__PURE__ */ $(MP, { children: /* @__PURE__ */ ke("div", { className: "flex  w-full items-center flex-col gap-4 my-8 overflow-scroll", children: [
     /* @__PURE__ */ $("h1", { className: "text-3xl font-bold text-gray-800 items-center", children: "PDF EDITOR TOKNOX DEMO" }),
     /* @__PURE__ */ ke(
       "div",
       {
         className: "z-40 relative",
-        onDrop: (f) => {
-          f.preventDefault();
-          const p = f.dataTransfer.getData("application/json"), g = f.currentTarget.getBoundingClientRect(), v = f.clientX - g.left - 85, b = f.clientY - g.top - 42.5;
-          a(p, v, b, t);
+        onDrop: (p) => {
+          p.preventDefault();
+          const g = p.dataTransfer.getData("application/json"), v = p.currentTarget.getBoundingClientRect(), b = p.clientX - v.left - 85, m = p.clientY - v.top - 42.5;
+          o(g, b, m, e);
         },
-        onDragOver: (f) => {
-          f.preventDefault();
+        onDragOver: (p) => {
+          p.preventDefault();
         },
-        onClick: () => n(null),
+        onClick: () => s(null),
         children: [
           /* @__PURE__ */ $(b2, { pdf: i }),
-          /* @__PURE__ */ $("div", { className: "absolute inset-0 z-50", children: r.filter((f) => f.page === t).map((f) => /* @__PURE__ */ $(ek, { item: f }, f.id)) })
+          /* @__PURE__ */ $("div", { className: "absolute inset-0 z-50", children: n.filter((p) => p.page === e).map((p) => /* @__PURE__ */ $(ek, { item: p }, p.id)) })
         ]
       }
     ),
-    /* @__PURE__ */ $(m2, { pdf: i }),
-    s && /* @__PURE__ */ $(l, {})
+    /* @__PURE__ */ $(m2, { pdf: i, onExport: t }),
+    a && /* @__PURE__ */ $(c, {})
   ] }) });
 };
 export {

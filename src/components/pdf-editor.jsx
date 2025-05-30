@@ -9,7 +9,7 @@ import { usePDFStore } from "@/hooks/usePdf";
 import { useToolManager } from "@/hooks/useToolManager";
 import { ELEMENT_TYPES } from "@/types/element-types";
 
-export const PdfEditor = ({ pdfFile }) => {
+export const PdfEditor = ({ pdfFile, handleExport }) => {
   const { pageNumber, setPDFFile } = usePDFStore();
 
   useEventListener();
@@ -69,7 +69,7 @@ export const PdfEditor = ({ pdfFile }) => {
               ))}
           </div>
         </div>
-        <PdfExport pdf={pdfFile} />
+        <PdfExport pdf={pdfFile} onExport={handleExport} />
 
         {/* Qui mostro il form se attivo */}
         {editingItem && <FormElement />}
