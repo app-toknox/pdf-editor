@@ -16,7 +16,12 @@ export default defineConfig({
     tailwindcss(),
     react(),
     cssInjectedByJsPlugin(),
-    dts({ insertTypesEntry: true }),
+    dts({
+      tsConfigFilePath: "./tsconfig.json",
+      entryRoot: "src",
+      outputDir: "dist",
+      insertTypesEntry: true,
+    }),
   ],
   resolve: {
     alias: {

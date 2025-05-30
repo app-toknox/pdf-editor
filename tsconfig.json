@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    // 1. Processa anche file .js/.jsx
+    "allowJs": true,
+
+    // 2. Genera solo i file di dichiarazione (.d.ts), non produce JS
+    "declaration": true,
+    "emitDeclarationOnly": true,
+
+    // 3. Metti i .d.ts in dist/
+    "declarationDir": "dist",
+
+    // 4. Supporta JSX in stile React 17+
+    "jsx": "react-jsx",
+
+    // 5. Usa moduli ESNext (lascia che Vite/Rollup bundle i .js)
+    "module": "ESNext",
+
+    // 6. Usa il look-up dei moduli in stile Node
+    "moduleResolution": "Node",
+
+    // 7. Non abbattere i warning su librerie esterne
+    "skipLibCheck": true
+  },
+
+
+  "include": [
+    "src/**/*.js",
+    "src/**/*.jsx"
+  ],
+
+
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
