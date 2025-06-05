@@ -9,17 +9,9 @@
 
     // 3. Metti i .d.ts in dist/
     "declarationDir": "dist",
-
-    // 4. Supporta JSX in stile React 17+
     "jsx": "react-jsx",
-
-    // 5. Usa moduli ESNext (lascia che Vite/Rollup bundle i .js)
     "module": "ESNext",
-
-    // 6. Usa il look-up dei moduli in stile Node
     "moduleResolution": "Node",
-
-    // 7. Non abbattere i warning su librerie esterne
     "skipLibCheck": true
   },
 

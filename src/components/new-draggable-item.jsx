@@ -19,7 +19,7 @@ export const NewDraggableItem = ({ item }) => {
           ref.offsetWidth,
           ref.offsetHeight,
           position.x,
-          position.y
+          position.y,
         )
       }
       bounds="parent"

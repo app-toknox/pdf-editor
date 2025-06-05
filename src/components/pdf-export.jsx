@@ -53,21 +53,21 @@ export const PdfExport = ({ pdf, onExport }) => {
         }
       }
     }
-
+    const originalName = pdf.name.replace(/\.pdf$/i, "");
+    const newFileName = `${originalName}-sign.pdf`;
     const pdfBytes = await pdfDoc.save();
-    const blob = new Blob([pdfBytes], { type: "application/pdf" });
 
-    if (onExport) onExport(blob);
+    const file = new File([pdfBytes], newFileName, { type: "application/pdf" });
 
-    const url = URL.createObjectURL(blob);
+    if (onExport) onExport(file);
+    const url = URL.createObjectURL(file);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "pdf-esportato.pdf";
+    link.download = newFileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-    console.log("PDF esportato:", url);
   };
   return (
     <>

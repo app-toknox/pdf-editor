@@ -1,1 +1,3 @@
-export function ToolsSidebar(): import("react/jsx-runtime").JSX.Element;
+export function ToolsSidebar({ children }: {
+    children: any;
+}): import("react/jsx-runtime").JSX.Element;

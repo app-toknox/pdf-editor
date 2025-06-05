@@ -1,12 +1,12 @@
-# React + Vite
+## `<PdfEditor />` Component
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The `PdfEditor` component is a React UI module used to load, display, and edit PDF files within an application.
 
-Currently, two official plugins are available:
+### Props
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **`pdfFile`**: A `File` object or binary representing the input PDF to be edited.
+- **`handleExport`**: A callback function triggered when the user exports the edited PDF. It returns the modified file in PDF format.
 
-## Expanding the ESLint configuration
+### Description
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+`PdfEditor` is designed to provide an interactive environment where users can view and annotate or modify a PDF file. It receives a PDF as input via the `pdfFile` prop, allows editing through a visual interface, and outputs a newly generated PDF file when the `handleExport` function is called. This component is ideal for applications that require client-side PDF editing and export functionality.

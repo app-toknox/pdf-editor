@@ -1,7 +1,7 @@
 import { ToolItem } from "@/components/tool-item";
 import { ELEMENT_TYPES } from "@/types/element-types";
 
-export const ToolsSidebar = () => {
+export const ToolsSidebar = ({ children }) => {
   const sidebarItems = Object.keys(ELEMENT_TYPES);
 
   return (
@@ -23,6 +23,7 @@ export const ToolsSidebar = () => {
           </ul>
         </nav>
       </div>
+      <div className="mt-auto">{children}</div>
     </aside>
   );
 };

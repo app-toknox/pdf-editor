@@ -47,10 +47,10 @@ export const PdfEditor = ({ pdfFile, handleExport }) => {
     handleDropData(type, x, y, pageNumber);
   };
   return (
-    <Layout>
+    <Layout exportPdf={<PdfExport pdf={pdfFile} onExport={handleExport} />}>
       <div className="flex  w-full items-center flex-col gap-4 my-8 overflow-scroll">
         <h1 className="text-3xl font-bold text-gray-800 items-center">
-          PDF EDITOR TOKNOX DEMO
+          PDF EDITOR TOKNOX
         </h1>
 
         {/* Questo è il mio container che sarà poi PDFviewer */}
@@ -69,7 +69,6 @@ export const PdfEditor = ({ pdfFile, handleExport }) => {
               ))}
           </div>
         </div>
-        <PdfExport pdf={pdfFile} onExport={handleExport} />
 
         {/* Qui mostro il form se attivo */}
         {editingItem && <FormElement />}
