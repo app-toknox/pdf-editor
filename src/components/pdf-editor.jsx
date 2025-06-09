@@ -8,8 +8,9 @@ import { useEventListener } from "@/hooks/use-event-listener";
 import { usePDFStore } from "@/hooks/usePdf";
 import { useToolManager } from "@/hooks/useToolManager";
 import { ELEMENT_TYPES } from "@/types/element-types";
+import { cn } from "@/utils/index";
 
-export const PdfEditor = ({ pdfFile, handleExport }) => {
+export const PdfEditor = ({ pdfFile, handleExport, className }) => {
   const { pageNumber, setPDFFile } = usePDFStore();
 
   useEventListener();
@@ -48,7 +49,12 @@ export const PdfEditor = ({ pdfFile, handleExport }) => {
   };
   return (
     <Layout exportPdf={<PdfExport pdf={pdfFile} onExport={handleExport} />}>
-      <div className="flex  w-full items-center flex-col gap-4 my-8 overflow-scroll">
+      <div
+        className={cn(
+          "flex w-full items-center flex-col gap-4 my-8 overflow-scroll",
+          className,
+        )}
+      >
         <h1 className="text-3xl font-bold text-gray-800 items-center">
           PDF EDITOR TOKNOX
         </h1>
