@@ -48,37 +48,39 @@ export const PdfEditor = ({ pdfFile, handleExport, className }) => {
     handleDropData(type, x, y, pageNumber);
   };
   return (
-    <Layout exportPdf={<PdfExport pdf={pdfFile} onExport={handleExport} />}>
-      <div
-        className={cn(
-          "flex w-full items-center flex-col gap-4 my-8 overflow-scroll",
-          className,
-        )}
-      >
-        <h1 className="text-3xl font-bold text-gray-800 items-center">
-          PDF EDITOR TOKNOX
-        </h1>
-
-        {/* Questo è il mio container che sarà poi PDFviewer */}
+    <div className="toknox-pdf-editor">
+      <Layout exportPdf={<PdfExport pdf={pdfFile} onExport={handleExport} />}>
         <div
-          className="z-40 relative"
-          onDrop={handleOnDrop}
-          onDragOver={handleOnDragOver}
-          onClick={() => handleSelection(null)}
+          className={cn(
+            "flex w-full items-center flex-col gap-4 my-8 overflow-scroll",
+            className,
+          )}
         >
-          <PdfViewer pdf={pdfFile} />
-          <div className="absolute inset-0 z-50">
-            {items
-              .filter((item) => item.page === pageNumber)
-              .map((item) => (
-                <NewDraggableItem key={item.id} item={item} />
-              ))}
-          </div>
-        </div>
+          <h1 className="text-3xl font-bold text-gray-800 items-center">
+            PDF EDITOR TOKNOX
+          </h1>
 
-        {/* Qui mostro il form se attivo */}
-        {editingItem && <FormElement />}
-      </div>
-    </Layout>
+          {/* Questo è il mio container che sarà poi PDFviewer */}
+          <div
+            className="z-40 relative"
+            onDrop={handleOnDrop}
+            onDragOver={handleOnDragOver}
+            onClick={() => handleSelection(null)}
+          >
+            <PdfViewer pdf={pdfFile} />
+            <div className="absolute inset-0 z-50">
+              {items
+                .filter((item) => item.page === pageNumber)
+                .map((item) => (
+                  <NewDraggableItem key={item.id} item={item} />
+                ))}
+            </div>
+          </div>
+
+          {/* Qui mostro il form se attivo */}
+          {editingItem && <FormElement />}
+        </div>
+      </Layout>
+    </div>
   );
 };

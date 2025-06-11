@@ -29,12 +29,12 @@ export const SignaturePad = ({ onSaveSignatureCallback }) => {
       </span>
       <div
         className={cn(
-          "flex items-center  justify-center flex-col w-full bg-gray-300 px-4 h-[220px]"
+          "flex items-center  justify-center flex-col w-full bg-gray-300 px-4 h-[220px]",
         )}
       >
         <SignatureCanvas
           ref={sigCanvasRef}
-          penColor="blue"
+          penColor="black"
           canvasProps={{
             width: 500,
             height: 200,
