@@ -10,7 +10,7 @@ const App = () => {
     console.log("Ricevuto PDF esportato:", file);
   };
   return (
-    <div className="w-[1200px] h-[800px] border border-gray-300">
+    <div className="w-[1200px] h-[800px] border border-gray-300 ">
       <InputPdfFile setPdf={useSetPdf} />
       <PdfEditor pdfFile={setPdf} handleExport={handleExport} />
     </div>

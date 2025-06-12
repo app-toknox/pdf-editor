@@ -54,7 +54,14 @@ export const PdfExport = ({ pdf, onExport }) => {
       }
     }
     const originalName = pdf.name.replace(/\.pdf$/i, "");
-    const newFileName = `${originalName}-sign.pdf`;
+    let userName = window.prompt("Save as", `${originalName}-signed`);
+    if (userName === null || userName.trim() === "") {
+      userName = `${originalName}-signed`;
+    }
+    const resolveFileName = (name) => {
+      return name.toLowerCase().endsWith(".pdf") ? name : `${name}.pdf`;
+    };
+    const newFileName = resolveFileName(userName.trim());
     const pdfBytes = await pdfDoc.save();
 
     const file = new File([pdfBytes], newFileName, { type: "application/pdf" });
