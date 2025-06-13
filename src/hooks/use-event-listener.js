@@ -9,9 +9,15 @@ export const useEventListener = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       const active = document.activeElement;
-      const isEditing = active.getAttribute("contenteditable") === "true";
-
-      //if (isEditing) return;
+      // Blocca le shortcut globali se il focus è su un input, textarea o contenteditable
+      if (
+        active &&
+        (active.tagName === "INPUT" ||
+          active.tagName === "TEXTAREA" ||
+          active.isContentEditable)
+      ) {
+        return;
+      }
 
       if ((e.ctrlKey || e.metaKey) && e.key === "c") {
         e.preventDefault();
@@ -23,7 +29,7 @@ export const useEventListener = () => {
         handlePaste();
       }
 
-      if ((e.key === "Delete" || e.key === "Backspace") && !isEditing) {
+      if (e.key === "Delete" || e.key === "Backspace") {
         e.preventDefault();
         handleDelete();
       }

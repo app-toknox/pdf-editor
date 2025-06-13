@@ -1,10 +1,19 @@
 import { PDFDocument } from "pdf-lib";
+import { useState } from "react";
 
 import { useToolManager } from "@/hooks/useToolManager";
 
+import { DownloadForm } from "./download-form";
+
 export const PdfExport = ({ pdf, onExport }) => {
   const { items } = useToolManager();
-  const handleDownload = async () => {
+
+  const [showModal, setShowModal] = useState(false);
+  const [fileName, setFileName] = useState(
+    pdf ? pdf.name.replace(/\.pdf$/i, "") + "-signed" : "signed",
+  );
+
+  const handleDownload = async (customName) => {
     if (!pdf) return;
     const arrayBuffer = await pdf.arrayBuffer();
     const pdfDoc = await PDFDocument.load(arrayBuffer);
@@ -23,7 +32,6 @@ export const PdfExport = ({ pdf, onExport }) => {
             const text = item.payload.textEditable || item.payload.text;
             const fontSize = item.payload.fontSize;
 
-            console.log(item.payload);
             page.drawText(text, {
               x: item.x + item.width / 2 - textWidth / 2,
               y: page.getHeight() - item.y - item.height / 2 - textHeight / 2,
@@ -53,38 +61,53 @@ export const PdfExport = ({ pdf, onExport }) => {
         }
       }
     }
-    const originalName = pdf.name.replace(/\.pdf$/i, "");
-    let userName = window.prompt("Save as", `${originalName}-signed`);
-    if (userName === null || userName.trim() === "") {
-      userName = `${originalName}-signed`;
-    }
-    const resolveFileName = (name) => {
-      return name.toLowerCase().endsWith(".pdf") ? name : `${name}.pdf`;
-    };
-    const newFileName = resolveFileName(userName.trim());
+
+    const safeFileName = customName.endsWith(".pdf")
+      ? customName
+      : `${customName}.pdf`;
     const pdfBytes = await pdfDoc.save();
 
-    const file = new File([pdfBytes], newFileName, { type: "application/pdf" });
+    const file = new File([pdfBytes], safeFileName, {
+      type: "application/pdf",
+    });
 
     if (onExport) onExport(file);
     const url = URL.createObjectURL(file);
     const link = document.createElement("a");
     link.href = url;
-    link.download = newFileName;
+    link.download = safeFileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   };
+
   return (
     <>
       {pdf ? (
-        <button
-          onClick={handleDownload}
-          className="px-6 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition duration-200"
-        >
-          Export PDF
-        </button>
+        <>
+          <button
+            onClick={() => {
+              const originalName = pdf.name.replace(/\.pdf$/i, "");
+              setFileName(`${originalName}-signed`);
+              setShowModal(true);
+            }}
+            className="px-6 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition duration-200"
+          >
+            Export PDF
+          </button>
+          {showModal && (
+            <DownloadForm
+              initialValue={fileName}
+              setFormOpen={setShowModal}
+              onSubmit={(name) => {
+                setFileName(name);
+                handleDownload(name);
+                setShowModal(false);
+              }}
+            />
+          )}
+        </>
       ) : (
         <p>No PDF file yet</p>
       )}

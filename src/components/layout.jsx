@@ -3,7 +3,7 @@ import { ToolsSidebar } from "@/components/tools-sidebar";
 
 export const Layout = ({ children, exportPdf }) => {
   return (
-    <div className="flex h-full w-full overflow-hidden bg-white">
+    <div className="toknox-pdf-editor flex h-full w-full overflow-hidden bg-white">
       <PdfPagesSidebar />
       {children}
       <ToolsSidebar>{exportPdf}</ToolsSidebar>
