@@ -3,7 +3,6 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { fileURLToPath } from "url";
 import { defineConfig } from "vite";
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 import dts from "vite-plugin-dts";
 
 // workaround per __dirname in ESM
@@ -15,7 +14,6 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     react(),
-    cssInjectedByJsPlugin(),
     dts({
       tsConfigFilePath: "./tsconfig.json",
       entryRoot: "src",
@@ -29,6 +27,8 @@ export default defineConfig({
     },
   },
   build: {
+    // extract CSS into its own file
+    cssCodeSplit: true,
     lib: {
       entry: path.resolve(__dirname, "src/index.js"),
       name: "PdfEditor",
@@ -42,6 +42,14 @@ export default defineConfig({
           react: "React",
           "react-dom": "ReactDOM",
           "react/jsx-runtime": "jsxRuntime",
+        },
+        // put all CSS assets in a single style.css file
+        assetFileNames: (assetInfo) => {
+          const firstName = assetInfo.names?.[0];
+          if (firstName?.endsWith(".css")) {
+            return "style.css";
+          }
+          return firstName ? `${firstName}[extname]` : "[name]-[hash][extname]";
         },
       },
     },
