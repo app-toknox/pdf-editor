@@ -1,8 +1,9 @@
+import { Trans } from "@lingui/react/macro";
 import { RxDragHandleDots1 } from "react-icons/rx";
 
 import { useToolManager } from "@/hooks/useToolManager";
 
-export const ToolItem = ({ item, Icon }) => {
+export const ToolItem = ({ item, Icon, labelKey }) => {
   const handleDragStart = (e) => {
     e.dataTransfer.setData("application/json", item);
   };
@@ -10,6 +11,22 @@ export const ToolItem = ({ item, Icon }) => {
   const { numberItems } = useToolManager();
 
   const itemCount = numberItems.find((el) => el.type === item)?.number || 0;
+
+  const renderLabel = () => {
+    switch (labelKey) {
+      case "Signature":
+        return <Trans>Signature</Trans>;
+      case "Stamp":
+        return <Trans>Stamp</Trans>;
+      case "Text":
+        return <Trans>Text</Trans>;
+      case "Data":
+        return <Trans>Data</Trans>;
+      default:
+        return item;
+    }
+  };
+
   return (
     <div
       draggable
@@ -18,7 +35,7 @@ export const ToolItem = ({ item, Icon }) => {
     >
       <RxDragHandleDots1 className="text-gray-400 h-6 w-6" />
       {Icon && <Icon size="1.25em" className="text-gray-600" />}
-      <span className="text-gray-800 font-medium">{item}</span>
+      <span className="text-gray-800 font-medium">{renderLabel()}</span>
       {itemCount > 0 && (
         <div className="ml-auto bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
           {itemCount}

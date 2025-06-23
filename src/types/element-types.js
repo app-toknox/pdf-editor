@@ -14,21 +14,25 @@ import { TextForm } from "@/components/items-layout/text/text-form";
 
 export const ELEMENT_TYPES = {
   Signature: {
+    labelKey: "Signature",
     component: SignatureComponent,
     form: SignatureForm,
     icon: FaFileSignature,
   },
   Stamp: {
+    labelKey: "Stamp",
     component: StampComponent,
     form: StampForm,
     icon: FaStamp,
   },
   Text: {
+    labelKey: "Text",
     component: TextComponent,
     form: TextForm,
     icon: BsChatSquareTextFill,
   },
   Data: {
+    labelKey: "Data",
     component: DataComponent,
     form: DataForm,
     icon: FaCalendarAlt,

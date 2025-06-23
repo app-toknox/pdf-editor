@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import React, { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
@@ -38,7 +39,7 @@ export const DataForm = ({ initialFormat = "dd-mm-yyyy" }) => {
           onClick={() => closeEditForm()}
         />
         <h2 className="text-xl font-semibold mb-4 text-gray-800">
-          Seleziona Formato Data
+          <Trans>Select Data type</Trans>
         </h2>
         <form
           onSubmit={(e) => {
@@ -60,14 +61,14 @@ export const DataForm = ({ initialFormat = "dd-mm-yyyy" }) => {
             <option value="mm/dd/yyyy">mm/dd/yyyy</option>
           </select>
           <p className="mb-4 text-center text-gray-700">
-            Anteprima: {getFormattedDate(format)}
+            <Trans>Preview</Trans>: {getFormattedDate(format)}
           </p>
           <button
             type="submit"
             className="btn btn-primary w-full flex items-center justify-center"
           >
             <FiCheck size="1em" className="mr-2" />
-            Salva
+            <Trans>Save</Trans>
           </button>
         </form>
       </div>

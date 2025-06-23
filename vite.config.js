@@ -1,3 +1,4 @@
+import { lingui } from "@lingui/vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -13,13 +14,16 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
   plugins: [
     tailwindcss(),
-    react(),
+    react({
+      plugins: [["@lingui/swc-plugin", {}]],
+    }),
     dts({
       tsConfigFilePath: "./tsconfig.json",
       entryRoot: "src",
       outputDir: "dist",
       insertTypesEntry: true,
     }),
+    lingui(),
   ],
   resolve: {
     alias: {

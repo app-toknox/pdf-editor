@@ -1,0 +1,1 @@
+/*eslint-disable*/module.exports={messages:JSON.parse("{\"FXj1a/\":[\"PDF EDITOR TOKNOX\"]}")};

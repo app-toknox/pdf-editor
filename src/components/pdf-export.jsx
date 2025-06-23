@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { PDFDocument } from "pdf-lib";
 import { useState } from "react";
 
@@ -92,9 +93,9 @@ export const PdfExport = ({ pdf, onExport }) => {
               setFileName(`${originalName}-signed`);
               setShowModal(true);
             }}
-            className="px-6 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition duration-200"
+            className="px-6 py-2 bg-indigo-700 text-white rounded-md shadow hover:bg-indigo-800 transition duration-200"
           >
-            Export PDF
+            <Trans>Export PDF</Trans>
           </button>
           {showModal && (
             <DownloadForm

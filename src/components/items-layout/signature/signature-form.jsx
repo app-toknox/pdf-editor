@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import React, { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
@@ -12,7 +13,9 @@ export const SignatureForm = ({ initialValue = "" }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
       <div className="relative bg-base-100 rounded-lg p-8 w-[400px] shadow-lg space-y-4">
-        <h2 className="text-xl font-semibold text-gray-800">Modifica Firma</h2>
+        <h2 className="text-xl font-semibold text-gray-800">
+          <Trans>Edit Signature</Trans>
+        </h2>
         <FiX
           size="1em"
           className="absolute top-3 right-3 text-gray-500 hover:text-red-600 cursor-pointer"
@@ -24,19 +27,19 @@ export const SignatureForm = ({ initialValue = "" }) => {
             onClick={() => setMode("text")}
             className={`tab ${mode === "text" ? "tab-active" : ""}`}
           >
-            Testo
+            <Trans>Text</Trans>
           </button>
           <button
             onClick={() => setMode("draw")}
             className={`tab ${mode === "draw" ? "tab-active" : ""}`}
           >
-            Disegna
+            <Trans>Draw</Trans>
           </button>
           <button
             onClick={() => setMode("upload")}
             className={`tab ${mode === "upload" ? "tab-active" : ""}`}
           >
-            Upload
+            <Trans>Upload</Trans>
           </button>
         </div>
 
@@ -71,7 +74,7 @@ export const SignatureForm = ({ initialValue = "" }) => {
               className="btn btn-primary w-full flex items-center justify-center"
             >
               <FiCheck size="1em" className="mr-2" />
-              Salva
+              <Trans>Save</Trans>
             </button>
           </form>
         )}

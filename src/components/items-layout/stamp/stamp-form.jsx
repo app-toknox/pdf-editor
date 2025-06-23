@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
@@ -30,7 +31,7 @@ export const StampForm = () => {
           onClick={closeEditForm}
         />
         <h2 className="text-xl font-semibold mb-4 text-gray-800">
-          Modifica Timbro
+          <Trans>Edit Stamp</Trans>
         </h2>
         <form
           onSubmit={(e) => {
@@ -57,7 +58,7 @@ export const StampForm = () => {
             className="btn btn-primary w-full flex items-center justify-center"
           >
             <FiCheck size="1em" className="mr-2" />
-            Salva
+            <Trans>Save</Trans>
           </button>
         </form>
       </div>
