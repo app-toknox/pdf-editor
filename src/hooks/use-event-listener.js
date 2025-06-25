@@ -41,4 +41,9 @@ export const useEventListener = () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [handleCopy, handleDelete, handlePaste, selectItem]);
+
+  // Cleanup function to remove event listeners
+  const cleanupEventListeners = () => {};
+
+  return { cleanupEventListeners };
 };

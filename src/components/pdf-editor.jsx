@@ -7,6 +7,7 @@ import { Layout } from "@/components/layout";
 import { NewDraggableItem } from "@/components/new-draggable-item";
 import { PdfExport } from "@/components/pdf-export";
 import { PdfViewer } from "@/components/pdf-viewer";
+import { useCleanup } from "@/hooks/use-cleanup";
 import { useEventListener } from "@/hooks/use-event-listener";
 import { usePDFStore } from "@/hooks/usePdf";
 import { useToolManager } from "@/hooks/useToolManager";
@@ -17,12 +18,15 @@ import { cn } from "@/utils/index";
 
 export const PdfEditor = ({ pdfFile, handleExport, className, locale }) => {
   const { pageNumber, setPDFFile } = usePDFStore();
+  
   i18n.load({
     en: enMessages,
     it: itMessages,
   });
   i18n.activate(locale || "en");
+  
   useEventListener();
+  useCleanup(); // Handle cleanup when component unmounts
 
   useEffect(() => {
     if (pdfFile) {

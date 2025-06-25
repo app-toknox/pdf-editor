@@ -41,5 +41,14 @@ export const usePDFStore = create((set, get) => ({
     set({ numPages, isLoaded: true });
   },
 
+  resetPDFState: () =>
+    set({
+      pageNumber: 1,
+      numPages: null,
+      isLoaded: false,
+      pdfWrapperRef: null,
+      pdfFile: null,
+    }),
+
   options,
 }));

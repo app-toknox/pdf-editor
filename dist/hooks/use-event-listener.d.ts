@@ -1,1 +1,3 @@
-export function useEventListener(): void;
+export function useEventListener(): {
+    cleanupEventListeners: () => void;
+};

@@ -168,4 +168,13 @@ export const useToolManager = create((set, get) => ({
           : item,
       ),
     })),
+
+  resetState: () =>
+    set({
+      items: [],
+      numberItems: [],
+      selectItem: null,
+      copiedItem: null,
+      editingItem: null,
+    }),
 }));
