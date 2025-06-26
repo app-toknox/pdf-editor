@@ -63,11 +63,40 @@ export const useToolManager = create((set, get) => ({
     get().handleSelection(item);
   },
 
+  calculateFontSize: (width, height) => {
+    const minDimension = Math.min(width, height);
+    const minThreshold = 80;
+    const baseFontSize = 12;
+    if (minDimension <= minThreshold) {
+      return baseFontSize;
+    }
+
+    const extraSize = minDimension - minThreshold;
+    const fontSize = baseFontSize + extraSize * 0.4;
+
+    const clampedFontSize = Math.min(35, fontSize);
+
+    return Math.round(clampedFontSize);
+  },
+
   handleResizeStop: (itemId, width, height, x, y) => {
     const currentItems = get().items;
-    const updatedItems = currentItems.map((item) =>
-      item.id === itemId ? { ...item, width, height, x, y } : item,
-    );
+    const updatedItems = currentItems.map((item) => {
+      if (item.id === itemId) {
+        const updateItem = { ...item, width, height, x, y };
+
+        if (item.payload && (item.payload.text || item.payload.textEditable)) {
+          const newFontSize = get().calculateFontSize(width, height);
+          updateItem.payload = {
+            ...updateItem.payload,
+            fontSize: newFontSize,
+          };
+        }
+
+        return updateItem;
+      }
+      return item;
+    });
     set({ items: updatedItems });
   },
 

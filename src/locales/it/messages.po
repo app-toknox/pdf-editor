@@ -13,13 +13,13 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/tool-item.jsx:23
-#~ msgid "{labelKey}"
-#~ msgstr ""
-
-#: src/components/tool-item.jsx:25
+#: src/components/tool-item.jsx:24
 msgid "Data"
 msgstr "Data"
+
+#: src/components/tools-sidebar.jsx:15
+msgid "Drag the elements onto the PDF to add them"
+msgstr "Trascina gli elementi sul PDF per aggiungerli"
 
 #: src/components/items-layout/signature/signature-form.jsx:36
 msgid "Draw"
@@ -37,13 +37,9 @@ msgstr "Modifica Timbro"
 msgid "Enter text"
 msgstr "Inserisci testo"
 
-#: src/components/pdf-export.jsx:98
-msgid "Export PDF"
-msgstr "Esporta PDF"
-
-#: src/components/pdf-editor.jsx:69
-msgid "PDF EDITOR TOKNOX"
-msgstr "EDITOR PDF TOKNOX"
+#: src/components/pdf-editor.jsx:73
+msgid "PDF Editor TokNox"
+msgstr "Editor PDF TokNox"
 
 #: src/components/pdf-pages-sidebar.jsx:13
 msgid "PDF Pages"
@@ -65,28 +61,28 @@ msgstr "Rinomina File"
 msgid "Save"
 msgstr "Salva"
 
+#: src/components/pdf-export.jsx:103
+msgid "Save PDF"
+msgstr "Salva PDF"
+
 #: src/components/items-layout/data/data-form.jsx:42
 msgid "Select Data type"
 msgstr "Seleziona tipo Data"
 
-#: src/components/tool-item.jsx:19
+#: src/components/tool-item.jsx:18
 msgid "Signature"
 msgstr "Firma"
 
-#: src/components/tool-item.jsx:21
+#: src/components/tool-item.jsx:20
 msgid "Stamp"
 msgstr "Timbro"
 
-#: src/components/items-layout/signature/signature-form.jsx:28
-#~ msgid "Testo"
-#~ msgstr "Testo"
-
-#: src/components/tool-item.jsx:23
+#: src/components/tool-item.jsx:22
 #: src/components/items-layout/signature/signature-form.jsx:30
 msgid "Text"
 msgstr "Testo"
 
-#: src/components/tools-sidebar.jsx:12
+#: src/components/tools-sidebar.jsx:13
 msgid "Tools"
 msgstr "Strumenti"
 

@@ -18,13 +18,13 @@ import { cn } from "@/utils/index";
 
 export const PdfEditor = ({ pdfFile, handleExport, className, locale }) => {
   const { pageNumber, setPDFFile } = usePDFStore();
-  
+
   i18n.load({
     en: enMessages,
     it: itMessages,
   });
   i18n.activate(locale || "en");
-  
+
   useEventListener();
   useCleanup(); // Handle cleanup when component unmounts
 
@@ -69,8 +69,8 @@ export const PdfEditor = ({ pdfFile, handleExport, className, locale }) => {
             className,
           )}
         >
-          <h1 className="text-3xl font-semibold text-gray-800 items-center">
-            <Trans>PDF EDITOR TOKNOX</Trans>
+          <h1 className="text-3xl font-light text-gray-800 items-center">
+            <Trans>PDF Editor TokNox</Trans>
           </h1>
 
           {/* Questo è il mio container che sarà poi PDFviewer */}

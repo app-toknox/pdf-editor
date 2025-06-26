@@ -92,14 +92,25 @@ const GeneralItemLayout = ({ item }) => {
             }}
           />
         ) : item.payload.text ? (
-          <div style={{ fontFamily: item.payload.style }} ref={ref}>
+          // gestione del testo
+          <div
+            style={{
+              fontFamily: item.payload.style,
+              fontSize: `${item.payload.fontSize || 12}px`, // usa fontSize dal payload
+            }}
+            ref={ref}
+          >
             {item.payload.text}
           </div>
         ) : item.payload.textEditable ? (
+          //gestione della data
           <div
             ref={ref}
             contentEditable
             suppressContentEditableWarning
+            style={{
+              fontSize: `${item.payload.fontSize || 12}px`, // usa fontSize dal payload
+            }}
             onBlur={(e) => {
               submitEditForm(item.id, { textEditable: e.target.innerText });
             }}

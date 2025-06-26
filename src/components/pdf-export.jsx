@@ -93,9 +93,14 @@ export const PdfExport = ({ pdf, onExport }) => {
               setFileName(`${originalName}-signed`);
               setShowModal(true);
             }}
-            className="px-6 py-2 bg-indigo-700 text-white rounded-md shadow hover:bg-indigo-800 transition duration-200"
+            disabled={items.length === 0}
+            className={`px-6 py-3 text-white rounded-md shadow transition duration-200 w-full ${
+              items.length > 0
+                ? "bg-indigo-900 hover:bg-indigo-950 cursor-pointer"
+                : "bg-gray-400 cursor-not-allowed opacity-60"
+            }`}
           >
-            <Trans>Export PDF</Trans>
+            <Trans>Save PDF</Trans>
           </button>
           {showModal && (
             <DownloadForm

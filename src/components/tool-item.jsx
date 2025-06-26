@@ -35,9 +35,9 @@ export const ToolItem = ({ item, Icon, labelKey }) => {
     >
       <RxDragHandleDots1 className="text-gray-400 h-6 w-6" />
       {Icon && <Icon size="1.25em" className="text-gray-600" />}
-      <span className="text-gray-800 font-medium">{renderLabel()}</span>
+      <span className="text-gray-800 font-light">{renderLabel()}</span>
       {itemCount > 0 && (
-        <div className="ml-auto bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+        <div className="ml-auto text-white text-xs font-bold px-2 py-0.5 rounded-full">
           {itemCount}
         </div>
       )}

@@ -9,6 +9,10 @@ export const NewDraggableItem = ({ item }) => {
     useToolManager();
   return (
     <Rnd
+      maxHeight={125}
+      maxWidth={250}
+      minHeight={85}
+      minWidth={150}
       size={{ width: item.width, height: item.height }}
       position={{ x: item.x, y: item.y }}
       onDragStop={(e, d) => handleDragStop(item.id, d.x, d.y)}

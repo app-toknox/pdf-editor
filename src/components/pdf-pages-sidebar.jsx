@@ -9,7 +9,7 @@ export const PdfPagesSidebar = () => {
 
   return (
     <aside className="w-80 bg-base-200 p-6 border-r border-gray-200 flex flex-col rounded-tr-3xl rounded-br-3xl shadow-md relative overflow-y-scroll ">
-      <h2 className="text-lg font-medium mb-4">
+      <h2 className="text-2xl font-light mb-4">
         <Trans>PDF Pages</Trans>
       </h2>
       <Document
