@@ -22,6 +22,12 @@ export default defineConfig({
       entryRoot: "src",
       outputDir: "dist",
       insertTypesEntry: true,
+      // Genera solo i tipi per l'entry point e le sue dipendenze
+      include: ["src/index.js"],
+      // Esclude file non necessari
+      exclude: ["src/**/*.test.*", "src/**/*.spec.*"],
+      // Non copiare tutti i file, solo quelli necessari
+      copyDtsFiles: false,
     }),
     lingui(),
   ],
@@ -32,7 +38,7 @@ export default defineConfig({
   },
   build: {
     // extract CSS into its own file
-    cssCodeSplit: true,
+    cssCodeSplit: false, // Un singolo file CSS per una libreria
     lib: {
       entry: path.resolve(__dirname, "src/index.js"),
       name: "PdfEditor",

@@ -12,18 +12,24 @@
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    
+    // 4. Risoluzione dei percorsi
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
 
-
+  // Include solo l'entry point - il plugin dts seguirà le dipendenze
   "include": [
-    "src/**/*.js",
-    "src/**/*.jsx"
+    "src/index.js"
   ],
-
 
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "**/*.test.*",
+    "**/*.spec.*"
   ]
 }
