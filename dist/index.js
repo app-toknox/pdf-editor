@@ -1479,7 +1479,7 @@ const VC = ({
     "I18nProvider rendered `null`. A call to `i18n.activate` needs to happen in order for translations to be activated and for the I18nProvider to render.This is not an error but an informational message logged only in development."
   ), null);
 };
-function Ge(n) {
+function Be(n) {
   let t;
   process.env.NODE_ENV !== "production" && (t = `Trans component was rendered without I18nProvider.
 Attempted to render message: ${n.message} id: ${n.id}. Make sure this component is rendered inside a I18nProvider.`);
@@ -1859,11 +1859,11 @@ function eg(n) {
 function ne(n) {
   tg >= $p.WARNINGS && console.log(`Warning: ${n}`);
 }
-function Be(n) {
+function je(n) {
   throw new Error(n);
 }
 function mr(n, t) {
-  n || Be(t);
+  n || je(t);
 }
 function JC(n) {
   switch (n == null ? void 0 : n.protocol) {
@@ -1949,7 +1949,7 @@ class Sl extends Qo {
   }
 }
 function ux(n) {
-  (typeof n != "object" || (n == null ? void 0 : n.length) === void 0) && Be("Invalid argument for bytesToString");
+  (typeof n != "object" || (n == null ? void 0 : n.length) === void 0) && je("Invalid argument for bytesToString");
   const t = n.length, e = 8192;
   if (t < e)
     return String.fromCharCode.apply(null, n);
@@ -1961,7 +1961,7 @@ function ux(n) {
   return r.join("");
 }
 function ng(n) {
-  typeof n != "string" && Be("Invalid argument for stringToBytes");
+  typeof n != "string" && je("Invalid argument for stringToBytes");
   const t = n.length, e = new Uint8Array(t);
   for (let r = 0; r < t; ++r)
     e[r] = n.charCodeAt(r) & 255;
@@ -2359,7 +2359,7 @@ function hT(n) {
   }
   t.remove();
 }
-function qe(n) {
+function Ge(n) {
   const {
     a: t,
     b: e,
@@ -3996,13 +3996,13 @@ Cr = new WeakMap(), Bi = new WeakMap(), ui = new WeakMap(), dc = new WeakMap(), 
   });
 }, O(Qr, mo, null), Gt(Qr, "_l10n", null);
 let dp = Qr;
-var Ca, di, He, pc, Ta, Dr, Pa, yo, Ou, ka, bo, Mu, Ra, ms, Hi, gc, vc, jn, Iu, Wp, ee, jv, _u, Wv, Uv, Fx, Dx, Hv, Vv, qv, Ox, Gv, Mx, Ix, _x, Xv, Ih;
+var Ca, di, Ve, pc, Ta, Dr, Pa, yo, Ou, ka, bo, Mu, Ra, ms, Hi, gc, vc, jn, Iu, Wp, ee, jv, _u, Wv, Uv, Fx, Dx, Hv, Vv, qv, Ox, Gv, Mx, Ix, _x, Xv, Ih;
 const ke = class ke {
   constructor(t) {
     O(this, ee);
     O(this, Ca, null);
     O(this, di, null);
-    O(this, He, null);
+    O(this, Ve, null);
     O(this, pc, !1);
     O(this, Ta, !1);
     O(this, Dr, null);
@@ -4099,7 +4099,7 @@ const ke = class ke {
     return !1;
   }
   static paste(t, e) {
-    Be("Not implemented");
+    je("Not implemented");
   }
   get propertiesToUpdate() {
     return [];
@@ -4291,16 +4291,16 @@ const ke = class ke {
   }
   altTextFinish() {
     var t;
-    (t = d(this, He)) == null || t.finish();
+    (t = d(this, Ve)) == null || t.finish();
   }
   addEditToolbar() {
     return At(this, null, function* () {
-      return this._editToolbar || d(this, Ra) ? this._editToolbar : (this._editToolbar = new Fv(this), this.div.append(this._editToolbar.render()), d(this, He) && (yield this._editToolbar.addAltText(d(this, He))), this._editToolbar);
+      return this._editToolbar || d(this, Ra) ? this._editToolbar : (this._editToolbar = new Fv(this), this.div.append(this._editToolbar.render()), d(this, Ve) && (yield this._editToolbar.addAltText(d(this, Ve))), this._editToolbar);
     });
   }
   removeEditToolbar() {
     var t;
-    this._editToolbar && (this._editToolbar.remove(), this._editToolbar = null, (t = d(this, He)) == null || t.destroy());
+    this._editToolbar && (this._editToolbar.remove(), this._editToolbar = null, (t = d(this, Ve)) == null || t.destroy());
   }
   addContainer(t) {
     var r;
@@ -4312,36 +4312,36 @@ const ke = class ke {
   }
   addAltTextButton() {
     return At(this, null, function* () {
-      d(this, He) || (dp.initialize(ke._l10n), C(this, He, new dp(this)), d(this, Ca) && (d(this, He).data = d(this, Ca), C(this, Ca, null)), yield this.addEditToolbar());
+      d(this, Ve) || (dp.initialize(ke._l10n), C(this, Ve, new dp(this)), d(this, Ca) && (d(this, Ve).data = d(this, Ca), C(this, Ca, null)), yield this.addEditToolbar());
     });
   }
   get altTextData() {
     var t;
-    return (t = d(this, He)) == null ? void 0 : t.data;
+    return (t = d(this, Ve)) == null ? void 0 : t.data;
   }
   set altTextData(t) {
-    d(this, He) && (d(this, He).data = t);
+    d(this, Ve) && (d(this, Ve).data = t);
   }
   get guessedAltText() {
     var t;
-    return (t = d(this, He)) == null ? void 0 : t.guessedText;
+    return (t = d(this, Ve)) == null ? void 0 : t.guessedText;
   }
   setGuessedAltText(t) {
     return At(this, null, function* () {
       var e;
-      yield (e = d(this, He)) == null ? void 0 : e.setGuessedText(t);
+      yield (e = d(this, Ve)) == null ? void 0 : e.setGuessedText(t);
     });
   }
   serializeAltText(t) {
     var e;
-    return (e = d(this, He)) == null ? void 0 : e.serialize(t);
+    return (e = d(this, Ve)) == null ? void 0 : e.serialize(t);
   }
   hasAltText() {
-    return !!d(this, He) && !d(this, He).isEmpty();
+    return !!d(this, Ve) && !d(this, Ve).isEmpty();
   }
   hasAltTextData() {
     var t, e;
-    return (e = (t = d(this, He)) == null ? void 0 : t.hasData()) != null ? e : !1;
+    return (e = (t = d(this, Ve)) == null ? void 0 : t.hasData()) != null ? e : !1;
   }
   render() {
     this.div = document.createElement("div"), this.div.setAttribute("data-editor-rotation", (360 - this.rotation) % 360), this.div.className = this.name, this.div.setAttribute("id", this.id), this.div.tabIndex = d(this, pc) ? -1 : 0, this._isVisible || this.div.classList.add("hidden"), this.setInForeground(), k(this, ee, Gv).call(this);
@@ -4441,7 +4441,7 @@ const ke = class ke {
     };
   }
   serialize(t = !1, e = null) {
-    Be("An editor must be serializable");
+    je("An editor must be serializable");
   }
   static deserialize(t, e, r) {
     return At(this, null, function* () {
@@ -4543,13 +4543,13 @@ const ke = class ke {
       });
       return;
     }
-    (e = this._editToolbar) == null || e.show(), (r = d(this, He)) == null || r.toggleAltTextBadge(!1);
+    (e = this._editToolbar) == null || e.show(), (r = d(this, Ve)) == null || r.toggleAltTextBadge(!1);
   }
   unselect() {
     var t, e, r, i, s;
     (t = d(this, Dr)) == null || t.classList.add("hidden"), (e = this.div) == null || e.classList.remove("selectedEditor"), (r = this.div) != null && r.contains(document.activeElement) && this._uiManager.currentLayer.div.focus({
       preventScroll: !0
-    }), (i = this._editToolbar) == null || i.hide(), (s = d(this, He)) == null || s.toggleAltTextBadge(!0);
+    }), (i = this._editToolbar) == null || i.hide(), (s = d(this, Ve)) == null || s.toggleAltTextBadge(!0);
   }
   updateParams(t, e) {
   }
@@ -4638,7 +4638,7 @@ const ke = class ke {
     (e == null ? void 0 : e.nodeName) === "DIV" && e.classList.contains("annotationContent") && e.remove();
   }
 };
-Ca = new WeakMap(), di = new WeakMap(), He = new WeakMap(), pc = new WeakMap(), Ta = new WeakMap(), Dr = new WeakMap(), Pa = new WeakMap(), yo = new WeakMap(), Ou = new WeakMap(), ka = new WeakMap(), bo = new WeakMap(), Mu = new WeakMap(), Ra = new WeakMap(), ms = new WeakMap(), Hi = new WeakMap(), gc = new WeakMap(), vc = new WeakMap(), jn = new WeakMap(), Iu = new WeakMap(), Wp = new WeakMap(), ee = new WeakSet(), jv = function([t, e], r, i) {
+Ca = new WeakMap(), di = new WeakMap(), Ve = new WeakMap(), pc = new WeakMap(), Ta = new WeakMap(), Dr = new WeakMap(), Pa = new WeakMap(), yo = new WeakMap(), Ou = new WeakMap(), ka = new WeakMap(), bo = new WeakMap(), Mu = new WeakMap(), Ra = new WeakMap(), ms = new WeakMap(), Hi = new WeakMap(), gc = new WeakMap(), vc = new WeakMap(), jn = new WeakMap(), Iu = new WeakMap(), Wp = new WeakMap(), ee = new WeakSet(), jv = function([t, e], r, i) {
   [r, i] = this.screenToPageTranslation(r, i), this.x += r / t, this.y += i / e, this.fixAndSetPosition();
 }, _u = new WeakSet(), Wv = function(t, e, r) {
   switch (r) {
@@ -4688,7 +4688,7 @@ Ca = new WeakMap(), di = new WeakMap(), He = new WeakMap(), pc = new WeakMap(), 
   } = tn.platform;
   if (e.button !== 0 || e.ctrlKey && r)
     return;
-  (g = d(this, He)) == null || g.toggle(!1);
+  (g = d(this, Ve)) == null || g.toggle(!1);
   const i = this._isDraggable;
   this._isDraggable = !1;
   const s = new AbortController(), o = this._uiManager.combinedSignal(s);
@@ -4703,7 +4703,7 @@ Ca = new WeakMap(), di = new WeakMap(), He = new WeakMap(), pc = new WeakMap(), 
   this.div.style.cursor = this.parent.div.style.cursor = window.getComputedStyle(e.target).cursor;
   const p = () => {
     var v;
-    s.abort(), this.parent.togglePointerEvents(!0), (v = d(this, He)) == null || v.toggle(!0), this._isDraggable = i, this.parent.div.style.cursor = u, this.div.style.cursor = f, k(this, ee, Hv).call(this, a, l, c, h);
+    s.abort(), this.parent.togglePointerEvents(!0), (v = d(this, Ve)) == null || v.toggle(!0), this._isDraggable = i, this.parent.div.style.cursor = u, this.div.style.cursor = f, k(this, ee, Hv).call(this, a, l, c, h);
   };
   window.addEventListener("pointerup", p, {
     signal: o
@@ -5019,7 +5019,7 @@ class zx extends Em {
     });
   }
   get print() {
-    Be("Should not call PrintAnnotationStorage.print");
+    je("Should not call PrintAnnotationStorage.print");
   }
   get serializable() {
     return d(this, Nu);
@@ -5077,7 +5077,7 @@ class vT {
           }
           return;
         }
-        Be("Not implemented: loadSystemFont without the Font Loading API.");
+        je("Not implemented: loadSystemFont without the Font Loading API.");
       }
     });
   }
@@ -5326,7 +5326,7 @@ class Bx {
     t.canvas.width = 0, t.canvas.height = 0, t.canvas = null, t.context = null;
   }
   _createCanvas(t, e) {
-    Be("Abstract method `_createCanvas` called.");
+    je("Abstract method `_createCanvas` called.");
   }
 }
 Lu = new WeakMap();
@@ -5370,7 +5370,7 @@ class jx {
   }
   _fetch(t) {
     return At(this, null, function* () {
-      Be("Abstract method `_fetch` called.");
+      je("Abstract method `_fetch` called.");
     });
   }
 }
@@ -5594,7 +5594,7 @@ class Vx {
   }
   _fetch(t) {
     return At(this, null, function* () {
-      Be("Abstract method `_fetch` called.");
+      je("Abstract method `_fetch` called.");
     });
   }
 }
@@ -5685,7 +5685,7 @@ function Qv(n, t) {
 }
 class Cm {
   getPattern() {
-    Be("Abstract method `getPattern` called.");
+    je("Abstract method `getPattern` called.");
   }
 }
 class ET extends Cm {
@@ -5702,7 +5702,7 @@ class ET extends Cm {
   getPattern(t, e, r, i) {
     let s;
     if (i === $r.STROKE || i === $r.FILL) {
-      const o = e.current.getClippedPathBoundingBox(i, qe(t)) || [0, 0, 0, 0], a = Math.ceil(o[2] - o[0]) || 1, l = Math.ceil(o[3] - o[1]) || 1, c = e.cachedCanvases.getCanvas("pattern", a, l), h = c.context;
+      const o = e.current.getClippedPathBoundingBox(i, Ge(t)) || [0, 0, 0, 0], a = Math.ceil(o[2] - o[0]) || 1, l = Math.ceil(o[3] - o[1]) || 1, c = e.cachedCanvases.getCanvas("pattern", a, l), h = c.context;
       h.clearRect(0, 0, h.canvas.width, h.canvas.height), h.beginPath(), h.rect(0, 0, h.canvas.width, h.canvas.height), h.translate(-o[0], -o[1]), r = Mt.transform(r, [1, 0, 0, 1, o[0], o[1]]), h.transform(...e.baseTransform), this.matrix && h.transform(...this.matrix), Qv(h, this._bbox), h.fillStyle = this._createGradient(h), h.fill(), s = t.createPattern(c.canvas, "no-repeat");
       const u = new DOMMatrix(r);
       s.setTransform(u);
@@ -5788,7 +5788,7 @@ class TT extends Cm {
     Qv(t, this._bbox);
     let s;
     if (i === $r.SHADING)
-      s = Mt.singularValueDecompose2dScale(qe(t));
+      s = Mt.singularValueDecompose2dScale(Ge(t));
     else if (s = Mt.singularValueDecompose2dScale(e.baseTransform), this.matrix) {
       const a = Mt.singularValueDecompose2dScale(this.matrix);
       s = [s[0] * a[0], s[1] * a[1]];
@@ -5839,7 +5839,7 @@ const zy = {
     const T = Math.ceil(l * x), I = Math.ceil(c * w), B = Math.ceil(g * x), F = Math.ceil(v * w);
     T >= B ? S = l : P = !0, I >= F ? E = c : A = !0;
     const z = this.getSizeAndScale(S, this.ctx.canvas.width, x), _ = this.getSizeAndScale(E, this.ctx.canvas.height, w), U = t.cachedCanvases.getCanvas("pattern", z.size, _.size), X = U.context, j = a.createCanvasGraphics(X);
-    if (j.groupLevel = t.groupLevel, this.setFillAndStrokeStyleToContext(j, i, o), X.translate(-z.scale * h, -_.scale * u), j.transform(z.scale, 0, 0, _.scale, 0, 0), X.save(), this.clipBbox(j, h, u, f, p), j.baseTransform = qe(j.ctx), j.executeOperatorList(r), j.endDrawing(), X.restore(), P || A) {
+    if (j.groupLevel = t.groupLevel, this.setFillAndStrokeStyleToContext(j, i, o), X.translate(-z.scale * h, -_.scale * u), j.transform(z.scale, 0, 0, _.scale, 0, 0), X.save(), this.clipBbox(j, h, u, f, p), j.baseTransform = Ge(j.ctx), j.executeOperatorList(r), j.endDrawing(), X.restore(), P || A) {
       const W = U.canvas;
       P && (S = l), A && (E = c);
       const V = this.getSizeAndScale(S, this.ctx.canvas.width, x), nt = this.getSizeAndScale(E, this.ctx.canvas.height, w), q = V.size, J = nt.size, ht = t.cachedCanvases.getCanvas("pattern-workaround", q, J), it = ht.context, ct = P ? Math.floor(g / l) : 0, yt = A ? Math.floor(v / c) : 0;
@@ -5872,7 +5872,7 @@ const zy = {
   }
   clipBbox(t, e, r, i, s) {
     const o = i - e, a = s - r;
-    t.ctx.rect(e, r, o, a), t.current.updateRectMinMax(qe(t.ctx), [e, r, i, s]), t.clip(), t.endPath();
+    t.ctx.rect(e, r, o, a), t.current.updateRectMinMax(Ge(t.ctx), [e, r, i, s]), t.clip(), t.endPath();
   }
   setFillAndStrokeStyleToContext(t, e, r) {
     const i = t.ctx, s = t.current;
@@ -5986,7 +5986,7 @@ class OT {
   }
 }
 function Zd(n, t, e, r, i, s, o, a, l, c) {
-  const [h, u, f, p, g, v] = qe(n);
+  const [h, u, f, p, g, v] = Ge(n);
   if (u === 0 && f === 0) {
     const x = o * h + g, w = Math.round(x), S = a * p + v, E = Math.round(S), P = (o + l) * h + g, A = Math.abs(Math.round(P) - w) || 1, T = (a + c) * p + v, I = Math.abs(Math.round(T) - E) || 1;
     return n.setTransform(Math.sign(h), 0, 0, Math.sign(p), w, E), n.drawImage(t, e, r, i, s, 0, 0, A, I), n.setTransform(h, u, f, p, g, v), [A, I];
@@ -6083,7 +6083,7 @@ class Hy {
   getPathBoundingBox(t = $r.FILL, e = null) {
     const r = [this.minX, this.minY, this.maxX, this.maxY];
     if (t === $r.STROKE) {
-      e || Be("Stroke bounding box must include transform.");
+      e || je("Stroke bounding box must include transform.");
       const i = Mt.singularValueDecompose2dScale(e), s = i[0] * this.lineWidth / 2, o = i[1] * this.lineWidth / 2;
       r[0] -= s, r[1] -= o, r[2] += s, r[3] += o;
     }
@@ -6208,9 +6208,9 @@ const by = class by {
     const s = this.ctx.canvas.width, o = this.ctx.canvas.height, a = this.ctx.fillStyle;
     if (this.ctx.fillStyle = i || "#ffffff", this.ctx.fillRect(0, 0, s, o), this.ctx.fillStyle = a, r) {
       const l = this.cachedCanvases.getCanvas("transparent", s, o);
-      this.compositeCtx = this.ctx, this.transparentCanvas = l.canvas, this.ctx = l.context, this.ctx.save(), this.ctx.transform(...qe(this.compositeCtx));
+      this.compositeCtx = this.ctx, this.transparentCanvas = l.canvas, this.ctx = l.context, this.ctx.save(), this.ctx.transform(...Ge(this.compositeCtx));
     }
-    this.ctx.save(), Jd(this.ctx), t && (this.ctx.transform(...t), this.outputScaleX = t[0], this.outputScaleY = t[0]), this.ctx.transform(...e.transform), this.viewportScale = e.scale, this.baseTransform = qe(this.ctx);
+    this.ctx.save(), Jd(this.ctx), t && (this.ctx.transform(...t), this.outputScaleX = t[0], this.outputScaleY = t[0]), this.ctx.transform(...e.transform), this.viewportScale = e.scale, this.baseTransform = Ge(this.ctx);
   }
   executeOperatorList(t, e, r, i) {
     const s = t.argsArray, o = t.fnArray;
@@ -6269,7 +6269,7 @@ const by = class by {
     const e = this.ctx, {
       width: r,
       height: i
-    } = t, s = this.current.fillColor, o = this.current.patternFill, a = qe(e);
+    } = t, s = this.current.fillColor, o = this.current.patternFill, a = Ge(e);
     let l, c, h, u;
     if ((t.bitmap || t.data) && t.count > 1) {
       const T = t.bitmap || t.data.buffer;
@@ -6289,7 +6289,7 @@ const by = class by {
     let f = Mt.transform(a, [1 / r, 0, 0, -1 / i, 0, 0]);
     f = Mt.transform(f, [1, 0, 0, 1, 0, -i]);
     const [p, g, v, y] = Mt.getAxialAlignedBoundingBox([0, 0, r, i], f), m = Math.round(v - p) || 1, x = Math.round(y - g) || 1, w = this.cachedCanvases.getCanvas("fillCanvas", m, x), S = w.context, E = p, P = g;
-    S.translate(-E, -P), S.transform(...f), h || (h = this._scaleImage(u.canvas, os(S)), h = h.img, l && o && l.set(c, h)), S.imageSmoothingEnabled = Gy(qe(S), t.interpolate), Zd(S, h, 0, 0, h.width, h.height, 0, 0, r, i), S.globalCompositeOperation = "source-in";
+    S.translate(-E, -P), S.transform(...f), h || (h = this._scaleImage(u.canvas, os(S)), h = h.img, l && o && l.set(c, h)), S.imageSmoothingEnabled = Gy(Ge(S), t.interpolate), Zd(S, h, 0, 0, h.width, h.height, 0, 0, r, i), S.globalCompositeOperation = "source-in";
     const A = Mt.transform(os(S), [1, 0, 0, 1, -E, -P]);
     return S.fillStyle = o ? s.getPattern(e, this, A, $r.FILL) : s, S.fillRect(0, 0, r, i), l && !o && (this.cachedCanvases.delete("fillCanvas"), l.set(c, w.canvas)), {
       canvas: w.canvas,
@@ -6374,7 +6374,7 @@ const by = class by {
     const t = this.ctx.canvas.width, e = this.ctx.canvas.height, r = "smaskGroupAt" + this.groupLevel, i = this.cachedCanvases.getCanvas(r, t, e);
     this.suspendedCtx = this.ctx, this.ctx = i.context;
     const s = this.ctx;
-    s.setTransform(...qe(this.suspendedCtx)), bh(this.suspendedCtx, s), DT(s, this.suspendedCtx), this.setGState([["BM", "source-over"], ["ca", 1], ["CA", 1]]);
+    s.setTransform(...Ge(this.suspendedCtx)), bh(this.suspendedCtx, s), DT(s, this.suspendedCtx), this.setGState([["BM", "source-over"], ["ca", 1], ["CA", 1]]);
   }
   endSMaskMode() {
     if (!this.inSMaskMode)
@@ -6423,7 +6423,7 @@ const by = class by {
   constructPath(t, e, r) {
     const i = this.ctx, s = this.current;
     let o = s.x, a = s.y, l, c;
-    const h = qe(i), u = h[0] === 0 && h[3] === 0 || h[1] === 0 && h[2] === 0, f = u ? r.slice(0) : null;
+    const h = Ge(i), u = h[0] === 0 && h[3] === 0 || h[1] === 0 && h[2] === 0, f = u ? r.slice(0) : null;
     for (let p = 0, g = 0, v = t.length; p < v; p++)
       switch (t[p] | 0) {
         case ai.rectangle:
@@ -6555,7 +6555,7 @@ const by = class by {
     const s = this.ctx, o = this.current, a = o.font, l = o.textRenderingMode, c = o.fontSize / o.fontSizeScale, h = l & zr.FILL_STROKE_MASK, u = !!(l & zr.ADD_TO_PATH_FLAG), f = o.patternFill && !a.missingFile;
     let p;
     (a.disableFontFace || u || f) && (p = a.getPathGenerator(this.commonObjs, t)), a.disableFontFace || f ? (s.save(), s.translate(e, r), s.beginPath(), p(s, c), i && s.setTransform(...i), (h === zr.FILL || h === zr.FILL_STROKE) && s.fill(), (h === zr.STROKE || h === zr.FILL_STROKE) && s.stroke(), s.restore()) : ((h === zr.FILL || h === zr.FILL_STROKE) && s.fillText(t, e, r), (h === zr.STROKE || h === zr.FILL_STROKE) && s.strokeText(t, e, r)), u && (this.pendingTextPaths || (this.pendingTextPaths = [])).push({
-      transform: qe(s),
+      transform: Ge(s),
       x: e,
       y: r,
       fontSize: c,
@@ -6589,7 +6589,7 @@ const by = class by {
     if (e.patternFill) {
       s.save();
       const P = e.fillColor.getPattern(s, this, os(s), $r.FILL);
-      m = qe(s), s.restore(), s.fillStyle = P;
+      m = Ge(s), s.restore(), s.fillStyle = P;
     }
     let x = e.lineWidth;
     const w = e.textMatrixScale;
@@ -6668,7 +6668,7 @@ const by = class by {
   getColorN_Pattern(t) {
     let e;
     if (t[0] === "TilingPattern") {
-      const r = t[1], i = this.baseTransform || qe(this.ctx), s = {
+      const r = t[1], i = this.baseTransform || Ge(this.ctx), s = {
         createCanvasGraphics: (o) => new by(o, this.commonObjs, this.objs, this.canvasFactory, this.filterFactory, {
           optionalContentConfig: this.optionalContentConfig,
           markedContentStack: this.markedContentStack
@@ -6720,15 +6720,15 @@ const by = class by {
     this.compose(this.current.getClippedPathBoundingBox()), this.restore();
   }
   beginInlineImage() {
-    Be("Should not call beginInlineImage");
+    je("Should not call beginInlineImage");
   }
   beginImageData() {
-    Be("Should not call beginImageData");
+    je("Should not call beginImageData");
   }
   paintFormXObjectBegin(t, e) {
-    if (this.contentVisible && (this.save(), this.baseTransformStack.push(this.baseTransform), t && this.transform(...t), this.baseTransform = qe(this.ctx), e)) {
+    if (this.contentVisible && (this.save(), this.baseTransformStack.push(this.baseTransform), t && this.transform(...t), this.baseTransform = Ge(this.ctx), e)) {
       const r = e[2] - e[0], i = e[3] - e[1];
-      this.ctx.rect(e[0], e[1], r, i), this.current.updateRectMinMax(qe(this.ctx), e), this.clip(), this.endPath();
+      this.ctx.rect(e[0], e[1], r, i), this.current.updateRectMinMax(Ge(this.ctx), e), this.clip(), this.endPath();
     }
   }
   paintFormXObjectEnd() {
@@ -6740,10 +6740,10 @@ const by = class by {
     this.save(), this.inSMaskMode && (this.endSMaskMode(), this.current.activeSMask = null);
     const e = this.ctx;
     t.isolated || eg("TODO: Support non-isolated groups."), t.knockout && ne("Knockout groups not supported.");
-    const r = qe(e);
+    const r = Ge(e);
     if (t.matrix && e.transform(...t.matrix), !t.bbox)
       throw new Error("Bounding box is required.");
-    let i = Mt.getAxialAlignedBoundingBox(t.bbox, qe(e));
+    let i = Mt.getAxialAlignedBoundingBox(t.bbox, Ge(e));
     const s = [0, 0, e.canvas.width, e.canvas.height];
     i = Mt.intersect(i, s) || [0, 0, 0, 0];
     const o = Math.floor(i[0]), a = Math.floor(i[1]), l = Math.max(Math.ceil(i[2]) - o, 1), c = Math.max(Math.ceil(i[3]) - a, 1);
@@ -6771,7 +6771,7 @@ const by = class by {
       this.tempSMask = this.smaskStack.pop(), this.restore();
     else {
       this.ctx.restore();
-      const i = qe(this.ctx);
+      const i = Ge(this.ctx);
       this.restore(), this.ctx.save(), this.ctx.setTransform(...i);
       const s = Mt.getAxialAlignedBoundingBox([0, 0, e.canvas.width, e.canvas.height], i);
       this.ctx.drawImage(e.canvas, 0, 0), this.ctx.restore(), this.compose(s);
@@ -6782,7 +6782,7 @@ const by = class by {
       const o = e[2] - e[0], a = e[3] - e[1];
       if (s && this.annotationCanvasMap) {
         r = r.slice(), r[4] -= e[0], r[5] -= e[1], e = e.slice(), e[0] = e[1] = 0, e[2] = o, e[3] = a;
-        const [l, c] = Mt.singularValueDecompose2dScale(qe(this.ctx)), {
+        const [l, c] = Mt.singularValueDecompose2dScale(Ge(this.ctx)), {
           viewportScale: h
         } = this, u = Math.ceil(o * this.outputScaleX * h), f = Math.ceil(a * this.outputScaleY * h);
         this.annotationCanvas = this.canvasFactory.create(u, f);
@@ -6818,7 +6818,7 @@ const by = class by {
     t = this.getObject(t.data, t);
     const a = this.ctx;
     a.save();
-    const l = qe(a);
+    const l = Ge(a);
     a.transform(e, r, i, s, 0, 0);
     const c = this._createMaskCanvas(t);
     a.setTransform(1, 0, 0, 1, c.offsetX - l[4], c.offsetY - l[5]);
@@ -6908,7 +6908,7 @@ const by = class by {
       Vy(l, t), s = this.applyTransferMapsToCanvas(l);
     }
     const o = this._scaleImage(s, os(i));
-    i.imageSmoothingEnabled = Gy(qe(i), t.interpolate), Zd(i, o.img, 0, 0, o.paintWidth, o.paintHeight, 0, -r, e, r), this.compose(), this.restore();
+    i.imageSmoothingEnabled = Gy(Ge(i), t.interpolate), Zd(i, o.img, 0, 0, o.paintWidth, o.paintHeight, 0, -r, e, r), this.compose(), this.restore();
   }
   paintInlineImageXObjectGroup(t, e) {
     if (!this.contentVisible)
@@ -6959,7 +6959,7 @@ const by = class by {
   }
   getSinglePixelWidth() {
     if (!this._cachedGetSinglePixelWidth) {
-      const t = qe(this.ctx);
+      const t = Ge(this.ctx);
       if (t[1] === 0 && t[2] === 0)
         this._cachedGetSinglePixelWidth = 1 / Math.min(Math.abs(t[0]), Math.abs(t[3]));
       else {
@@ -7082,7 +7082,7 @@ const Qd = {
   START_COMPLETE: 8
 };
 function vn(n) {
-  switch (n instanceof Error || typeof n == "object" && n !== null || Be('wrapReason: Expected "reason" to be a (possibly cloned) Error.'), n.name) {
+  switch (n instanceof Error || typeof n == "object" && n !== null || je('wrapReason: Expected "reason" to be a (possibly cloned) Error.'), n.name) {
     case "AbortException":
       return new Sl(n.message);
     case "MissingPDFException":
@@ -7435,7 +7435,7 @@ class zT {
     return d(this, Wu) ? (e == null ? void 0 : e.viewState) !== "OFF" : d(this, Uu) ? (t == null ? void 0 : t.printState) !== "OFF" : !0;
   }
   _setVisible(t, e, r = !1) {
-    t !== Vl && Be("Internal method `_setVisible` called."), C(this, Hu, r), C(this, bc, e);
+    t !== Vl && je("Internal method `_setVisible` called."), C(this, Hu, r), C(this, bc, e);
   }
 }
 Wu = new WeakMap(), Uu = new WeakMap(), Hu = new WeakMap(), bc = new WeakMap();
@@ -9027,7 +9027,7 @@ let o0 = Gp, o1 = class {
     this._readyCapability.resolve();
   }
   requestDataRange(t, e) {
-    Be("Abstract method PDFDataRangeTransport.requestDataRange");
+    je("Abstract method PDFDataRangeTransport.requestDataRange");
   }
   abort() {
   }
@@ -9515,7 +9515,7 @@ class yP {
 }
 xs = new WeakMap(), Xp = new WeakMap();
 var Kp, Wa, Ua, Pc, Nf, kc, Lf;
-const je = class je {
+const We = class We {
   constructor({
     name: t = null,
     port: e = null,
@@ -9524,9 +9524,9 @@ const je = class je {
     O(this, Pc);
     var i;
     if (this.name = t, this.destroyed = !1, this.verbosity = r, this._readyCapability = Promise.withResolvers(), this._port = null, this._webWorker = null, this._messageHandler = null, e) {
-      if ((i = d(je, Ua)) != null && i.has(e))
+      if ((i = d(We, Ua)) != null && i.has(e))
         throw new Error("Cannot use more than one PDFWorker per port.");
-      (d(je, Ua) || C(je, Ua, /* @__PURE__ */ new WeakMap())).set(e, this), this._initializeFromPort(e);
+      (d(We, Ua) || C(We, Ua, /* @__PURE__ */ new WeakMap())).set(e, this), this._initializeFromPort(e);
       return;
     }
     this._initialize();
@@ -9545,15 +9545,15 @@ const je = class je {
     }), k(this, Pc, Nf).call(this);
   }
   _initialize() {
-    if (d(je, Wa) || d(je, kc, Lf)) {
+    if (d(We, Wa) || d(We, kc, Lf)) {
       this._setupFakeWorker();
       return;
     }
     let {
       workerSrc: t
-    } = je;
+    } = We;
     try {
-      je._isSameOrigin(window.location.href, t) || (t = je._createCDNWrapper(new URL(t, window.location).href));
+      We._isSameOrigin(window.location.href, t) || (t = We._createCDNWrapper(new URL(t, window.location).href));
       const e = new Worker(t, {
         type: "module"
       }), r = new zh("main", "worker", e), i = () => {
@@ -9592,14 +9592,14 @@ const je = class je {
     this._setupFakeWorker();
   }
   _setupFakeWorker() {
-    d(je, Wa) || (ne("Setting up fake worker."), C(je, Wa, !0)), je._setupFakeWorkerGlobal.then((t) => {
+    d(We, Wa) || (ne("Setting up fake worker."), C(We, Wa, !0)), We._setupFakeWorkerGlobal.then((t) => {
       if (this.destroyed) {
         this._readyCapability.reject(new Error("Worker was destroyed"));
         return;
       }
       const e = new yP();
       this._port = e;
-      const r = `fake${Zr(je, Kp)._++}`, i = new zh(r + "_worker", r, e);
+      const r = `fake${Zr(We, Kp)._++}`, i = new zh(r + "_worker", r, e);
       t.setup(i, e), this._messageHandler = new zh(r, r + "_worker", e), k(this, Pc, Nf).call(this);
     }).catch((t) => {
       this._readyCapability.reject(new Error(`Setting up fake worker failed: "${t.message}".`));
@@ -9607,7 +9607,7 @@ const je = class je {
   }
   destroy() {
     var t;
-    this.destroyed = !0, this._webWorker && (this._webWorker.terminate(), this._webWorker = null), (t = d(je, Ua)) == null || t.delete(this._port), this._port = null, this._messageHandler && (this._messageHandler.destroy(), this._messageHandler = null);
+    this.destroyed = !0, this._webWorker && (this._webWorker.terminate(), this._webWorker = null), (t = d(We, Ua)) == null || t.delete(this._port), this._port = null, this._messageHandler && (this._messageHandler.destroy(), this._messageHandler = null);
   }
   static fromPort(t) {
     var r;
@@ -9619,7 +9619,7 @@ const je = class je {
         throw new Error("PDFWorker.fromPort - the worker is being destroyed.\nPlease remember to await `PDFDocumentLoadingTask.destroy()`-calls.");
       return e;
     }
-    return new je(t);
+    return new We(t);
   }
   static get workerSrc() {
     if (Ls.workerSrc)
@@ -9646,7 +9646,7 @@ Kp = new WeakMap(), Wa = new WeakMap(), Ua = new WeakMap(), Pc = new WeakSet(), 
   } catch (e) {
     return null;
   }
-}, O(je, kc), O(je, Kp, 0), O(je, Wa, !1), O(je, Ua), qr && (C(je, Wa, !0), Ls.workerSrc || (Ls.workerSrc = "./pdf.worker.mjs")), je._isSameOrigin = (t, e) => {
+}, O(We, kc), O(We, Kp, 0), O(We, Wa, !1), O(We, Ua), qr && (C(We, Wa, !0), Ls.workerSrc || (Ls.workerSrc = "./pdf.worker.mjs")), We._isSameOrigin = (t, e) => {
   let r;
   try {
     if (r = new URL(t), !r.origin || r.origin === "null")
@@ -9656,13 +9656,13 @@ Kp = new WeakMap(), Wa = new WeakMap(), Ua = new WeakMap(), Pc = new WeakSet(), 
   }
   const i = new URL(e, r);
   return r.origin === i.origin;
-}, je._createCDNWrapper = (t) => {
+}, We._createCDNWrapper = (t) => {
   const e = `await import("${t}");`;
   return URL.createObjectURL(new Blob([e], {
     type: "text/javascript"
   }));
 };
-let $l = je;
+let $l = We;
 var Ss, qi, Rc, Fc, Gi, Ha, Bh;
 class bP {
   constructor(t, e, r, i, s) {
@@ -9835,7 +9835,7 @@ class bP {
           i = new Pv(r.message, r.details);
           break;
         default:
-          Be("DocException - expected a valid Error.");
+          je("DocException - expected a valid Error.");
       }
       e._capability.reject(i);
     }), t.on("PasswordRequest", (r) => {
@@ -10319,7 +10319,7 @@ class AP {
     return this._createSVG(t);
   }
   _createSVG(t) {
-    Be("Abstract method `_createSVG` called.");
+    je("Abstract method `_createSVG` called.");
   }
 }
 class Rm extends AP {
@@ -10815,7 +10815,7 @@ const wy = class wy {
     this.parent.div.append(e.render());
   }
   render() {
-    Be("Abstract method `AnnotationElement.render` called");
+    je("Abstract method `AnnotationElement.render` called");
   }
   _getElementsByName(t, e = null) {
     const r = [];
@@ -12682,19 +12682,19 @@ gi = new WeakMap(), wn = new WeakMap(), pd = new WeakMap(), Ja = new WeakMap(), 
 let g0 = Ne;
 class P1 {
   toSVGPath() {
-    Be("Abstract method `toSVGPath` must be implemented.");
+    je("Abstract method `toSVGPath` must be implemented.");
   }
   get box() {
-    Be("Abstract getter `box` must be implemented.");
+    je("Abstract getter `box` must be implemented.");
   }
   serialize(t, e) {
-    Be("Abstract method `serialize` must be implemented.");
+    je("Abstract method `serialize` must be implemented.");
   }
   get classNamesForDrawing() {
-    Be("Abstract getter `classNamesForDrawing` must be implemented.");
+    je("Abstract getter `classNamesForDrawing` must be implemented.");
   }
   get classNamesForOutlining() {
-    Be("Abstract getter `classNamesForOutlining` must be implemented.");
+    je("Abstract getter `classNamesForOutlining` must be implemented.");
   }
   get mustRemoveSelfIntersections() {
     return !1;
@@ -13811,7 +13811,7 @@ Gc = new WeakMap(), Td = new WeakMap(), ks = new WeakMap(), rl = new WeakMap(), 
 }, O(be, Xn), Gt(be, "_defaultColor", null), Gt(be, "_defaultOpacity", 1), Gt(be, "_defaultThickness", 12), Gt(be, "_type", "highlight"), Gt(be, "_editorType", te.HIGHLIGHT), Gt(be, "_freeHighlightId", -1), Gt(be, "_freeHighlight", null), Gt(be, "_freeHighlightClipId", "");
 let gp = be;
 var il, sl, Ki, Fs, Hn, ol, al, ll, Ds, Zc, cl, hl, Fo, bt, Y1, Z1, J1, Q1, C0, $1, T0, tS, eS, rS, nS, iS, ua, P0, k0, R0, Xf, Kf, Xl, F0, Yf, Ks, sS, D0, oS, aS, O0, Zf, Vh;
-const We = class We extends De {
+const Ue = class Ue extends De {
   constructor(e) {
     super(Rt(lt({}, e), {
       name: "inkEditor"
@@ -13838,13 +13838,13 @@ const We = class We extends De {
   static updateDefaultParams(e, r) {
     switch (e) {
       case Xt.INK_THICKNESS:
-        We._defaultThickness = r;
+        Ue._defaultThickness = r;
         break;
       case Xt.INK_COLOR:
-        We._defaultColor = r;
+        Ue._defaultColor = r;
         break;
       case Xt.INK_OPACITY:
-        We._defaultOpacity = r / 100;
+        Ue._defaultOpacity = r / 100;
         break;
     }
   }
@@ -13862,11 +13862,11 @@ const We = class We extends De {
     }
   }
   static get defaultPropertiesToUpdate() {
-    return [[Xt.INK_THICKNESS, We._defaultThickness], [Xt.INK_COLOR, We._defaultColor || De._defaultLineColor], [Xt.INK_OPACITY, Math.round(We._defaultOpacity * 100)]];
+    return [[Xt.INK_THICKNESS, Ue._defaultThickness], [Xt.INK_COLOR, Ue._defaultColor || De._defaultLineColor], [Xt.INK_OPACITY, Math.round(Ue._defaultOpacity * 100)]];
   }
   get propertiesToUpdate() {
     var e;
-    return [[Xt.INK_THICKNESS, this.thickness || We._defaultThickness], [Xt.INK_COLOR, this.color || We._defaultColor || De._defaultLineColor], [Xt.INK_OPACITY, Math.round(100 * ((e = this.opacity) != null ? e : We._defaultOpacity))]];
+    return [[Xt.INK_THICKNESS, this.thickness || Ue._defaultThickness], [Xt.INK_COLOR, this.color || Ue._defaultColor || De._defaultLineColor], [Xt.INK_OPACITY, Math.round(100 * ((e = this.opacity) != null ? e : Ue._defaultOpacity))]];
   }
   rebuild() {
     this.parent && (super.rebuild(), this.div !== null && (this.canvas || (k(this, bt, Xf).call(this), k(this, bt, Kf).call(this)), this.isAttachedToDOM || (this.parent.add(this), k(this, bt, Xl).call(this)), k(this, bt, Vh).call(this)));
@@ -13945,7 +13945,7 @@ const We = class We extends De {
       var y, m, x;
       if (e instanceof Fm)
         return null;
-      const s = yield Fl(We, this, "deserialize").call(this, e, r, i);
+      const s = yield Fl(Ue, this, "deserialize").call(this, e, r, i);
       s.thickness = e.thickness, s.color = Mt.makeHexColor(...e.color), s.opacity = e.opacity;
       const [o, a] = s.pageDimensions, l = s.width * o, c = s.height * a, h = s.parentScale, u = e.thickness / 2;
       C(s, Hn, !0), C(s, cl, Math.round(l)), C(s, hl, Math.round(c));
@@ -13957,7 +13957,7 @@ const We = class We extends De {
       for (let {
         bezier: w
       } of f) {
-        w = k(y = We, Ks, oS).call(y, w, p, g);
+        w = k(y = Ue, Ks, oS).call(y, w, p, g);
         const S = [];
         s.paths.push(S);
         let E = h * (w[0] - u), P = h * (w[1] - u);
@@ -14067,7 +14067,7 @@ il = new WeakMap(), sl = new WeakMap(), Ki = new WeakMap(), Fs = new WeakMap(), 
     signal: i
   }), this.canvas.addEventListener("pointerup", this.canvasPointerup.bind(this), {
     signal: i
-  }), this.isEditing = !0, d(this, ll) || (C(this, ll, !0), k(this, bt, Xl).call(this), this.thickness || (this.thickness = We._defaultThickness), this.color || (this.color = We._defaultColor || De._defaultLineColor), (s = this.opacity) != null || (this.opacity = We._defaultOpacity)), this.currentPath.push([e, r]), C(this, al, !1), k(this, bt, C0).call(this), C(this, Fo, () => {
+  }), this.isEditing = !0, d(this, ll) || (C(this, ll, !0), k(this, bt, Xl).call(this), this.thickness || (this.thickness = Ue._defaultThickness), this.color || (this.color = Ue._defaultColor || De._defaultLineColor), (s = this.opacity) != null || (this.opacity = Ue._defaultOpacity)), this.currentPath.push([e, r]), C(this, al, !1), k(this, bt, C0).call(this), C(this, Fo, () => {
     k(this, bt, rS).call(this), d(this, Fo) && window.requestAnimationFrame(d(this, Fo));
   }), window.requestAnimationFrame(d(this, Fo));
 }, T0 = function(e, r) {
@@ -14264,8 +14264,8 @@ il = new WeakMap(), sl = new WeakMap(), Ki = new WeakMap(), Fs = new WeakMap(), 
       v === 0 && (p.push(E, P), g.push(E, P)), p.push(A, T, I, B, F, z), g.push(A, T), v === y - 1 && g.push(F, z);
     }
     o.push({
-      bezier: k(h = We, Ks, D0).call(h, p, s, this.rotation),
-      points: k(u = We, Ks, D0).call(u, g, s, this.rotation)
+      bezier: k(h = Ue, Ks, D0).call(h, p, s, this.rotation),
+      points: k(u = Ue, Ks, D0).call(u, g, s, this.rotation)
     });
   }
   return o;
@@ -14294,16 +14294,16 @@ il = new WeakMap(), sl = new WeakMap(), Ki = new WeakMap(), Fs = new WeakMap(), 
   this.translationX = -r[0], this.translationY = -r[1], k(this, bt, Xl).call(this), k(this, bt, ua).call(this), C(this, cl, s), C(this, hl, o), this.setDims(s, o);
   const u = e ? i / this.scaleFactor / 2 : 0;
   this.translate(c - this.translationX - u, h - this.translationY - u);
-}, O(We, Ks), Gt(We, "_defaultColor", null), Gt(We, "_defaultOpacity", 1), Gt(We, "_defaultThickness", 1), Gt(We, "_type", "ink"), Gt(We, "_editorType", te.INK);
-let E0 = We;
-var Ve, Or, Do, Os, Oo, Jc, Yi, Ms, Zi, En, Qc, he, qh, Gh, Jf, I0, lS, Qf, _0, $f, cS, hS;
+}, O(Ue, Ks), Gt(Ue, "_defaultColor", null), Gt(Ue, "_defaultOpacity", 1), Gt(Ue, "_defaultThickness", 1), Gt(Ue, "_type", "ink"), Gt(Ue, "_editorType", te.INK);
+let E0 = Ue;
+var qe, Or, Do, Os, Oo, Jc, Yi, Ms, Zi, En, Qc, he, qh, Gh, Jf, I0, lS, Qf, _0, $f, cS, hS;
 const Jl = class Jl extends De {
   constructor(e) {
     super(Rt(lt({}, e), {
       name: "stampEditor"
     }));
     O(this, he);
-    O(this, Ve, null);
+    O(this, qe, null);
     O(this, Or, null);
     O(this, Do, null);
     O(this, Os, null);
@@ -14392,7 +14392,7 @@ const Jl = class Jl extends De {
   }
   remove() {
     var e, r;
-    d(this, Or) && (C(this, Ve, null), this._uiManager.imageManager.deleteId(d(this, Or)), (e = d(this, Yi)) == null || e.remove(), C(this, Yi, null), (r = d(this, Ms)) == null || r.disconnect(), C(this, Ms, null), d(this, Zi) && (clearTimeout(d(this, Zi)), C(this, Zi, null))), super.remove();
+    d(this, Or) && (C(this, qe, null), this._uiManager.imageManager.deleteId(d(this, Or)), (e = d(this, Yi)) == null || e.remove(), C(this, Yi, null), (r = d(this, Ms)) == null || r.disconnect(), C(this, Ms, null), d(this, Zi) && (clearTimeout(d(this, Zi)), C(this, Zi, null))), super.remove();
   }
   rebuild() {
     if (!this.parent) {
@@ -14405,7 +14405,7 @@ const Jl = class Jl extends De {
     this._isDraggable = !0, this.div.focus();
   }
   isEmpty() {
-    return !(d(this, Do) || d(this, Ve) || d(this, Os) || d(this, Oo) || d(this, Or));
+    return !(d(this, Do) || d(this, qe) || d(this, Os) || d(this, Oo) || d(this, Or));
   }
   get isResizable() {
     return !0;
@@ -14414,7 +14414,7 @@ const Jl = class Jl extends De {
     if (this.div)
       return this.div;
     let e, r;
-    if (this.width && (e = this.x, r = this.y), super.render(), this.div.hidden = !0, this.div.setAttribute("role", "figure"), this.addAltTextButton(), d(this, Ve) ? k(this, he, I0).call(this) : k(this, he, Jf).call(this), this.width && !this.annotationElementId) {
+    if (this.width && (e = this.x, r = this.y), super.render(), this.div.hidden = !0, this.div.setAttribute("role", "figure"), this.addAltTextButton(), d(this, qe) ? k(this, he, I0).call(this) : k(this, he, Jf).call(this), this.width && !this.annotationElementId) {
       const [i, s] = this.parentDimensions;
       this.setAt(e * i, r * s, this.width * i, this.height * s);
     }
@@ -14426,8 +14426,8 @@ const Jl = class Jl extends De {
     const {
       width: s,
       height: o
-    } = d(this, Ve), a = new Rv();
-    let l = d(this, Ve), c = s, h = o, u = null;
+    } = d(this, qe), a = new Rv();
+    let l = d(this, qe), c = s, h = o, u = null;
     if (r) {
       if (s > r || o > r) {
         const T = Math.min(r / s, r / o);
@@ -14448,7 +14448,7 @@ const Jl = class Jl extends De {
       let g, v;
       if (a.symmetric && l.width < e && l.height < e)
         g = l.width, v = l.height;
-      else if (l = d(this, Ve), s > e || o > e) {
+      else if (l = d(this, qe), s > e || o > e) {
         const x = Math.min(e / s, e / o);
         g = Math.floor(s * x), v = Math.floor(o * x), d(this, En) || (l = k(this, he, Qf).call(this, g, v));
       }
@@ -14519,7 +14519,7 @@ const Jl = class Jl extends De {
         isSvg: u,
         accessibilityData: f
       } = e;
-      h && i.imageManager.isValidId(h) ? (C(o, Or, h), l && C(o, Ve, l)) : C(o, Os, c), C(o, En, u);
+      h && i.imageManager.isValidId(h) ? (C(o, Or, h), l && C(o, qe, l)) : C(o, Os, c), C(o, En, u);
       const [p, g] = o.pageDimensions;
       return o.width = (a[2] - a[0]) / p, o.height = (a[3] - a[1]) / g, o.annotationElementId = e.id || null, f && (o.altTextData = f), o._initialData = s, C(o, Qc, !!s), o;
     });
@@ -14575,19 +14575,19 @@ const Jl = class Jl extends De {
     }), null;
   }
 };
-Ve = new WeakMap(), Or = new WeakMap(), Do = new WeakMap(), Os = new WeakMap(), Oo = new WeakMap(), Jc = new WeakMap(), Yi = new WeakMap(), Ms = new WeakMap(), Zi = new WeakMap(), En = new WeakMap(), Qc = new WeakMap(), he = new WeakSet(), qh = function(e, r = !1) {
+qe = new WeakMap(), Or = new WeakMap(), Do = new WeakMap(), Os = new WeakMap(), Oo = new WeakMap(), Jc = new WeakMap(), Yi = new WeakMap(), Ms = new WeakMap(), Zi = new WeakMap(), En = new WeakMap(), Qc = new WeakMap(), he = new WeakSet(), qh = function(e, r = !1) {
   if (!e) {
     this.remove();
     return;
   }
-  C(this, Ve, e.bitmap), r || (C(this, Or, e.id), C(this, En, e.isSvg)), e.file && C(this, Jc, e.file.name), k(this, he, I0).call(this);
+  C(this, qe, e.bitmap), r || (C(this, Or, e.id), C(this, En, e.isSvg)), e.file && C(this, Jc, e.file.name), k(this, he, I0).call(this);
 }, Gh = function() {
   if (C(this, Do, null), this._uiManager.enableWaiting(!1), !!d(this, Yi)) {
-    if (this._uiManager.useNewAltTextWhenAddingImage && this._uiManager.useNewAltTextFlow && d(this, Ve)) {
+    if (this._uiManager.useNewAltTextWhenAddingImage && this._uiManager.useNewAltTextFlow && d(this, qe)) {
       this._editToolbar.hide(), this._uiManager.editAltText(this, !0);
       return;
     }
-    if (!this._uiManager.useNewAltTextWhenAddingImage && this._uiManager.useNewAltTextFlow && d(this, Ve)) {
+    if (!this._uiManager.useNewAltTextWhenAddingImage && this._uiManager.useNewAltTextFlow && d(this, qe)) {
       this._reportTelemetry({
         action: "pdfjs.image.image_added",
         data: {
@@ -14650,7 +14650,7 @@ Ve = new WeakMap(), Or = new WeakMap(), Do = new WeakMap(), Os = new WeakMap(), 
   let {
     width: r,
     height: i
-  } = d(this, Ve);
+  } = d(this, qe);
   const [s, o] = this.pageDimensions, a = 0.75;
   if (this.width)
     r = this.width * s, i = this.height * o;
@@ -14674,8 +14674,8 @@ Ve = new WeakMap(), Or = new WeakMap(), Do = new WeakMap(), Os = new WeakMap(), 
   const {
     width: i,
     height: s
-  } = d(this, Ve);
-  let o = i, a = s, l = d(this, Ve);
+  } = d(this, qe);
+  let o = i, a = s, l = d(this, qe);
   for (; o > 2 * e || a > 2 * r; ) {
     const c = o, h = a;
     o > 2 * e && (o = o >= 16384 ? Math.floor(o / 2) - 1 : Math.ceil(o / 2)), a > 2 * r && (a = a >= 16384 ? Math.floor(a / 2) - 1 : Math.ceil(a / 2));
@@ -14688,7 +14688,7 @@ Ve = new WeakMap(), Or = new WeakMap(), Do = new WeakMap(), Os = new WeakMap(), 
   if (!a || a.width === s && a.height === o)
     return;
   a.width = s, a.height = o;
-  const l = d(this, En) ? d(this, Ve) : k(this, he, Qf).call(this, s, o), c = a.getContext("2d");
+  const l = d(this, En) ? d(this, qe) : k(this, he, Qf).call(this, s, o), c = a.getContext("2d");
   c.filter = this._uiManager.hcmFilter, c.drawImage(l, 0, 0, l.width, l.height, 0, 0, s, o);
 }, $f = function(e) {
   if (e) {
@@ -14701,13 +14701,13 @@ Ve = new WeakMap(), Or = new WeakMap(), Do = new WeakMap(), Os = new WeakMap(), 
     return {
       width: r.width,
       height: r.height
-    } = d(this, Ve), r.getContext("2d").drawImage(d(this, Ve), 0, 0), r.toDataURL();
+    } = d(this, qe), r.getContext("2d").drawImage(d(this, qe), 0, 0), r.toDataURL();
   }
   if (d(this, En)) {
     const [r, i] = this.pageDimensions, s = Math.round(this.width * r * Wo.PDF_TO_CSS_UNITS), o = Math.round(this.height * i * Wo.PDF_TO_CSS_UNITS), a = new OffscreenCanvas(s, o);
-    return a.getContext("2d").drawImage(d(this, Ve), 0, 0, d(this, Ve).width, d(this, Ve).height, 0, 0, s, o), a.transferToImageBitmap();
+    return a.getContext("2d").drawImage(d(this, qe), 0, 0, d(this, qe).width, d(this, qe).height, 0, 0, s, o), a.transferToImageBitmap();
   }
-  return structuredClone(d(this, Ve));
+  return structuredClone(d(this, qe));
 }, cS = function() {
   this._uiManager._signal && (C(this, Ms, new ResizeObserver((e) => {
     const r = e[0].contentRect;
@@ -16518,7 +16518,7 @@ const ER = {
     children: [
       /* @__PURE__ */ G("h2", {
         className: "text-2xl font-light mb-4",
-        children: /* @__PURE__ */ G(Ge, {
+        children: /* @__PURE__ */ G(Be, {
           id: "UV69vl"
         })
       }),
@@ -16840,19 +16840,19 @@ const IR = () => {
         children: (() => {
           switch (e) {
             case "Signature":
-              return /* @__PURE__ */ G(Ge, {
+              return /* @__PURE__ */ G(Be, {
                 id: "n+8yVN"
               });
             case "Stamp":
-              return /* @__PURE__ */ G(Ge, {
+              return /* @__PURE__ */ G(Be, {
                 id: "cKbHTq"
               });
             case "Text":
-              return /* @__PURE__ */ G(Ge, {
+              return /* @__PURE__ */ G(Be, {
                 id: "xeiujy"
               });
             case "Data":
-              return /* @__PURE__ */ G(Ge, {
+              return /* @__PURE__ */ G(Be, {
                 id: "HKH+W+"
               });
             default:
@@ -19376,7 +19376,7 @@ const yg = ({ item: n }) => {
         }),
         /* @__PURE__ */ G("h2", {
           className: "text-xl font-semibold mb-4 text-gray-800",
-          children: /* @__PURE__ */ G(Ge, {
+          children: /* @__PURE__ */ G(Be, {
             id: "cFdnRY"
           })
         }),
@@ -19422,7 +19422,7 @@ const yg = ({ item: n }) => {
             /* @__PURE__ */ oe("p", {
               className: "mb-4 text-center text-gray-700",
               children: [
-                /* @__PURE__ */ G(Ge, {
+                /* @__PURE__ */ G(Be, {
                   id: "rdUucN"
                 }),
                 ": ",
@@ -19437,7 +19437,7 @@ const yg = ({ item: n }) => {
                   size: "1em",
                   className: "mr-2"
                 }),
-                /* @__PURE__ */ G(Ge, {
+                /* @__PURE__ */ G(Be, {
                   id: "tfDRzk"
                 })
               ]
@@ -23330,7 +23330,9 @@ const lO = Gm || TD, cO = ({ onSaveSignatureCallback: n }) => {
     children: [
       /* @__PURE__ */ G("span", {
         className: "text-sm font-semibold self-start",
-        children: "Aggiungi una firma"
+        children: /* @__PURE__ */ G(Be, {
+          id: "CAGeds"
+        })
       }),
       /* @__PURE__ */ G("div", {
         className: MA("flex items-center  justify-center flex-col w-full bg-gray-300 px-4 h-[220px]"),
@@ -23351,12 +23353,16 @@ const lO = Gm || TD, cO = ({ onSaveSignatureCallback: n }) => {
             className: "btn btn-primary w-20",
             onClick: s,
             disabled: !e,
-            children: "Salva"
+            children: /* @__PURE__ */ G(Be, {
+              id: "tfDRzk"
+            })
           }),
           /* @__PURE__ */ G("button", {
             className: "btn btn-error w-20",
             onClick: i,
-            children: "Pulisci"
+            children: /* @__PURE__ */ G(Be, {
+              id: "dEgA5A"
+            })
           })
         ]
       })
@@ -23371,7 +23377,7 @@ const lO = Gm || TD, cO = ({ onSaveSignatureCallback: n }) => {
       children: [
         /* @__PURE__ */ G("h2", {
           className: "text-xl font-semibold text-gray-800",
-          children: /* @__PURE__ */ G(Ge, {
+          children: /* @__PURE__ */ G(Be, {
             id: "2KSJAT"
           })
         }),
@@ -23386,21 +23392,21 @@ const lO = Gm || TD, cO = ({ onSaveSignatureCallback: n }) => {
             /* @__PURE__ */ G("button", {
               onClick: () => o("text"),
               className: `tab ${s === "text" ? "tab-active" : ""}`,
-              children: /* @__PURE__ */ G(Ge, {
+              children: /* @__PURE__ */ G(Be, {
                 id: "xeiujy"
               })
             }),
             /* @__PURE__ */ G("button", {
               onClick: () => o("draw"),
               className: `tab ${s === "draw" ? "tab-active" : ""}`,
-              children: /* @__PURE__ */ G(Ge, {
+              children: /* @__PURE__ */ G(Be, {
                 id: "2vTp2v"
               })
             }),
             /* @__PURE__ */ G("button", {
               onClick: () => o("upload"),
               className: `tab ${s === "upload" ? "tab-active" : ""}`,
-              children: /* @__PURE__ */ G(Ge, {
+              children: /* @__PURE__ */ G(Be, {
                 id: "ONWvwQ"
               })
             })
@@ -23457,7 +23463,7 @@ const lO = Gm || TD, cO = ({ onSaveSignatureCallback: n }) => {
                   size: "1em",
                   className: "mr-2"
                 }),
-                /* @__PURE__ */ G(Ge, {
+                /* @__PURE__ */ G(Be, {
                   id: "tfDRzk"
                 })
               ]
@@ -23509,7 +23515,7 @@ const lO = Gm || TD, cO = ({ onSaveSignatureCallback: n }) => {
         }),
         /* @__PURE__ */ G("h2", {
           className: "text-xl font-semibold mb-4 text-gray-800",
-          children: /* @__PURE__ */ G(Ge, {
+          children: /* @__PURE__ */ G(Be, {
             id: "HcCAEE"
           })
         }),
@@ -23548,7 +23554,7 @@ const lO = Gm || TD, cO = ({ onSaveSignatureCallback: n }) => {
                   size: "1em",
                   className: "mr-2"
                 }),
-                /* @__PURE__ */ G(Ge, {
+                /* @__PURE__ */ G(Be, {
                   id: "tfDRzk"
                 })
               ]
@@ -23571,7 +23577,7 @@ const lO = Gm || TD, cO = ({ onSaveSignatureCallback: n }) => {
       children: [
         /* @__PURE__ */ G("h2", {
           className: "text-xl font-semibold mb-4 text-gray-800",
-          children: /* @__PURE__ */ G(Ge, {
+          children: /* @__PURE__ */ G(Be, {
             id: "Kr4638"
           })
         }),
@@ -23606,7 +23612,7 @@ const lO = Gm || TD, cO = ({ onSaveSignatureCallback: n }) => {
                   size: "1em",
                   className: "mr-2"
                 }),
-                /* @__PURE__ */ G(Ge, {
+                /* @__PURE__ */ G(Be, {
                   id: "tfDRzk"
                 })
               ]
@@ -23649,11 +23655,11 @@ const lO = Gm || TD, cO = ({ onSaveSignatureCallback: n }) => {
       /* @__PURE__ */ oe("h2", {
         className: "text-2xl font-light mb-4 text-gray-900 border-b pb-2 border-gray-300 flex items-center gap-2",
         children: [
-          /* @__PURE__ */ G(Ge, {
+          /* @__PURE__ */ G(Be, {
             id: "xdA/+p"
           }),
           /* @__PURE__ */ G(Q2, {
-            content: /* @__PURE__ */ G(Ge, {
+            content: /* @__PURE__ */ G(Be, {
               id: "qSqKJy"
             }),
             className: "max-w-60",
@@ -32344,10 +32350,10 @@ var Vn;
 (function(n) {
   n[n.NoToggleToOff = sr(14)] = "NoToggleToOff", n[n.Radio = sr(15)] = "Radio", n[n.PushButton = sr(16)] = "PushButton", n[n.RadiosInUnison = sr(25)] = "RadiosInUnison";
 })(Vn || (Vn = {}));
-var Ue;
+var He;
 (function(n) {
   n[n.Multiline = sr(12)] = "Multiline", n[n.Password = sr(13)] = "Password", n[n.FileSelect = sr(20)] = "FileSelect", n[n.DoNotSpellCheck = sr(22)] = "DoNotSpellCheck", n[n.DoNotScroll = sr(23)] = "DoNotScroll", n[n.Comb = sr(24)] = "Comb", n[n.RichText = sr(25)] = "RichText";
-})(Ue || (Ue = {}));
+})(He || (He = {}));
 var xe;
 (function(n) {
   n[n.Combo = sr(17)] = "Combo", n[n.Edit = sr(18)] = "Edit", n[n.Sort = sr(19)] = "Sort", n[n.MultiSelect = sr(21)] = "MultiSelect", n[n.DoNotSpellCheck = sr(22)] = "DoNotSpellCheck", n[n.CommitOnSelChange = sr(26)] = "CommitOnSelChange";
@@ -35212,51 +35218,51 @@ var gh = function(n) {
     }, t.prototype.setFontSize = function(e) {
       Eg(e, "fontSize"), this.acroField.setFontSize(e), this.markAsDirty();
     }, t.prototype.isMultiline = function() {
-      return this.acroField.hasFlag(Ue.Multiline);
+      return this.acroField.hasFlag(He.Multiline);
     }, t.prototype.enableMultiline = function() {
-      this.markAsDirty(), this.acroField.setFlagTo(Ue.Multiline, !0);
+      this.markAsDirty(), this.acroField.setFlagTo(He.Multiline, !0);
     }, t.prototype.disableMultiline = function() {
-      this.markAsDirty(), this.acroField.setFlagTo(Ue.Multiline, !1);
+      this.markAsDirty(), this.acroField.setFlagTo(He.Multiline, !1);
     }, t.prototype.isPassword = function() {
-      return this.acroField.hasFlag(Ue.Password);
+      return this.acroField.hasFlag(He.Password);
     }, t.prototype.enablePassword = function() {
-      this.acroField.setFlagTo(Ue.Password, !0);
+      this.acroField.setFlagTo(He.Password, !0);
     }, t.prototype.disablePassword = function() {
-      this.acroField.setFlagTo(Ue.Password, !1);
+      this.acroField.setFlagTo(He.Password, !1);
     }, t.prototype.isFileSelector = function() {
-      return this.acroField.hasFlag(Ue.FileSelect);
+      return this.acroField.hasFlag(He.FileSelect);
     }, t.prototype.enableFileSelection = function() {
-      this.acroField.setFlagTo(Ue.FileSelect, !0);
+      this.acroField.setFlagTo(He.FileSelect, !0);
     }, t.prototype.disableFileSelection = function() {
-      this.acroField.setFlagTo(Ue.FileSelect, !1);
+      this.acroField.setFlagTo(He.FileSelect, !1);
     }, t.prototype.isSpellChecked = function() {
-      return !this.acroField.hasFlag(Ue.DoNotSpellCheck);
+      return !this.acroField.hasFlag(He.DoNotSpellCheck);
     }, t.prototype.enableSpellChecking = function() {
-      this.acroField.setFlagTo(Ue.DoNotSpellCheck, !1);
+      this.acroField.setFlagTo(He.DoNotSpellCheck, !1);
     }, t.prototype.disableSpellChecking = function() {
-      this.acroField.setFlagTo(Ue.DoNotSpellCheck, !0);
+      this.acroField.setFlagTo(He.DoNotSpellCheck, !0);
     }, t.prototype.isScrollable = function() {
-      return !this.acroField.hasFlag(Ue.DoNotScroll);
+      return !this.acroField.hasFlag(He.DoNotScroll);
     }, t.prototype.enableScrolling = function() {
-      this.acroField.setFlagTo(Ue.DoNotScroll, !1);
+      this.acroField.setFlagTo(He.DoNotScroll, !1);
     }, t.prototype.disableScrolling = function() {
-      this.acroField.setFlagTo(Ue.DoNotScroll, !0);
+      this.acroField.setFlagTo(He.DoNotScroll, !0);
     }, t.prototype.isCombed = function() {
-      return this.acroField.hasFlag(Ue.Comb) && !this.isMultiline() && !this.isPassword() && !this.isFileSelector() && this.getMaxLength() !== void 0;
+      return this.acroField.hasFlag(He.Comb) && !this.isMultiline() && !this.isPassword() && !this.isFileSelector() && this.getMaxLength() !== void 0;
     }, t.prototype.enableCombing = function() {
       if (this.getMaxLength() === void 0) {
         var e = "PDFTextFields must have a max length in order to be combed";
         console.warn(e);
       }
-      this.markAsDirty(), this.disableMultiline(), this.disablePassword(), this.disableFileSelection(), this.acroField.setFlagTo(Ue.Comb, !0);
+      this.markAsDirty(), this.disableMultiline(), this.disablePassword(), this.disableFileSelection(), this.acroField.setFlagTo(He.Comb, !0);
     }, t.prototype.disableCombing = function() {
-      this.markAsDirty(), this.acroField.setFlagTo(Ue.Comb, !1);
+      this.markAsDirty(), this.acroField.setFlagTo(He.Comb, !1);
     }, t.prototype.isRichFormatted = function() {
-      return this.acroField.hasFlag(Ue.RichText);
+      return this.acroField.hasFlag(He.RichText);
     }, t.prototype.enableRichFormatting = function() {
-      this.acroField.setFlagTo(Ue.RichText, !0);
+      this.acroField.setFlagTo(He.RichText, !0);
     }, t.prototype.disableRichFormatting = function() {
-      this.acroField.setFlagTo(Ue.RichText, !1);
+      this.acroField.setFlagTo(He.RichText, !1);
     }, t.prototype.addToPage = function(e, r) {
       var i, s, o, a, l, c, h;
       Y(e, "page", [[qn, "PDFPage"]]), gh(r), r || (r = {}), "textColor" in r || (r.textColor = Ce(0, 0, 0)), "backgroundColor" in r || (r.backgroundColor = Ce(1, 1, 1)), "borderColor" in r || (r.borderColor = Ce(0, 0, 0)), "borderWidth" in r || (r.borderWidth = 1);
@@ -36424,7 +36430,7 @@ const eN = ({ initialValue: n, setFormOpen: t, onSubmit: e }) => {
       children: [
         /* @__PURE__ */ G("h2", {
           className: "text-xl font-semibold text-gray-800",
-          children: /* @__PURE__ */ G(Ge, {
+          children: /* @__PURE__ */ G(Be, {
             id: "8K9eN4"
           })
         }),
@@ -36454,7 +36460,7 @@ const eN = ({ initialValue: n, setFormOpen: t, onSubmit: e }) => {
                   size: "1em",
                   className: "mr-2"
                 }),
-                /* @__PURE__ */ G(Ge, {
+                /* @__PURE__ */ G(Be, {
                   id: "tfDRzk"
                 })
               ]
@@ -36516,7 +36522,7 @@ const eN = ({ initialValue: n, setFormOpen: t, onSubmit: e }) => {
           },
           disabled: e.length === 0,
           className: `px-6 py-3 text-white rounded-md shadow transition duration-200 w-full ${e.length > 0 ? "bg-indigo-900 hover:bg-indigo-950 cursor-pointer" : "bg-gray-400 cursor-not-allowed opacity-60"}`,
-          children: /* @__PURE__ */ G(Ge, {
+          children: /* @__PURE__ */ G(Be, {
             id: "rtJdiz"
           })
         }),
@@ -36577,7 +36583,7 @@ const eN = ({ initialValue: n, setFormOpen: t, onSubmit: e }) => {
     };
   }, [e, t, r, n]), { cleanupEventListeners: () => {
   } };
-}, aN = JSON.parse('{"HKH+W+":["Data"],"qSqKJy":["Drag the elements onto the PDF to add them"],"2vTp2v":["Draw"],"2KSJAT":["Edit Signature"],"HcCAEE":["Edit Stamp"],"Kr4638":["Enter text"],"BPv3e0":["PDF Editor TokNox"],"UV69vl":["PDF Pages"],"rdUucN":["Preview"],"8K9eN4":["Rename File"],"tfDRzk":["Save"],"rtJdiz":["Save PDF"],"cFdnRY":["Select Data type"],"n+8yVN":["Signature"],"cKbHTq":["Stamp"],"xeiujy":["Text"],"xdA/+p":["Tools"],"ONWvwQ":["Upload"],"7im85O":["Write your text here..."]}'), lN = JSON.parse('{"HKH+W+":["Data"],"qSqKJy":["Trascina gli elementi sul PDF per aggiungerli"],"2vTp2v":["Disegna"],"2KSJAT":["Modifica Firma"],"HcCAEE":["Modifica Timbro"],"Kr4638":["Inserisci testo"],"BPv3e0":["Editor PDF TokNox"],"UV69vl":["Pagine PDF"],"rdUucN":["Anteprima"],"8K9eN4":["Rinomina File"],"tfDRzk":["Salva"],"rtJdiz":["Salva PDF"],"cFdnRY":["Seleziona tipo Data"],"n+8yVN":["Firma"],"cKbHTq":["Timbro"],"xeiujy":["Testo"],"xdA/+p":["Strumenti"],"ONWvwQ":["Carica"],"7im85O":["Scrivi qui il tuo testo..."]}'), yN = ({ pdfFile: n, handleExport: t, className: e, locale: r }) => {
+}, aN = JSON.parse('{"CAGeds":["Add your signature"],"dEgA5A":["Cancel"],"HKH+W+":["Data"],"qSqKJy":["Drag the elements onto the PDF to add them"],"2vTp2v":["Draw"],"2KSJAT":["Edit Signature"],"HcCAEE":["Edit Stamp"],"Kr4638":["Enter text"],"BPv3e0":["PDF Editor TokNox"],"UV69vl":["PDF Pages"],"rdUucN":["Preview"],"8K9eN4":["Rename File"],"tfDRzk":["Save"],"rtJdiz":["Save PDF"],"cFdnRY":["Select Data type"],"n+8yVN":["Signature"],"cKbHTq":["Stamp"],"xeiujy":["Text"],"xdA/+p":["Tools"],"ONWvwQ":["Upload"],"7im85O":["Write your text here..."]}'), lN = JSON.parse('{"CAGeds":["Aggiungi la tua firma"],"dEgA5A":["Annulla"],"HKH+W+":["Data"],"qSqKJy":["Trascina gli elementi sul PDF per aggiungerli"],"2vTp2v":["Disegna"],"2KSJAT":["Modifica Firma"],"HcCAEE":["Modifica Timbro"],"Kr4638":["Inserisci testo"],"BPv3e0":["Editor PDF TokNox"],"UV69vl":["Pagine PDF"],"rdUucN":["Anteprima"],"8K9eN4":["Rinomina File"],"tfDRzk":["Salva"],"rtJdiz":["Salva PDF"],"cFdnRY":["Seleziona tipo Data"],"n+8yVN":["Firma"],"cKbHTq":["Timbro"],"xeiujy":["Testo"],"xdA/+p":["Strumenti"],"ONWvwQ":["Carica"],"7im85O":["Scrivi qui il tuo testo..."]}'), yN = ({ pdfFile: n, handleExport: t, className: e, locale: r }) => {
   var g;
   const { pageNumber: i, setPDFFile: s } = hg();
   Ug.load({
@@ -36608,7 +36614,7 @@ const eN = ({ initialValue: n, setFormOpen: t, onSubmit: e }) => {
         children: [
           /* @__PURE__ */ G("h1", {
             className: "text-3xl font-light text-gray-800 items-center",
-            children: /* @__PURE__ */ G(Ge, {
+            children: /* @__PURE__ */ G(Be, {
               id: "BPv3e0"
             })
           }),

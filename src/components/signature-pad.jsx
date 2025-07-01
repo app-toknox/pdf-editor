@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { useState } from "react";
 import { useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
@@ -25,7 +26,7 @@ export const SignaturePad = ({ onSaveSignatureCallback }) => {
   return (
     <div className="flex flex-col justify-center items-center w-full gap-y-2">
       <span className="text-sm font-semibold self-start">
-        Aggiungi una firma
+        <Trans>Add your signature</Trans>
       </span>
       <div
         className={cn(
@@ -48,10 +49,10 @@ export const SignaturePad = ({ onSaveSignatureCallback }) => {
           onClick={handleSave}
           disabled={!enableSave}
         >
-          Salva
+          <Trans>Save</Trans>
         </button>
         <button className="btn btn-error w-20" onClick={handleClear}>
-          Pulisci
+          <Trans>Cancel</Trans>
         </button>
       </div>
     </div>

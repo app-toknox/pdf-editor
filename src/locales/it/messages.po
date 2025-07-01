@@ -13,6 +13,14 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/components/signature-pad.jsx:29
+msgid "Add your signature"
+msgstr "Aggiungi la tua firma"
+
+#: src/components/signature-pad.jsx:55
+msgid "Cancel"
+msgstr "Annulla"
+
 #: src/components/tool-item.jsx:24
 msgid "Data"
 msgstr "Data"
@@ -53,6 +61,7 @@ msgstr "Anteprima"
 msgid "Rename File"
 msgstr "Rinomina File"
 
+#: src/components/signature-pad.jsx:52
 #: src/components/download-form.jsx:39
 #: src/components/items-layout/text/text-form.jsx:42
 #: src/components/items-layout/stamp/stamp-form.jsx:61
