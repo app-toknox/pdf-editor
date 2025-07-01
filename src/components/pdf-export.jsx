@@ -48,7 +48,28 @@ export const PdfExport = ({ pdf, onExport }) => {
               console.warn("Invalid image dimensions for item", item);
               continue;
             }
-            const image = await pdfDoc.embedPng(item.payload.img);
+            let image;
+            try {
+              if (
+                item.payload.img.startsWith("data:image/jpg") ||
+                item.payload.img.startsWith("data:image/jpeg")
+              ) {
+                image = await pdfDoc.embedJpg(item.payload.img);
+              } else if (item.payload.img.startsWith("data:image/png")) {
+                image = await pdfDoc.embedPng(item.payload.img);
+              } else {
+                // Tipo sconosciuto, prova PNG prima e poi JPG
+                try {
+                  image = await pdfDoc.embedPng(item.payload.img);
+                } catch {
+                  image = await pdfDoc.embedJpg(item.payload.img);
+                }
+              }
+            } catch (error) {
+              console.warn("Unsupported image format for item", error);
+              continue;
+            }
+
             const xPos = item.x + item.width / 2 - imgWidth / 2;
             const yPos =
               page.getHeight() - item.y - item.height / 2 - imgHeight / 2;
