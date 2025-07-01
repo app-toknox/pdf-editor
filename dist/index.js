@@ -36493,7 +36493,23 @@ const eN = ({ initialValue: n, setFormOpen: t, onSubmit: e }) => {
               console.warn("Invalid image dimensions for item", S);
               continue;
             }
-            const I = yield h.embedPng(S.payload.img), B = S.x + S.width / 2 - A / 2, F = x.getHeight() - S.y - S.height / 2 - T / 2;
+            let I;
+            try {
+              if (S.payload.img.startsWith("data:image/jpg") || S.payload.img.startsWith("data:image/jpeg"))
+                I = yield h.embedJpg(S.payload.img);
+              else if (S.payload.img.startsWith("data:image/png"))
+                I = yield h.embedPng(S.payload.img);
+              else
+                try {
+                  I = yield h.embedPng(S.payload.img);
+                } catch (z) {
+                  I = yield h.embedJpg(S.payload.img);
+                }
+            } catch (z) {
+              console.warn("Unsupported image format for item", z);
+              continue;
+            }
+            const B = S.x + S.width / 2 - A / 2, F = x.getHeight() - S.y - S.height / 2 - T / 2;
             x.drawImage(I, {
               x: B,
               y: F,
