@@ -1,3 +1,6 @@
+const DEFAULT_ITEM_WIDTH = 145;
+const DEFAULT_ITEM_HEIGHT = 85;
+
 export const getFormattedDate = () => {
   const today = new Date();
   const day = today.getDate().toString().padStart(2, "0");
@@ -12,8 +15,8 @@ export const dataItem = (type, x, y, page) => ({
   x,
   y,
   page,
-  width: 170,
-  height: 85,
+  width: DEFAULT_ITEM_WIDTH,
+  height: DEFAULT_ITEM_HEIGHT,
   payload: { text: getFormattedDate() },
 });
 
@@ -23,8 +26,8 @@ export const generalItem = (type, x, y, page) => ({
   x,
   y,
   page,
-  width: 170,
-  height: 100,
+  width: DEFAULT_ITEM_WIDTH,
+  height: DEFAULT_ITEM_HEIGHT,
   payload: { text: `${type} not provided` },
 });
 
@@ -34,8 +37,8 @@ export const textItem = (type, x, y, page) => ({
   x,
   y,
   page,
-  width: 150,
-  height: 85,
+  width: DEFAULT_ITEM_WIDTH,
+  height: DEFAULT_ITEM_HEIGHT,
   payload: { textEditable: "text" },
 });
 

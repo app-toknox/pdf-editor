@@ -80,7 +80,7 @@ const GeneralItemLayout = ({ item }) => {
             ref={ref}
             src={item.payload.img}
             alt="Signature"
-            className="max-h-full max-w-full object-contain ml-2"
+            className="max-h-full max-w-full object-contain"
             draggable={false}
             onLoad={() => {
               if (!ref.current) return;
@@ -96,7 +96,9 @@ const GeneralItemLayout = ({ item }) => {
           <div
             style={{
               fontFamily: item.payload.style,
-              fontSize: `${item.payload.fontSize || 12}px`, // usa fontSize dal payload
+              fontSize: `${item.payload.fontSize || 12}px`,
+              whiteSpace: "nowrap",
+              overflow: "visible",
             }}
             ref={ref}
           >
@@ -109,7 +111,9 @@ const GeneralItemLayout = ({ item }) => {
             contentEditable
             suppressContentEditableWarning
             style={{
-              fontSize: `${item.payload.fontSize || 12}px`, // usa fontSize dal payload
+              fontSize: `${item.payload.fontSize || 12}px`,
+              whiteSpace: "nowrap",
+              overflow: "visible",
             }}
             onBlur={(e) => {
               submitEditForm(item.id, { textEditable: e.target.innerText });

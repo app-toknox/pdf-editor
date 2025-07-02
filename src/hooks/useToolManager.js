@@ -46,7 +46,6 @@ export const useToolManager = create((set, get) => ({
 
     set({ items: updatedItems });
     set({ editingItem: null });
-    console.log(updatedItems);
   },
   setSelectItem: (item) => set({ selectItem: item }),
   setCopiedItem: (item) => set({ copiedItem: item }),
@@ -65,18 +64,19 @@ export const useToolManager = create((set, get) => ({
 
   calculateFontSize: (width, height) => {
     const minDimension = Math.min(width, height);
-    const minThreshold = 80;
-    const baseFontSize = 12;
-    if (minDimension <= minThreshold) {
-      return baseFontSize;
-    }
+    const baseFontSize = 10;
+    const maxFontSize = 100;
 
-    const extraSize = minDimension - minThreshold;
-    const fontSize = baseFontSize + extraSize * 0.4;
+    const minSize = 80;
+    const maxSize = 300;
 
-    const clampedFontSize = Math.min(35, fontSize);
+    const proportion = Math.max(
+      0,
+      Math.min(1, (minDimension - minSize) / (maxSize - minSize)),
+    );
+    const fontSize = baseFontSize + proportion * (maxFontSize - baseFontSize);
 
-    return Math.round(clampedFontSize);
+    return Math.round(fontSize);
   },
 
   handleResizeStop: (itemId, width, height, x, y) => {
