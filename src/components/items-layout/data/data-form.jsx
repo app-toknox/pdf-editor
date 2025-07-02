@@ -5,8 +5,18 @@ import { FiCheck, FiX } from "react-icons/fi";
 import { useToolManager } from "@/hooks/useToolManager";
 
 export const DataForm = ({ initialFormat = "dd-mm-yyyy" }) => {
-  const [format, setFormat] = useState(initialFormat);
   const { editingItem, submitEditForm, closeEditForm } = useToolManager();
+  const [format, setFormat] = useState(initialFormat);
+  const [color, setColor] = useState(editingItem?.payload?.color || "#000000");
+
+  const colors = [
+    "#000000",
+    "#FFFFFF",
+    "#FFA500",
+    "#00FF00",
+    "#0000FF",
+    "#FF0000",
+  ];
   const getFormattedDate = (format) => {
     const today = new Date();
     const day = today.getDate().toString().padStart(2, "0");
@@ -44,7 +54,10 @@ export const DataForm = ({ initialFormat = "dd-mm-yyyy" }) => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            submitEditForm(editingItem.id, { text: getFormattedDate(format) });
+            submitEditForm(editingItem.id, {
+              text: getFormattedDate(format),
+              color: color,
+            });
           }}
           className="flex flex-col"
         >
@@ -60,7 +73,33 @@ export const DataForm = ({ initialFormat = "dd-mm-yyyy" }) => {
             <option value="mm-dd-yyyy">mm-dd-yyyy</option>
             <option value="mm/dd/yyyy">mm/dd/yyyy</option>
           </select>
-          <p className="mb-4 text-center text-gray-700">
+
+          {/* Selezione Colore */}
+          <div className="w-full mb-4">
+            <div className="flex gap-2 justify-center">
+              {colors.map((colorOption) => (
+                <button
+                  key={colorOption}
+                  type="button"
+                  className={`w-6 h-6 rounded-full border-2 transition-all ${
+                    color === colorOption
+                      ? "border-gray-400 scale-110"
+                      : colorOption === "#FFFFFF"
+                        ? "border-gray-300 hover:border-gray-400"
+                        : "border-gray-200 hover:border-gray-300"
+                  }`}
+                  style={{ backgroundColor: colorOption }}
+                  onClick={() => setColor(colorOption)}
+                  title={colorOption}
+                />
+              ))}
+            </div>
+          </div>
+
+          <p
+            className="mb-4 text-center text-gray-700"
+            style={{ color: color }}
+          >
             <Trans>Preview</Trans>: {getFormattedDate(format)}
           </p>
           <button

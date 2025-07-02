@@ -73,7 +73,7 @@ const GeneralItemLayout = ({ item }) => {
       )}
 
       <div
-        className={`w-full h-full ${isHover && "border border-red-300"} ${item.id === selectItem?.id && "border border-blue-400"} flex items-center justify-center text-center`}
+        className={`w-full h-full ${isHover && "border border-red-300"} ${item.id === selectItem?.id && "border border-blue-400 bg-gray-200/30"} flex items-center justify-center text-center`}
       >
         {item.payload.img ? (
           <img
@@ -113,6 +113,7 @@ const GeneralItemLayout = ({ item }) => {
             suppressContentEditableWarning
             style={{
               fontSize: `${item.payload.fontSize || 12}px`,
+              color: item.payload.color,
               whiteSpace: "nowrap",
               overflow: "visible",
             }}
