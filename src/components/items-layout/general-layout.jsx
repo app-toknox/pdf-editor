@@ -97,6 +97,7 @@ const GeneralItemLayout = ({ item }) => {
             style={{
               fontFamily: item.payload.style,
               fontSize: `${item.payload.fontSize || 12}px`,
+              color: item.payload.color,
               whiteSpace: "nowrap",
               overflow: "visible",
             }}
