@@ -1,5 +1,5 @@
-const DEFAULT_ITEM_WIDTH = 145;
-const DEFAULT_ITEM_HEIGHT = 85;
+export const DEFAULT_ITEM_WIDTH = 145;
+export const DEFAULT_ITEM_HEIGHT = 85;
 
 export const getFormattedDate = () => {
   const today = new Date();

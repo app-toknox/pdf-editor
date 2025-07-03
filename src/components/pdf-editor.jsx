@@ -13,6 +13,10 @@ import { usePDFStore } from "@/hooks/usePdf";
 import { useToolManager } from "@/hooks/useToolManager";
 import { messages as enMessages } from "@/locales/en/messages";
 import { messages as itMessages } from "@/locales/it/messages";
+import {
+  DEFAULT_ITEM_HEIGHT,
+  DEFAULT_ITEM_WIDTH,
+} from "@/types/base-droppable-types";
 import { ELEMENT_TYPES } from "@/types/element-types";
 import { cn } from "@/utils/index";
 
@@ -55,8 +59,8 @@ export const PdfEditor = ({ pdfFile, handleExport, className, locale }) => {
 
     const type = e.dataTransfer.getData("application/json");
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left - 85;
-    const y = e.clientY - rect.top - 42.5;
+    const x = e.clientX - rect.left - DEFAULT_ITEM_WIDTH / 2;
+    const y = e.clientY - rect.top - DEFAULT_ITEM_HEIGHT / 2;
 
     handleDropData(type, x, y, pageNumber);
   };

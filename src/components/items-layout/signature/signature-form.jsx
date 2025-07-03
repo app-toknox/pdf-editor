@@ -18,9 +18,6 @@ export const SignatureForm = ({ initialValue = "" }) => {
     "Allura",
     "Pacifico",
     "Kaushan Script",
-    "Satisfy",
-    "Caveat",
-    "Cookie",
   ];
 
   useEffect(() => {

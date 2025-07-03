@@ -16,22 +16,19 @@ export const TextForm = ({ initialValue = "" }) => {
 
   const fonts = [
     "Arial",
-    "Helvetica",
     "Times New Roman",
     "Georgia",
-    "Verdana",
-    "Trebuchet MS",
+    "Montserrat",
     "Courier New",
-    "Impact",
   ];
 
   const colors = [
-    "#000000",
-    "#FFFFFF",
-    "#FFA500",
-    "#00FF00",
-    "#0000FF",
-    "#FF0000",
+    "#2C2C2C",
+    "#F8F8F8",
+    "#1E88E5",
+    "#43A047",
+    "#FFC107",
+    "#E53935",
   ];
 
   useEffect(() => {
@@ -114,24 +111,27 @@ export const TextForm = ({ initialValue = "" }) => {
           </div>
 
           {/* Selezione Colore */}
-          <div className="w-full mb-4">
-            <div className="flex gap-2 justify-center">
-              {colors.map((colorOption) => (
-                <button
-                  key={colorOption}
-                  type="button"
-                  className={`w-6 h-6 rounded-full border-2 transition-all ${
-                    color === colorOption
-                      ? "border-gray-400 scale-110"
-                      : colorOption === "#FFFFFF"
-                        ? "border-gray-300 hover:border-gray-400"
-                        : "border-gray-200 hover:border-gray-300"
-                  }`}
-                  style={{ backgroundColor: colorOption }}
-                  onClick={() => setColor(colorOption)}
-                  title={colorOption}
-                />
-              ))}
+          <div className="w-full mb-10">
+            <div className="flex items-center gap-2">
+              <Trans>Colors:</Trans>
+              <div className="flex gap-2">
+                {colors.map((colorOption) => (
+                  <button
+                    key={colorOption}
+                    type="button"
+                    className={`w-3 h-3 rounded-full transition-all ${
+                      color === colorOption
+                        ? "border-2 border-gray-400 scale-110"
+                        : colorOption === "#FFFFFF"
+                          ? "border border-gray-300 hover:border-gray-400"
+                          : "hover:scale-105"
+                    }`}
+                    style={{ backgroundColor: colorOption }}
+                    onClick={() => setColor(colorOption)}
+                    title={colorOption}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
