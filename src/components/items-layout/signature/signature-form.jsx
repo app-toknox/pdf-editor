@@ -1,15 +1,37 @@
 import { Trans } from "@lingui/react/macro";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 
-import { SignaturePad } from "@/components/signature-pad"; // Assuming SignaturePad is imported from this path
+import { SignaturePad } from "@/components/signature-pad";
 import { useToolManager } from "@/hooks/useToolManager";
 export const SignatureForm = ({ initialValue = "" }) => {
   const [text, setText] = useState(initialValue);
-  const [font, setFont] = useState("Arial");
+  const [font, setFont] = useState("Dancing Script");
   const [mode, setMode] = useState("text");
   const { closeEditForm, submitEditForm, editingItem } = useToolManager();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
+  const fonts = [
+    "Dancing Script",
+    "Great Vibes",
+    "Allura",
+    "Pacifico",
+    "Kaushan Script",
+  ];
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
       <div className="relative bg-base-100 rounded-lg p-8 w-[400px] shadow-lg space-y-4">
@@ -50,16 +72,48 @@ export const SignatureForm = ({ initialValue = "" }) => {
             }}
             className="flex flex-col items-center"
           >
-            <select
-              value={font}
-              onChange={(e) => setFont(e.target.value)}
-              className="select select-bordered w-full mb-4"
-            >
-              <option value="Arial">Arial</option>
-              <option value="Times New Roman">Times New Roman</option>
-              <option value="Courier New">Courier New</option>
-              <option value="Georgia">Georgia</option>
-            </select>
+            <div className="relative w-full mb-4" ref={dropdownRef}>
+              <div
+                className="input input-bordered w-full cursor-pointer flex items-center justify-between"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                style={{ fontFamily: font }}
+              >
+                <span>{font}</span>
+                <svg
+                  className={`w-4 h-4 transition-transform ${
+                    isDropdownOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
+
+              {isDropdownOpen && (
+                <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-md shadow-lg z-10 max-h-48 overflow-y-auto">
+                  {fonts.map((fontName) => (
+                    <div
+                      key={fontName}
+                      className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                      style={{ fontFamily: fontName }}
+                      onClick={() => {
+                        setFont(fontName);
+                        setIsDropdownOpen(false);
+                      }}
+                    >
+                      {fontName}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             <input
               type="text"
               value={text}

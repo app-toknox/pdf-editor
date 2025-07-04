@@ -26,12 +26,19 @@ const GeneralItemLayout = ({ item }) => {
     const rect = ref.current.getBoundingClientRect();
     const styles = window.getComputedStyle(ref.current);
 
-    updateItemMetadata(item.id, {
-      widthSmallDiv: rect.width,
-      heightSmallDiv: rect.height,
+    const metadata = {
+      contentWidth: rect.width,
+      contentHeight: rect.height,
       fontSize: parseFloat(styles.fontSize),
-    });
-  }, [item.id, updateItemMetadata]);
+    };
+
+    if (item.payload.img) {
+      metadata.widthImage = rect.width;
+      metadata.heightImage = rect.height;
+    }
+
+    updateItemMetadata(item.id, metadata);
+  }, [item.id, item.width, item.height, item.payload.img, updateItemMetadata]);
 
   return (
     <div
@@ -73,14 +80,14 @@ const GeneralItemLayout = ({ item }) => {
       )}
 
       <div
-        className={`w-full h-full ${isHover && "border border-red-300"} ${item.id === selectItem?.id && "border border-blue-400"} flex items-center justify-center text-center`}
+        className={`w-full h-full ${isHover && "border border-red-300"} ${item.id === selectItem?.id && "border border-blue-400 bg-gray-200/30"} flex items-center justify-center text-center`}
       >
         {item.payload.img ? (
           <img
             ref={ref}
             src={item.payload.img}
             alt="Signature"
-            className="max-h-full max-w-full object-contain ml-2"
+            className="max-h-full max-w-full object-contain"
             draggable={false}
             onLoad={() => {
               if (!ref.current) return;
@@ -96,7 +103,10 @@ const GeneralItemLayout = ({ item }) => {
           <div
             style={{
               fontFamily: item.payload.style,
-              fontSize: `${item.payload.fontSize || 12}px`, // usa fontSize dal payload
+              fontSize: `${item.payload.fontSize || 12}px`,
+              color: item.payload.color,
+              whiteSpace: "nowrap",
+              overflow: "visible",
             }}
             ref={ref}
           >
@@ -109,7 +119,10 @@ const GeneralItemLayout = ({ item }) => {
             contentEditable
             suppressContentEditableWarning
             style={{
-              fontSize: `${item.payload.fontSize || 12}px`, // usa fontSize dal payload
+              fontSize: `${item.payload.fontSize || 12}px`,
+              color: item.payload.color,
+              whiteSpace: "nowrap",
+              overflow: "visible",
             }}
             onBlur={(e) => {
               submitEditForm(item.id, { textEditable: e.target.innerText });
