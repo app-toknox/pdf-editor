@@ -26,12 +26,19 @@ const GeneralItemLayout = ({ item }) => {
     const rect = ref.current.getBoundingClientRect();
     const styles = window.getComputedStyle(ref.current);
 
-    updateItemMetadata(item.id, {
-      widthSmallDiv: rect.width,
-      heightSmallDiv: rect.height,
+    const metadata = {
+      contentWidth: rect.width,
+      contentHeight: rect.height,
       fontSize: parseFloat(styles.fontSize),
-    });
-  }, [item.id, updateItemMetadata]);
+    };
+
+    if (item.payload.img) {
+      metadata.widthImage = rect.width;
+      metadata.heightImage = rect.height;
+    }
+
+    updateItemMetadata(item.id, metadata);
+  }, [item.id, item.width, item.height, item.payload.img, updateItemMetadata]);
 
   return (
     <div

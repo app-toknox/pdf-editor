@@ -11,7 +11,6 @@ export const SignaturePad = ({ onSaveSignatureCallback }) => {
 
   const handleClear = () => {
     sigCanvasRef.current.clear();
-    onSaveSignatureCallback();
     if (!enableSave) setEnableSalve(true);
   };
 
@@ -52,7 +51,7 @@ export const SignaturePad = ({ onSaveSignatureCallback }) => {
           <Trans>Save</Trans>
         </button>
         <button className="btn btn-error w-20" onClick={handleClear}>
-          <Trans>Cancel</Trans>
+          <Trans>Clear</Trans>
         </button>
       </div>
     </div>

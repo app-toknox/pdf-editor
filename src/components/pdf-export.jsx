@@ -2,12 +2,14 @@ import { Trans } from "@lingui/react/macro";
 import { PDFDocument } from "pdf-lib";
 import { useState } from "react";
 
+import { useTextToImage } from "@/hooks/useTextToImage";
 import { useToolManager } from "@/hooks/useToolManager";
 
 import { DownloadForm } from "./download-form";
 
 export const PdfExport = ({ pdf, onExport }) => {
   const { items } = useToolManager();
+  const { textToImage } = useTextToImage();
 
   const [showModal, setShowModal] = useState(false);
   const [fileName, setFileName] = useState(
@@ -25,54 +27,76 @@ export const PdfExport = ({ pdf, onExport }) => {
 
       for (const item of pageItems) {
         if (item.payload) {
-          // Calcolo dimensioni per testo
-          const textWidth = item.payload.widthSmallDiv;
-          const textHeight = item.payload.heightSmallDiv;
-
           if (item.payload.text || item.payload.textEditable) {
             const text = item.payload.textEditable || item.payload.text;
-            const fontSize = item.payload.fontSize;
+            const fontSize = item.payload.fontSize || 12;
+            const color = item.payload.color || "#000000";
+            const fontFamily = item.payload.style || "Arial";
 
-            page.drawText(text, {
-              x: item.x + item.width / 2 - textWidth / 2,
-              y: page.getHeight() - item.y - item.height / 2 - textHeight / 2,
-              size: parseFloat(fontSize),
+            const textImageResult = textToImage(
+              text,
+              fontSize,
+              fontFamily,
+              color,
+            );
+
+            const textImage = await pdfDoc.embedPng(textImageResult.dataUrl);
+
+            const imageX = item.x + (item.width - textImageResult.width) / 2;
+            const imageY =
+              page.getHeight() -
+              item.y -
+              (item.height + textImageResult.height) / 2;
+
+            page.drawImage(textImage, {
+              x: imageX,
+              y: imageY,
+              width: textImageResult.width,
+              height: textImageResult.height,
             });
           }
 
           if (item.payload.img) {
-            // Calcolo dimensioni per immagine
             const imgWidth = item.payload.widthImage;
             const imgHeight = item.payload.heightImage;
-            if (isNaN(imgWidth) || isNaN(imgHeight)) {
-              console.warn("Invalid image dimensions for item", item);
-              continue;
-            }
-            let image;
-            try {
-              if (
-                item.payload.img.startsWith("data:image/jpg") ||
-                item.payload.img.startsWith("data:image/jpeg")
-              ) {
-                image = await pdfDoc.embedJpg(item.payload.img);
-              } else if (item.payload.img.startsWith("data:image/png")) {
-                image = await pdfDoc.embedPng(item.payload.img);
-              } else {
-                // Tipo sconosciuto, prova PNG prima e poi JPG
-                try {
-                  image = await pdfDoc.embedPng(item.payload.img);
-                } catch {
-                  image = await pdfDoc.embedJpg(item.payload.img);
-                }
-              }
-            } catch (error) {
-              console.warn("Unsupported image format for item", error);
+
+            if (
+              !imgWidth ||
+              !imgHeight ||
+              isNaN(imgWidth) ||
+              isNaN(imgHeight)
+            ) {
+              console.warn("Invalid image dimensions for item", item.id);
               continue;
             }
 
-            const xPos = item.x + item.width / 2 - imgWidth / 2;
+            let image;
+            try {
+              const imgData = item.payload.img;
+
+              if (
+                imgData.startsWith("data:image/jpeg") ||
+                imgData.startsWith("data:image/jpg")
+              ) {
+                image = await pdfDoc.embedJpg(imgData);
+              } else if (imgData.startsWith("data:image/png")) {
+                image = await pdfDoc.embedPng(imgData);
+              } else {
+                try {
+                  image = await pdfDoc.embedPng(imgData);
+                } catch {
+                  image = await pdfDoc.embedJpg(imgData);
+                }
+              }
+            } catch (error) {
+              console.warn("Unsupported image format for item", item.id, error);
+              continue;
+            }
+
+            const xPos = item.x + (item.width - imgWidth) / 2;
             const yPos =
-              page.getHeight() - item.y - item.height / 2 - imgHeight / 2;
+              page.getHeight() - item.y - (item.height + imgHeight) / 2;
+
             page.drawImage(image, {
               x: xPos,
               y: yPos,
